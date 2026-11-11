@@ -1,0 +1,11 @@
+.wrap {
+  position: fixed;
+  inset: 0;
+  z-index: var(--z-canvas);
+  pointer-events: none;
+}
+
+.wrap canvas {
+  width: 100% !important;
+  height: 100% !important;
+}

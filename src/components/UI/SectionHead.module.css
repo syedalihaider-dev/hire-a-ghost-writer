@@ -1,0 +1,68 @@
+.head {
+  display: grid;
+  grid-template-columns: repeat(var(--cols), minmax(0, 1fr));
+  column-gap: var(--gutter);
+  row-gap: var(--s-6);
+}
+
+.meta {
+  grid-column: 1 / -1;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: var(--s-4);
+  padding-bottom: var(--s-4);
+  border-bottom: 1px solid var(--line);
+}
+
+.title {
+  grid-column: 1 / -1;
+  font-size: var(--fs-h2);
+}
+
+.split .title {
+  grid-column: 1 / span 9;
+}
+
+.split .side {
+  grid-column: 10 / -1;
+  align-self: end;
+  display: grid;
+  gap: var(--s-5);
+  justify-items: start;
+}
+
+.stack .side {
+  grid-column: 1 / span 6;
+  display: grid;
+  gap: var(--s-5);
+  justify-items: start;
+}
+
+.center {
+  text-align: center;
+}
+
+.center .title,
+.center .side {
+  grid-column: 1 / -1;
+  justify-self: center;
+}
+
+.center .side {
+  display: grid;
+  justify-items: center;
+  gap: var(--s-5);
+}
+
+.center .side :global(.lead) {
+  margin-inline: auto;
+}
+
+@media (max-width: 1023px) {
+  .split .title,
+  .split .side,
+  .stack .side {
+    grid-column: 1 / -1;
+  }
+}

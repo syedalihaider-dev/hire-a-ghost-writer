@@ -1,0 +1,83 @@
+.ribbon {
+  position: relative;
+  z-index: 2;
+  height: clamp(220px, 26vw, 420px);
+  margin-block: calc(var(--ribbon-overlap) * -1);
+  overflow: hidden;
+  pointer-events: none;
+  /* the seam: dark hero above, light chapter below */
+  background: linear-gradient(180deg, transparent 0 38%, var(--bone-50) 38% 100%);
+}
+
+.band {
+  position: absolute;
+  left: -10%;
+  right: -10%;
+  top: 50%;
+  overflow: hidden;
+  box-shadow: 0 30px 60px -30px rgba(11, 15, 25, 0.5);
+}
+
+.back {
+  transform: translateY(-50%) rotate(3deg);
+  background: var(--navy-800);
+  color: var(--bone-50);
+  border-block: 1px solid rgba(197, 160, 89, 0.35);
+}
+
+.front {
+  transform: translateY(-62%) rotate(-4deg);
+  background: var(--gold-500);
+  color: var(--ink-950);
+}
+
+.track {
+  display: flex;
+  width: max-content;
+  will-change: transform;
+}
+
+.item {
+  display: inline-flex;
+  align-items: center;
+  gap: clamp(1rem, 2.4vw, 2.5rem);
+  padding: clamp(0.5rem, 1.1vw, 1rem) clamp(1rem, 2.4vw, 2.5rem) clamp(0.5rem, 1.1vw, 1rem) 0;
+  white-space: nowrap;
+}
+
+.front .item {
+  font-family: var(--font-display);
+  font-variation-settings: "opsz" 72;
+  font-weight: 800;
+  font-size: clamp(2.6rem, 7.2vw, 7.5rem);
+  line-height: 0.9;
+  text-transform: uppercase;
+}
+
+.back .item {
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-weight: 500;
+  font-size: clamp(1.6rem, 3.6vw, 3.6rem);
+  line-height: 1.1;
+  color: var(--bone-50);
+}
+
+.dot {
+  color: var(--gold-500);
+  font-style: normal;
+  font-size: 0.6em;
+}
+
+.mark path {
+  fill: var(--ink-950);
+}
+
+@media (max-width: 767px) {
+  .front {
+    transform: translateY(-62%) rotate(-6deg);
+  }
+  .back {
+    transform: translateY(-40%) rotate(4deg);
+  }
+}

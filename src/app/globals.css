@@ -1,0 +1,188 @@
+@import "../styles/variables.css";
+@import "../styles/utilities.css";
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
+  background: var(--ink-950);
+  scroll-padding-top: var(--header-h);
+}
+
+html.lenis,
+html.lenis body {
+  height: auto;
+}
+.lenis.lenis-smooth {
+  scroll-behavior: auto !important;
+}
+.lenis.lenis-stopped {
+  overflow: clip;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  font-family: var(--font-body);
+  font-size: var(--fs-base);
+  line-height: var(--lh-body);
+  color: var(--fg);
+  background: var(--ink-950);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  overflow-x: clip;
+}
+
+h1,
+h2,
+h3,
+h4,
+p,
+figure,
+blockquote,
+dl,
+dd,
+ul,
+ol {
+  margin: 0;
+}
+
+ul[role="list"],
+ol[role="list"] {
+  list-style: none;
+  padding: 0;
+}
+
+h1,
+h2,
+h3,
+h4 {
+  font-weight: inherit;
+  font-size: inherit;
+}
+
+img,
+svg,
+canvas,
+video {
+  display: block;
+  max-width: 100%;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+button,
+input,
+textarea,
+select {
+  font: inherit;
+  color: inherit;
+}
+
+button {
+  cursor: pointer;
+  background: none;
+  border: 0;
+  padding: 0;
+}
+
+/* Slim branded scrollbar — desktop pointers only; touch keeps native behaviour */
+@media (hover: hover) and (pointer: fine) {
+  html {
+    scrollbar-width: thin;
+    scrollbar-color: var(--gold-600) var(--ink-950);
+  }
+  ::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+  }
+  ::-webkit-scrollbar-track {
+    background: var(--ink-950);
+  }
+  ::-webkit-scrollbar-thumb {
+    background: var(--gold-600);
+    border: 2px solid var(--ink-950);
+    border-radius: var(--r-pill);
+  }
+  ::-webkit-scrollbar-thumb:hover {
+    background: var(--gold-500);
+  }
+}
+
+::selection {
+  background: var(--gold-500);
+  color: var(--ink-950);
+}
+
+:focus-visible {
+  outline: 2px solid var(--gold-500);
+  outline-offset: 3px;
+}
+
+/* Content always sits above the shared WebGL canvas */
+main,
+footer {
+  position: relative;
+  z-index: var(--z-content);
+}
+
+main:focus {
+  outline: none;
+}
+
+/*
+ * Sections that own a WebGL layer are painted by their 3D/shader scene when
+ * WebGL is active; otherwise their CSS background is the 2D fallback.
+ */
+.webgl-on [data-gl][data-gl-ready] {
+  background: transparent !important;
+}
+.webgl-on [data-gl-ready] [data-gl-fallback] {
+  visibility: hidden;
+}
+
+.skip-link {
+  position: fixed;
+  top: var(--s-3);
+  left: var(--s-3);
+  z-index: calc(var(--z-gate) + 1);
+  padding: var(--s-3) var(--s-4);
+  background: var(--gold-500);
+  color: var(--ink-950);
+  font-weight: 600;
+  transform: translateY(-200%);
+  transition: transform var(--dur-fast);
+}
+
+.skip-link:focus-visible {
+  transform: none;
+}
+
+/* Pre-hydration reveal states (only when JS runs and motion is allowed) */
+@media (prefers-reduced-motion: no-preference) {
+  .js [data-reveal] {
+    opacity: 0;
+  }
+  .js [data-reveal-group] > [data-reveal-item] {
+    opacity: 0;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}

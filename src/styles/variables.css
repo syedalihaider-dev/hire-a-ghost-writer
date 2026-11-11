@@ -1,0 +1,138 @@
+/*
+ * Design tokens — Hire A Ghost Writer Now (v2, agency direction)
+ * Brand: navy #141A2A + gold #C5A059. Gold is the ONLY accent.
+ * Contrast (WCAG): navy/bone 15.8 · gold/navy 7.1 · gold-800/bone 5.6 ·
+ * slate-300/navy 7.0 · slate-600/bone 5.6. Gold on bone (2.2) = decoration only.
+ */
+:root {
+  /* Navy / ink */
+  --ink-950: #0b0f19;
+  --ink-900: #0f1421;
+  --navy-800: #141a2a;
+  --navy-700: #1b2335;
+  --navy-600: #2e3646;
+
+  /* Bone (light surfaces) */
+  --bone-50: #f6f4ef;
+  --bone-100: #ece8df;
+  --bone-200: #dcd6c9;
+
+  /* Gold */
+  --gold-400: #d4b373;
+  --gold-500: #c5a059;
+  --gold-600: #b48e46;
+  --gold-800: #7a5c24;
+
+  /* Wine — the testimonials chapter (luxury accent surface) */
+  --wine-900: #22090d;
+  --wine-800: #331117;
+  --wine-700: #4a1a21;
+
+  /* Slate */
+  --slate-300: #9aa5b6;
+  --slate-600: #5a6272;
+
+  --error-dark: #ef8f7f;
+  --error-light: #a33a2a;
+
+  /* Semantic (dark by default; .surface-light flips them) */
+  --bg: var(--navy-800);
+  --fg: var(--bone-50);
+  --muted: var(--slate-300);
+  --accent: var(--gold-500);
+  --accent-text: var(--gold-500);
+  --line: rgba(246, 244, 239, 0.14);
+  --line-strong: rgba(246, 244, 239, 0.32);
+  --error: var(--error-dark);
+
+  /* Typefaces */
+  --font-display: var(--font-big-shoulders), "Arial Narrow", sans-serif;
+  --font-body: var(--font-archivo), system-ui, sans-serif;
+  --font-mono: var(--font-jetbrains), ui-monospace, monospace;
+  --font-serif: var(--font-cormorant), Georgia, "Times New Roman", serif;
+
+  /* Display scale (viewport-driven, like the reference) */
+  --fs-hero: clamp(4.2rem, 12vw, 13rem);
+  --fs-h2: clamp(3rem, 8vw, 8.5rem);
+  --fs-h3: clamp(1.9rem, 3.4vw, 3.4rem);
+  --fs-h4: clamp(1.35rem, 1.6vw, 1.75rem);
+  --fs-wordmark: clamp(3.5rem, 15.5vw, 17rem);
+  --lh-display: 0.84;
+  --ls-display: -0.005em;
+
+  /* Text scale */
+  --fs-label: 0.75rem; /* 12px mono labels (legibility floor) */
+  --fs-xs: 0.75rem;
+  --fs-sm: 0.875rem;
+  --fs-base: 1rem;
+  --fs-md: clamp(1.0625rem, 1rem + 0.25vw, 1.1875rem);
+  --fs-lg: clamp(1.25rem, 1.1rem + 0.5vw, 1.5rem);
+  --lh-body: 1.6;
+
+  /* Spacing — 4/8-pt scale. Use only these. */
+  --s-1: 4px;
+  --s-2: 8px;
+  --s-3: 12px;
+  --s-4: 16px;
+  --s-5: 24px;
+  --s-6: 32px;
+  --s-7: 48px;
+  --s-8: 64px;
+  --s-9: 96px;
+  --s-10: 128px;
+  --s-11: 160px;
+
+  /* Section padding — only three values */
+  --pad-sm: var(--s-9);
+  --pad-md: var(--s-10);
+  --pad-lg: var(--s-11);
+
+  /* Grid: 12 / 8 / 4 */
+  --container: 1440px;
+  --cols: 12;
+  --gutter: var(--s-5);
+  --margin: clamp(16px, 4vw, 64px);
+  --header-h: 80px;
+  /* how far the ribbon bands overlap the hero and the next chapter */
+  --ribbon-overlap: clamp(85px, 10vw, 162px);
+
+  /* Radius: 0 / 4 / 999 */
+  --r-0: 0;
+  --r-1: 4px;
+  --r-pill: 999px;
+
+  /* Motion tokens (mirrors src/lib/motion.ts) */
+  --dur-fast: 0.3s;
+  --dur-base: 0.6s;
+  --dur-slow: 1.2s;
+  --dur-roll: 0.5s;
+  --ease-out: cubic-bezier(0.16, 1, 0.3, 1); /* expo.out */
+  --ease-in-out: cubic-bezier(0.65, 0, 0.35, 1); /* power3.inOut */
+  --ease-roll: cubic-bezier(0.76, 0, 0.24, 1);
+
+  /* Layers */
+  --z-canvas: 0;
+  --z-content: 1;
+  --z-header: 50;
+  --z-menu: 60;
+  --z-drawer: 70;
+  --z-cursor: 90;
+  --z-gate: 100;
+}
+
+@media (max-width: 1023px) {
+  :root {
+    --cols: 8;
+    --pad-sm: var(--s-8);
+    --pad-md: 80px;
+    --pad-lg: var(--s-9);
+  }
+}
+
+@media (max-width: 767px) {
+  :root {
+    --cols: 4;
+    --gutter: var(--s-4);
+    --header-h: 68px;
+  }
+}

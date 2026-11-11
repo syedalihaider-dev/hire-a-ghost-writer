@@ -1,0 +1,129 @@
+.layout {
+  display: grid;
+  grid-template-columns: repeat(12, minmax(0, 1fr));
+  column-gap: var(--gutter);
+  row-gap: var(--s-7);
+  align-items: start;
+}
+
+.aside {
+  grid-column: 1 / span 5;
+  position: sticky;
+  top: calc(var(--header-h) + var(--s-5));
+  display: grid;
+  gap: var(--s-6);
+}
+
+.aside h2 {
+  font-size: clamp(3rem, 6vw, 6.5rem);
+}
+
+.help {
+  display: grid;
+  gap: var(--s-2);
+}
+
+.phone {
+  font-family: var(--font-display);
+  font-variation-settings: "opsz" 72;
+  font-weight: 800;
+  font-size: var(--fs-h3);
+  line-height: 1;
+  transition: color var(--dur-fast);
+}
+
+.phone:hover {
+  color: var(--gold-800);
+}
+
+.accordion {
+  grid-column: 7 / -1;
+  border-top: 1px solid var(--line-strong);
+}
+
+.item {
+  border-bottom: 1px solid var(--line-strong);
+}
+
+.q {
+  display: grid;
+  grid-template-columns: 2.75rem minmax(0, 1fr) 40px;
+  align-items: center;
+  gap: var(--s-3);
+  width: 100%;
+  padding-block: var(--s-5);
+  text-align: left;
+}
+
+.qText {
+  font-family: var(--font-display);
+  font-variation-settings: "opsz" 72;
+  font-weight: 700;
+  font-size: var(--fs-h4);
+  line-height: 1.05;
+  text-transform: uppercase;
+  transition: color var(--dur-fast);
+}
+
+.q:hover .qText {
+  color: var(--gold-800);
+}
+
+.qIcon {
+  display: grid;
+  place-items: center;
+  width: 40px;
+  height: 40px;
+  border: 1px solid var(--line-strong);
+  border-radius: 50%;
+  transition: transform var(--dur-base) var(--ease-roll), background var(--dur-base), border-color var(--dur-base), color var(--dur-base);
+}
+
+.item[data-open] .qIcon {
+  transform: rotate(45deg);
+  background: var(--navy-800);
+  border-color: var(--navy-800);
+  color: var(--bone-50);
+}
+
+.panel {
+  display: grid;
+  grid-template-rows: 0fr;
+  transition: grid-template-rows var(--dur-base) var(--ease-roll);
+}
+
+.item[data-open] .panel {
+  grid-template-rows: 1fr;
+}
+
+.panelInner {
+  min-height: 0;
+  overflow: hidden;
+}
+
+.panelInner p {
+  padding: 0 52px var(--s-5) 2.75rem;
+  margin-left: var(--s-3);
+  color: var(--muted);
+  max-width: 62ch;
+}
+
+@media (max-width: 1023px) {
+  .aside,
+  .accordion {
+    grid-column: 1 / -1;
+  }
+  .aside {
+    position: relative;
+    top: 0;
+  }
+}
+
+@media (max-width: 479px) {
+  .q {
+    grid-template-columns: 2rem minmax(0, 1fr) 40px;
+  }
+  .panelInner p {
+    padding: 0 0 var(--s-5) 2rem;
+  }
+}

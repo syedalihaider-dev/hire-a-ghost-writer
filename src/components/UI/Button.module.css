@@ -1,0 +1,153 @@
+.button {
+  --b-fg: var(--ink-950);
+  --b-bg: var(--gold-500);
+  --b-border: var(--gold-500);
+  --b-fg-hover: var(--ink-950);
+  --b-bg-hover: var(--gold-400);
+  --b-border-hover: var(--gold-400);
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--s-3);
+  border: 1px solid var(--b-border);
+  border-radius: var(--r-1);
+  background: var(--b-bg);
+  color: var(--b-fg);
+  font-family: var(--font-body);
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  line-height: 1;
+  text-transform: uppercase;
+  white-space: nowrap;
+  transition:
+    background-color var(--dur-roll) var(--ease-roll),
+    color var(--dur-roll) var(--ease-roll),
+    border-color var(--dur-roll) var(--ease-roll);
+}
+
+.sm {
+  min-height: 36px;
+  padding: 0 var(--s-4);
+  font-size: 0.75rem;
+}
+
+.md {
+  min-height: 44px;
+  padding: 0 var(--s-5);
+  font-size: 0.8125rem;
+}
+
+.lg {
+  min-height: 56px;
+  padding: 0 var(--s-6);
+  font-size: 0.9375rem;
+}
+
+.button:hover,
+.button:focus-visible {
+  background: var(--b-bg-hover);
+  border-color: var(--b-border-hover);
+  color: var(--b-fg-hover);
+}
+
+.button:active {
+  scale: 0.97;
+}
+
+.button:disabled {
+  opacity: 0.65;
+  cursor: progress;
+}
+
+/* Rolling label */
+.roll {
+  position: relative;
+  display: block;
+  overflow: hidden;
+  line-height: 1.25;
+}
+
+.rollA,
+.rollB {
+  display: block;
+  transition: transform var(--dur-roll) var(--ease-roll);
+}
+
+.rollB {
+  position: absolute;
+  inset: 0;
+  transform: translateY(105%);
+}
+
+.button:hover .rollA,
+.button:focus-visible .rollA {
+  transform: translateY(-105%);
+}
+
+.button:hover .rollB,
+.button:focus-visible .rollB {
+  transform: translateY(0);
+}
+
+.icon {
+  display: inline-flex;
+  transition: transform var(--dur-roll) var(--ease-roll);
+}
+
+.button:hover .icon,
+.button:focus-visible .icon {
+  transform: translateX(4px);
+}
+
+/* Variants */
+.outline {
+  --b-fg: var(--fg);
+  --b-bg: transparent;
+  --b-border: var(--line-strong);
+  --b-fg-hover: var(--ink-950);
+  --b-bg-hover: var(--gold-500);
+  --b-border-hover: var(--gold-500);
+}
+
+.dark {
+  --b-fg: var(--bone-50);
+  --b-bg: var(--navy-800);
+  --b-border: var(--navy-800);
+  --b-fg-hover: var(--ink-950);
+  --b-bg-hover: var(--gold-500);
+  --b-border-hover: var(--gold-500);
+}
+
+.light {
+  --b-fg: var(--navy-800);
+  --b-bg: var(--bone-50);
+  --b-border: var(--bone-50);
+  --b-fg-hover: var(--ink-950);
+  --b-bg-hover: var(--gold-500);
+  --b-border-hover: var(--gold-500);
+}
+
+/* Corner brackets */
+.bracket {
+  --c: var(--line-strong);
+  --len: 8px;
+  position: relative;
+  display: inline-flex;
+  padding: 7px;
+  background:
+    linear-gradient(var(--c), var(--c)) top left / var(--len) 1px no-repeat,
+    linear-gradient(var(--c), var(--c)) top left / 1px var(--len) no-repeat,
+    linear-gradient(var(--c), var(--c)) top right / var(--len) 1px no-repeat,
+    linear-gradient(var(--c), var(--c)) top right / 1px var(--len) no-repeat,
+    linear-gradient(var(--c), var(--c)) bottom left / var(--len) 1px no-repeat,
+    linear-gradient(var(--c), var(--c)) bottom left / 1px var(--len) no-repeat,
+    linear-gradient(var(--c), var(--c)) bottom right / var(--len) 1px no-repeat,
+    linear-gradient(var(--c), var(--c)) bottom right / 1px var(--len) no-repeat;
+  transition: padding var(--dur-roll) var(--ease-roll);
+}
+
+.bracket:hover {
+  --c: var(--gold-500);
+  padding: 4px;
+}

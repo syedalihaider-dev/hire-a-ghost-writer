@@ -1,0 +1,137 @@
+.modal {
+  position: fixed;
+  inset: 0;
+  z-index: var(--z-drawer);
+  display: grid;
+  place-items: center;
+  padding: var(--s-5);
+  visibility: hidden;
+}
+
+.overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(8, 11, 19, 0.82);
+}
+
+.panel {
+  --fg: var(--bone-50);
+  --muted: var(--slate-300);
+  --line: rgba(246, 244, 239, 0.14);
+  --line-strong: rgba(246, 244, 239, 0.32);
+  position: relative;
+  display: grid;
+  grid-template-columns: minmax(0, 0.85fr) minmax(0, 1.15fr);
+  width: min(100%, 1080px);
+  max-height: min(92vh, 820px);
+  overflow: hidden;
+  border-radius: var(--r-1);
+  background: var(--navy-800);
+  color: var(--bone-50);
+  box-shadow: 0 60px 120px -40px rgba(0, 0, 0, 0.8);
+  border: 1px solid rgba(197, 160, 89, 0.22);
+}
+
+.media {
+  position: relative;
+  min-height: 100%;
+}
+
+.media img {
+  object-fit: cover;
+  object-position: 35% 40%;
+}
+
+.media::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, rgba(11, 15, 25, 0.1) 30%, rgba(11, 15, 25, 0.88));
+}
+
+.mediaCaption {
+  position: absolute;
+  z-index: 1;
+  left: var(--s-6);
+  right: var(--s-6);
+  bottom: var(--s-6);
+  display: grid;
+  gap: var(--s-3);
+}
+
+.mediaQuote {
+  font-size: clamp(1.4rem, 2vw, 2rem);
+  font-style: italic;
+}
+
+.body {
+  display: grid;
+  align-content: start;
+  gap: var(--s-4);
+  padding: var(--s-7) var(--s-7) var(--s-6);
+  overflow-y: auto;
+  overscroll-behavior: contain;
+}
+
+.title {
+  font-size: clamp(2.4rem, 3.6vw, 3.6rem);
+}
+
+.subtitle {
+  color: var(--slate-300);
+  margin-bottom: var(--s-2);
+}
+
+.call {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--s-2);
+  justify-self: start;
+  color: var(--gold-400);
+  font-size: var(--fs-sm);
+}
+
+.close {
+  position: absolute;
+  top: var(--s-4);
+  right: var(--s-4);
+  z-index: 2;
+  display: grid;
+  place-items: center;
+  width: 44px;
+  height: 44px;
+  border: 1px solid rgba(246, 244, 239, 0.3);
+  border-radius: 50%;
+  background: rgba(11, 15, 25, 0.6);
+  transition: background var(--dur-roll) var(--ease-roll), color var(--dur-roll) var(--ease-roll), rotate var(--dur-roll) var(--ease-roll);
+}
+
+.close:hover {
+  background: var(--gold-500);
+  color: var(--ink-950);
+  rotate: 90deg;
+}
+
+@media (max-width: 899px) {
+  .modal {
+    padding: var(--s-3);
+    align-items: end;
+  }
+  .panel {
+    grid-template-columns: 1fr;
+    max-height: 94vh;
+    overflow-y: auto;
+  }
+  .media {
+    display: none;
+  }
+  .body {
+    padding: var(--s-7) var(--s-5) var(--s-5);
+    overflow: visible;
+  }
+}
+
+/* GSAP stagger target for the form column */
+.stagger {
+  min-width: 0;
+}

@@ -1,0 +1,128 @@
+.menu {
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  visibility: hidden;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  background:
+    radial-gradient(70% 60% at 85% 10%, rgba(197, 160, 89, 0.12), transparent 60%),
+    var(--ink-950);
+  color: var(--bone-50);
+  pointer-events: auto;
+}
+
+.inner {
+  display: grid;
+  grid-template-columns: repeat(12, minmax(0, 1fr));
+  column-gap: var(--gutter);
+  row-gap: var(--s-7);
+  min-height: 100%;
+  padding: calc(var(--header-h) + var(--s-7)) var(--margin) var(--s-7);
+  align-content: space-between;
+}
+
+.nav {
+  grid-column: 1 / span 7;
+}
+
+.row {
+  border-bottom: 1px solid var(--line);
+}
+
+.link {
+  display: block;
+  overflow: hidden;
+}
+
+.linkInner {
+  display: flex;
+  align-items: baseline;
+  gap: var(--s-4);
+  padding-block: var(--s-2);
+  font-family: var(--font-display);
+  font-variation-settings: "opsz" 72;
+  font-weight: 800;
+  font-size: clamp(3rem, 7.2vw, 7.5rem);
+  line-height: 0.95;
+  text-transform: uppercase;
+  transition:
+    color var(--dur-base) var(--ease-roll),
+    translate var(--dur-base) var(--ease-roll);
+}
+
+/* hover uses 'translate' so it never fights GSAP's transform-based entrance */
+.link:hover .linkInner,
+.link:focus-visible .linkInner {
+  color: var(--gold-500);
+  translate: var(--s-5) 0;
+}
+
+.col {
+  grid-column: span 5;
+  display: grid;
+  align-content: start;
+  justify-items: start;
+  gap: var(--s-4);
+}
+
+.nav + .col {
+  grid-column: 9 / -1;
+}
+
+.col + .col {
+  grid-column: 9 / -1;
+}
+
+.services {
+  display: grid;
+  gap: var(--s-2);
+  font-size: var(--fs-sm);
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+.services a:hover {
+  color: var(--gold-400);
+}
+
+.idx {
+  font-family: var(--font-mono);
+  font-size: var(--fs-label);
+  color: var(--slate-300);
+}
+
+.phone {
+  font-family: var(--font-display);
+  font-variation-settings: "opsz" 72;
+  font-weight: 700;
+  font-size: clamp(2rem, 3vw, 3rem);
+  line-height: 1;
+}
+
+.phone:hover {
+  color: var(--gold-400);
+}
+
+.address {
+  font-style: normal;
+  color: var(--slate-300);
+}
+
+@media (min-width: 1024px) {
+  .nav {
+    grid-row: span 2;
+  }
+}
+
+@media (max-width: 1023px) {
+  .nav,
+  .col,
+  .nav + .col,
+  .col + .col {
+    grid-column: 1 / -1;
+  }
+  .inner {
+    align-content: start;
+  }
+}

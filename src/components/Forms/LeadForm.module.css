@@ -1,0 +1,150 @@
+.form {
+  --f-fg: var(--navy-800);
+  --f-muted: var(--slate-600);
+  --f-line: rgba(20, 26, 42, 0.25);
+  --f-focus: var(--gold-800);
+  --f-error: var(--error-light);
+  position: relative;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: var(--s-5) var(--s-5);
+  color: var(--f-fg);
+}
+
+.dark {
+  --f-fg: var(--bone-50);
+  --f-muted: var(--slate-300);
+  --f-line: rgba(246, 244, 239, 0.22);
+  --f-focus: var(--gold-500);
+  --f-error: var(--error-dark);
+}
+
+.field {
+  display: grid;
+  gap: var(--s-1);
+  min-width: 0;
+}
+
+.full {
+  grid-column: 1 / -1;
+}
+
+.label {
+  font-family: var(--font-mono);
+  font-size: var(--fs-label);
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--f-muted);
+}
+
+.req {
+  margin-left: 2px;
+  color: var(--gold-600);
+}
+
+.input {
+  width: 100%;
+  min-height: 48px;
+  padding: var(--s-2) 0;
+  border: 0;
+  border-bottom: 1px solid var(--f-line);
+  border-radius: 0;
+  background: transparent;
+  color: var(--f-fg);
+  font-size: var(--fs-base);
+  transition: border-color var(--dur-fast);
+  -webkit-appearance: none;
+  appearance: none;
+}
+
+textarea.input {
+  resize: vertical;
+  min-height: 112px;
+  line-height: 1.5;
+}
+
+.input::placeholder {
+  color: var(--f-muted);
+  opacity: 0.7;
+}
+
+.input:hover {
+  border-color: var(--f-muted);
+}
+
+.input:focus-visible {
+  outline: none;
+  border-bottom-color: var(--f-focus);
+  box-shadow: 0 1px 0 0 var(--f-focus);
+}
+
+.input[aria-invalid="true"] {
+  border-bottom-color: var(--f-error);
+}
+
+.error,
+.formError {
+  font-size: var(--fs-sm);
+  color: var(--f-error);
+}
+
+.formError a {
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+.actions {
+  display: grid;
+  gap: var(--s-3);
+  justify-items: start;
+  margin-top: var(--s-2);
+}
+
+.note {
+  font-size: var(--fs-xs);
+  color: var(--f-muted);
+}
+
+.hp {
+  position: absolute;
+  left: -9999px;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+}
+
+.success {
+  display: grid;
+  gap: var(--s-2);
+  padding: var(--s-6) 0;
+}
+
+.successTitle {
+  font-family: var(--font-display);
+  font-variation-settings: "opsz" 72;
+  font-weight: 800;
+  font-size: var(--fs-h3);
+  line-height: 1;
+  text-transform: uppercase;
+  color: var(--gold-800);
+}
+
+.dark .successTitle,
+.success.dark {
+  color: var(--bone-50);
+}
+
+.dark .successTitle {
+  color: var(--gold-500);
+}
+
+@media (max-width: 559px) {
+  .form {
+    grid-template-columns: 1fr;
+  }
+}
+
+.submit {
+  min-width: 200px;
+}

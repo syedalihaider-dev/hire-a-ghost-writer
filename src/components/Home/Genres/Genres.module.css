@@ -1,0 +1,208 @@
+.genres {
+  position: relative;
+  overflow: hidden;
+}
+
+.list {
+  margin-top: var(--s-9);
+  border-top: 1px solid var(--line-strong);
+}
+
+.row {
+  position: relative;
+  border-bottom: 1px solid var(--line-strong);
+  isolation: isolate;
+}
+
+.row::before {
+  content: "";
+  position: absolute;
+  inset: 0 calc(var(--margin) * -1);
+  z-index: -1;
+  background: var(--navy-800);
+  transform: scaleY(0);
+  transform-origin: bottom;
+  transition: transform var(--dur-base) var(--ease-roll);
+}
+
+.head {
+  display: grid;
+  grid-template-columns: 4rem minmax(0, 1fr) minmax(0, 1fr) 44px;
+  align-items: center;
+  gap: var(--gutter);
+  width: 100%;
+  padding-block: var(--s-4);
+  text-align: left;
+  transition: color var(--dur-base) var(--ease-roll);
+}
+
+.name {
+  font-family: var(--font-display);
+  font-variation-settings: "opsz" 72;
+  font-weight: 800;
+  font-size: clamp(2.4rem, 5.4vw, 5.5rem);
+  line-height: 0.9;
+  text-transform: uppercase;
+  transition: transform var(--dur-base) var(--ease-roll);
+}
+
+.service {
+  font-size: var(--fs-sm);
+  color: var(--muted);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  transition: color var(--dur-base);
+}
+
+.toggle {
+  display: grid;
+  place-items: center;
+  width: 44px;
+  height: 44px;
+  border: 1px solid var(--line-strong);
+  border-radius: 50%;
+  transition: transform var(--dur-base) var(--ease-roll), background var(--dur-base), border-color var(--dur-base);
+}
+
+.row[data-open] .toggle {
+  transform: rotate(45deg);
+  background: var(--gold-500);
+  border-color: var(--gold-500);
+  color: var(--ink-950);
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .row[data-hover]::before {
+    transform: scaleY(1);
+  }
+  .row[data-hover] .head {
+    color: var(--bone-50);
+  }
+  .row[data-hover] .name {
+    transform: translateX(var(--s-5));
+  }
+  .row[data-hover] .service {
+    color: var(--gold-500);
+  }
+  .row[data-hover] .toggle {
+    border-color: rgba(246, 244, 239, 0.4);
+  }
+  .row[data-hover] .panel {
+    color: var(--bone-50);
+  }
+}
+
+.panel {
+  display: grid;
+  grid-template-rows: 0fr;
+  transition: grid-template-rows var(--dur-base) var(--ease-roll);
+}
+
+.row[data-open] .panel {
+  grid-template-rows: 1fr;
+}
+
+.panelInner {
+  min-height: 0;
+  overflow: hidden;
+  display: grid;
+  grid-template-columns: 4rem 160px minmax(0, 1fr) auto;
+  gap: var(--gutter);
+  align-items: end;
+}
+
+.row[data-open] .panelInner {
+  padding-bottom: var(--s-6);
+}
+
+.thumb {
+  grid-column: 2;
+  position: relative;
+  aspect-ratio: 3 / 4;
+  overflow: hidden;
+}
+
+.thumb img {
+  object-fit: cover;
+}
+
+.text {
+  max-width: 60ch;
+  color: inherit;
+  opacity: 0.85;
+}
+
+.link {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--s-2);
+  font-size: var(--fs-sm);
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  white-space: nowrap;
+  color: var(--accent-text);
+}
+
+.row[data-hover] .link {
+  color: var(--gold-500);
+}
+
+/* Cursor-follow image (desktop only) */
+.follower {
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 3;
+  width: 240px;
+  aspect-ratio: 3 / 4;
+  margin: -160px 0 0 -120px;
+  pointer-events: none;
+  opacity: 0;
+  scale: 0.6;
+  transition: opacity var(--dur-fast), scale var(--dur-base) var(--ease-out);
+}
+
+.follower[data-visible] {
+  opacity: 1;
+  scale: 1;
+}
+
+.followerImg {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  clip-path: inset(100% 0 0 0);
+  transition: clip-path var(--dur-base) var(--ease-roll);
+  box-shadow: 0 30px 60px -20px rgba(0, 0, 0, 0.5);
+}
+
+.followerImg[data-active] {
+  clip-path: inset(0 0 0 0);
+}
+
+.followerImg img {
+  object-fit: cover;
+}
+
+@media (hover: none), (pointer: coarse), (prefers-reduced-motion: reduce) {
+  .follower {
+    display: none;
+  }
+}
+
+@media (max-width: 1023px) {
+  .head {
+    grid-template-columns: 2.5rem minmax(0, 1fr) 44px;
+  }
+  .service {
+    display: none;
+  }
+  .panelInner {
+    grid-template-columns: 1fr;
+  }
+  .thumb {
+    grid-column: auto;
+    width: 140px;
+  }
+}

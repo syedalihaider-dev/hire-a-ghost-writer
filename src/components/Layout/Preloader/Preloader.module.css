@@ -1,0 +1,67 @@
+.preloader {
+  position: fixed;
+  inset: 0;
+  z-index: var(--z-gate);
+  display: grid;
+  place-items: center;
+  background: var(--ink-950);
+  color: var(--bone-50);
+  will-change: transform;
+  /* If JavaScript never takes over, get out of the way on its own. */
+  animation: fallback 0.4s ease 4s forwards;
+}
+
+.preloader[data-controlled="true"] {
+  animation: none;
+}
+
+@keyframes fallback {
+  to {
+    opacity: 0;
+    visibility: hidden;
+  }
+}
+
+.inner {
+  display: grid;
+  justify-items: center;
+  gap: var(--s-5);
+}
+
+.logo {
+  width: min(64vw, 260px);
+  height: auto;
+}
+
+.meta {
+  display: grid;
+  justify-items: center;
+  gap: var(--s-3);
+}
+
+.track {
+  position: relative;
+  display: block;
+  width: 160px;
+  height: 1px;
+  overflow: hidden;
+  background: rgba(246, 244, 239, 0.15);
+}
+
+.bar {
+  position: absolute;
+  inset: 0;
+  background: var(--gold-500);
+  transform: scaleX(0);
+  transform-origin: left;
+}
+
+/* Gold leading edge on the curtain as it lifts */
+.edge {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 2px;
+  background: var(--gold-500);
+}

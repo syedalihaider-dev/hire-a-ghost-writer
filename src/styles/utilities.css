@@ -1,0 +1,173 @@
+/* Shared layout + typography primitives */
+
+.container {
+  width: 100%;
+  max-width: var(--container);
+  margin-inline: auto;
+  padding-inline: var(--margin);
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(var(--cols), minmax(0, 1fr));
+  column-gap: var(--gutter);
+}
+
+.pad-sm {
+  padding-block: var(--pad-sm);
+}
+.pad-md {
+  padding-block: var(--pad-md);
+}
+.pad-lg {
+  padding-block: var(--pad-lg);
+}
+
+/* Surfaces */
+/* Dark surfaces reset the semantic tokens so they nest safely inside light ones. */
+.surface-dark,
+.surface-ink {
+  --fg: var(--bone-50);
+  --muted: var(--slate-300);
+  --accent-text: var(--gold-500);
+  --line: rgba(246, 244, 239, 0.14);
+  --line-strong: rgba(246, 244, 239, 0.32);
+  --error: var(--error-dark);
+  color: var(--fg);
+}
+
+.surface-dark {
+  background: var(--navy-800);
+}
+
+.surface-ink {
+  background: var(--ink-950);
+}
+
+.surface-light {
+  --fg: var(--navy-800);
+  --muted: var(--slate-600);
+  --accent-text: var(--gold-800);
+  --line: rgba(20, 26, 42, 0.14);
+  --line-strong: rgba(20, 26, 42, 0.35);
+  --error: var(--error-light);
+  background: var(--bone-50);
+  color: var(--fg);
+}
+
+/* Bracketed mono label: [ OUR SERVICES ] */
+.label {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6em;
+  font-family: var(--font-mono);
+  font-size: var(--fs-label);
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  line-height: 1.4;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+.label::before {
+  content: "[";
+}
+.label::after {
+  content: "]";
+}
+
+.label--accent {
+  color: var(--accent-text);
+}
+
+/* Display type */
+.display {
+  font-family: var(--font-display);
+  font-variation-settings: "opsz" 72;
+  font-weight: 800;
+  line-height: var(--lh-display);
+  letter-spacing: var(--ls-display);
+  text-transform: uppercase;
+  text-wrap: balance;
+}
+
+.display .w-light {
+  font-weight: 300;
+}
+
+.display .w-serif {
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-weight: 500;
+  text-transform: none;
+  font-size: 0.8em;
+  letter-spacing: 0;
+}
+
+.display .dot {
+  color: var(--accent);
+}
+
+.lead {
+  font-size: var(--fs-md);
+  line-height: var(--lh-body);
+  color: var(--muted);
+  max-width: 34rem;
+  text-wrap: pretty;
+}
+
+.visually-hidden {
+  position: absolute !important;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  padding: 0;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+.link-line {
+  background-image: linear-gradient(currentColor, currentColor);
+  background-size: 0% 1px;
+  background-position: 100% 100%;
+  background-repeat: no-repeat;
+  padding-bottom: 2px;
+  transition: background-size var(--dur-base) var(--ease-out);
+}
+
+.link-line:hover,
+.link-line:focus-visible {
+  background-size: 100% 1px;
+  background-position: 0 100%;
+}
+
+/* Film grain for cinematic surfaces */
+.grain {
+  position: relative;
+}
+
+.grain::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 2;
+  opacity: 0.035;
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='180' height='180'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>");
+}
+
+/* Editorial serif headline (hero, testimonials, showcase) */
+.serif {
+  font-family: var(--font-serif);
+  font-weight: 500;
+  line-height: 1.02;
+  letter-spacing: -0.015em;
+  text-wrap: balance;
+}
+
+.serif em {
+  font-style: italic;
+  color: var(--accent);
+}

@@ -1,0 +1,204 @@
+.header {
+  position: fixed;
+  inset: 0 0 auto;
+  z-index: var(--z-header);
+  pointer-events: none;
+}
+
+.bar {
+  display: flex;
+  align-items: center;
+  gap: var(--s-6);
+  height: var(--header-h);
+  padding-inline: var(--margin);
+}
+
+.bar > *,
+.actions > * {
+  pointer-events: auto;
+}
+
+.brand {
+  position: relative;
+  display: block;
+  width: 190px;
+  height: 50px;
+  flex: none;
+}
+
+.logoFull,
+.logoMark {
+  position: absolute;
+  top: 50%;
+  left: 0;
+  transition:
+    opacity var(--dur-base) var(--ease-out),
+    transform var(--dur-base) var(--ease-out);
+}
+
+.logoFull {
+  width: 190px;
+  height: auto;
+  transform: translateY(-50%);
+}
+
+.logoMark {
+  width: 44px;
+  height: 44px;
+  opacity: 0;
+  transform: translateY(-50%) scale(0.6) rotate(-30deg);
+}
+
+.header[data-scrolled] .logoFull {
+  opacity: 0;
+  transform: translateY(-60%);
+}
+
+.header[data-scrolled] .logoMark {
+  opacity: 1;
+  transform: translateY(-50%);
+}
+
+/* Sound toggle: its own dark pill keeps it legible over light and dark chapters
+   (no blend modes — those force full-page compositing while scrolling). */
+.sound {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--s-3);
+  min-height: 36px;
+  padding: 0 var(--s-4);
+  border-radius: var(--r-pill);
+  background: rgba(11, 15, 25, 0.72);
+  color: #fff;
+}
+
+.sound :global(.label) {
+  color: #fff;
+}
+
+.bars {
+  display: inline-flex;
+  align-items: flex-end;
+  gap: 2px;
+  height: 12px;
+}
+
+.bars i {
+  width: 2px;
+  height: 3px;
+  background: #fff;
+  transition: height var(--dur-fast);
+}
+
+.bars[data-on] i {
+  animation: eq 1s ease-in-out infinite alternate;
+}
+
+.bars[data-on] i:nth-child(2) {
+  animation-delay: 0.25s;
+}
+
+.bars[data-on] i:nth-child(3) {
+  animation-delay: 0.5s;
+}
+
+@keyframes eq {
+  from {
+    height: 3px;
+  }
+  to {
+    height: 12px;
+  }
+}
+
+.actions {
+  margin-left: auto;
+  display: flex;
+  align-items: center;
+  gap: var(--s-3);
+}
+
+.actions :global([class*="bracket"]) {
+  --c: rgba(255, 255, 255, 0.55);
+}
+
+.menuBtn {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--s-3);
+  min-height: 36px;
+  padding: 0 var(--s-4);
+  border-radius: var(--r-1);
+  background: var(--bone-50);
+  color: var(--navy-800);
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  transition: background var(--dur-roll) var(--ease-roll);
+}
+
+.menuBtn:hover {
+  background: var(--gold-500);
+}
+
+.menuLabel {
+  min-width: 3.4em;
+  text-align: left;
+}
+
+.burger {
+  display: grid;
+  gap: 3px;
+  width: 14px;
+}
+
+.burger i {
+  display: block;
+  height: 1.5px;
+  background: currentColor;
+  transition: transform var(--dur-base) var(--ease-roll), opacity var(--dur-fast);
+}
+
+.burger i:nth-child(2) {
+  width: 70%;
+  justify-self: end;
+}
+
+.burger[data-open] i:nth-child(1) {
+  transform: translateY(4.5px) rotate(45deg);
+}
+
+.burger[data-open] i:nth-child(2) {
+  opacity: 0;
+}
+
+.burger[data-open] i:nth-child(3) {
+  transform: translateY(-4.5px) rotate(-45deg);
+}
+
+@media (max-width: 767px) {
+  .brand {
+    width: 150px;
+  }
+  .logoFull {
+    width: 150px;
+  }
+  .sound {
+    display: none;
+  }
+  .quote {
+    display: none !important;
+  }
+}
+
+@media (max-width: 1023px) and (min-width: 768px) {
+  .sound :global(.label) {
+    display: none;
+  }
+}
+
+/* animation target for the header entrance */
+.item {
+  will-change: transform;
+}

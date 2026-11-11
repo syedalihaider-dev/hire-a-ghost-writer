@@ -1,0 +1,70 @@
+.cursor {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: var(--z-cursor);
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity var(--dur-fast);
+}
+
+.cursor[data-visible="true"] {
+  opacity: 1;
+}
+
+.ring {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 36px;
+  height: 36px;
+  margin: -18px 0 0 -18px;
+  border: 1px solid rgba(197, 160, 89, 0.7);
+  border-radius: 50%;
+  transition:
+    transform var(--dur) var(--ease-out),
+    background-color var(--dur) var(--ease-out),
+    border-color var(--dur) var(--ease-out);
+}
+
+.cursor[data-state="hover"] .ring {
+  transform: scale(1.6);
+  background: rgba(197, 160, 89, 0.12);
+  border-color: transparent;
+}
+
+.cursor[data-state="label"] .ring {
+  transform: scale(2.6);
+  background: var(--gold-500);
+  border-color: transparent;
+}
+
+.cursor[data-pressed="true"] .ring {
+  transform: scale(0.8);
+}
+
+.label {
+  position: absolute;
+  left: 0;
+  top: 0;
+  transform: translate(-50%, -50%) scale(0.6);
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--ink-900);
+  white-space: nowrap;
+  opacity: 0;
+  transition: opacity var(--dur-fast), transform var(--dur) var(--ease-out);
+}
+
+.cursor[data-state="label"] .label {
+  opacity: 1;
+  transform: translate(-50%, -50%) scale(1);
+}
+
+@media (hover: none), (pointer: coarse) {
+  .cursor {
+    display: none;
+  }
+}

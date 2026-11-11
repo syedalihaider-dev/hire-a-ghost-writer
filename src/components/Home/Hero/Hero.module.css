@@ -1,0 +1,217 @@
+.hero {
+  position: relative;
+  overflow: hidden;
+  background:
+    radial-gradient(60% 70% at 85% 30%, rgba(197, 160, 89, 0.1), transparent 60%),
+    radial-gradient(50% 60% at 0% 100%, rgba(46, 54, 70, 0.6), transparent 70%),
+    var(--ink-950);
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(12, minmax(0, 1fr));
+  column-gap: var(--gutter);
+  align-items: center;
+  min-height: 100vh;
+  min-height: 100svh;
+  max-height: 1100px;
+  padding-top: calc(var(--header-h) + var(--s-5));
+  padding-bottom: calc(var(--ribbon-overlap) + var(--s-5));
+}
+
+.copy {
+  grid-column: 1 / span 6;
+  display: grid;
+  justify-items: start;
+  gap: var(--s-5);
+  padding-right: var(--s-6);
+}
+
+.title {
+  font-size: clamp(2.6rem, 4.9vw, 5.4rem);
+  line-height: 1;
+  max-width: 13ch;
+}
+
+.title em {
+  display: inline-block;
+  color: var(--gold-500);
+}
+
+.intro {
+  font-size: var(--fs-md);
+  line-height: 1.6;
+  color: var(--slate-300);
+  max-width: 34rem;
+}
+
+.ctas {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--s-3);
+  margin-top: var(--s-2);
+}
+
+.points {
+  display: grid;
+  gap: var(--s-2);
+  margin-top: var(--s-3);
+  padding-top: var(--s-5);
+  border-top: 1px solid var(--line);
+  font-size: var(--fs-sm);
+  color: rgba(246, 244, 239, 0.8);
+  width: 100%;
+}
+
+.points li {
+  display: flex;
+  gap: var(--s-3);
+  align-items: baseline;
+}
+
+/* Visual */
+.visual {
+  position: relative;
+  grid-column: 7 / -1;
+  align-self: stretch;
+  display: grid;
+  margin: 0;
+  padding: var(--s-5) 0 var(--s-5) var(--s-5);
+}
+
+.frame {
+  position: relative;
+  z-index: 1;
+  min-height: 420px;
+  overflow: hidden;
+  border-radius: var(--r-1);
+  background: var(--navy-700);
+}
+
+.image {
+  object-fit: cover;
+  /* keep the pen nib and handwriting in frame */
+  object-position: 34% 45%;
+  will-change: transform;
+}
+
+.frame::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, transparent 55%, rgba(11, 15, 25, 0.75));
+  pointer-events: none;
+}
+
+.caption {
+  position: absolute;
+  z-index: 1;
+  /* clear the rotating seal that overlaps the frame's lower-left corner */
+  left: 104px;
+  right: var(--s-5);
+  bottom: var(--s-5);
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--s-2) var(--s-4);
+}
+
+.caption :global(.label) {
+  color: rgba(246, 244, 239, 0.85);
+}
+
+.frameLine {
+  position: absolute;
+  top: 0;
+  right: calc(var(--s-5) * -1);
+  bottom: var(--s-8);
+  left: var(--s-8);
+  border: 1px solid rgba(197, 160, 89, 0.45);
+  border-radius: var(--r-1);
+  pointer-events: none;
+}
+
+.seal {
+  position: absolute;
+  z-index: 2;
+  left: 0;
+  bottom: var(--s-8);
+  width: 132px;
+  height: 132px;
+  display: grid;
+  place-items: center;
+  border-radius: 50%;
+  background: var(--ink-950);
+  box-shadow: 0 20px 40px -20px rgba(0, 0, 0, 0.8);
+}
+
+.sealText {
+  position: absolute;
+  inset: 6px;
+  animation: spin 28s linear infinite;
+}
+
+.sealText text {
+  fill: var(--gold-400);
+  font-family: var(--font-mono);
+  font-size: 12px;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+.sealMark {
+  width: 52px;
+  height: 52px;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@media (max-width: 1023px) {
+  .caption {
+    left: var(--s-5);
+  }
+  .grid {
+    max-height: none;
+    min-height: 0;
+    row-gap: var(--s-7);
+    padding-bottom: calc(var(--ribbon-overlap) + var(--s-7));
+  }
+  .copy,
+  .visual {
+    grid-column: 1 / -1;
+    padding-right: 0;
+  }
+  .frame {
+    min-height: 0;
+    aspect-ratio: 4 / 3;
+  }
+  .visual {
+    padding: var(--s-4) var(--s-4) 0 0;
+  }
+  .frameLine {
+    top: 0;
+    right: 0;
+    bottom: calc(var(--s-4) * -1);
+    left: var(--s-6);
+  }
+  .seal {
+    width: 104px;
+    height: 104px;
+    left: auto;
+    right: var(--s-3);
+    bottom: auto;
+    top: calc(var(--s-6) * -1);
+  }
+}
+
+@media (max-width: 767px) {
+  .title {
+    font-size: clamp(2.5rem, 10.5vw, 3.4rem);
+  }
+  .ctas > * {
+    flex: 1 1 auto;
+  }
+}
