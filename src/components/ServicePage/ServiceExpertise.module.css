@@ -1,0 +1,139 @@
+.expertise {
+  position: relative;
+  overflow: hidden;
+  padding-block: var(--pad-md);
+  color: var(--bone-50);
+  background:
+    radial-gradient(40% 50% at 50% 62%, color-mix(in srgb, var(--glow) 20%, transparent), transparent 70%),
+    var(--tone);
+}
+
+.head {
+  display: grid;
+  justify-items: center;
+  gap: var(--s-5);
+  text-align: center;
+}
+
+.title {
+  max-width: 18ch;
+  font-size: clamp(2.6rem, 5vw, 5.4rem);
+}
+
+.intro {
+  max-width: 36rem;
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-size: clamp(1.25rem, 1.6vw, 1.6rem);
+  line-height: 1.35;
+  color: rgba(246, 244, 239, 0.78);
+}
+
+/* ---------- Compass ---------- */
+.compass {
+  position: relative;
+  display: grid;
+  place-items: center;
+  margin: var(--s-9) auto 0;
+  max-width: 1100px;
+  min-height: 640px;
+}
+
+.plate {
+  position: relative;
+  width: min(42vw, 460px);
+  aspect-ratio: 1;
+  overflow: hidden;
+  border-radius: 50%;
+  clip-path: circle(50% at 50% 50%);
+  will-change: clip-path;
+}
+
+.ring {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: min(52vw, 580px);
+  aspect-ratio: 1;
+  translate: -50% -50%;
+  border: 1px solid color-mix(in srgb, var(--glow) 55%, transparent);
+  border-radius: 50%;
+  pointer-events: none;
+}
+
+.points {
+  position: absolute;
+  inset: 0;
+}
+
+.point {
+  position: absolute;
+  display: grid;
+  gap: var(--s-2);
+  max-width: 15rem;
+  /* fully visible by default; motion dims and lights each in turn */
+}
+
+.pNo {
+  font-family: var(--font-mono);
+  font-size: var(--fs-label);
+  color: var(--gold-500);
+}
+
+.pTitle {
+  font-family: var(--font-display);
+  font-variation-settings: "opsz" 72;
+  font-weight: 800;
+  font-size: clamp(2rem, 3.2vw, 3.4rem);
+  line-height: 0.92;
+  text-transform: uppercase;
+}
+
+.p1 {
+  left: 0;
+  top: 4%;
+}
+.p2 {
+  right: 0;
+  top: 14%;
+  text-align: right;
+  justify-items: end;
+}
+.p3 {
+  left: 4%;
+  bottom: 10%;
+}
+.p4 {
+  right: 2%;
+  bottom: 2%;
+  text-align: right;
+  justify-items: end;
+}
+
+@media (max-width: 1023px) {
+  .compass {
+    min-height: 0;
+    margin-top: var(--s-8);
+    gap: var(--s-7);
+  }
+  .plate {
+    width: min(72vw, 400px);
+  }
+  .ring {
+    display: none;
+  }
+  .points {
+    position: static;
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: var(--s-6) var(--s-5);
+    width: 100%;
+  }
+  .point {
+    position: static;
+    padding-top: var(--s-3);
+    border-top: 1px solid color-mix(in srgb, var(--glow) 45%, transparent);
+    text-align: left !important;
+    justify-items: start !important;
+  }
+}

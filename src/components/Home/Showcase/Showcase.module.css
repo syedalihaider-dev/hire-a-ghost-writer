@@ -13,6 +13,19 @@
   margin-bottom: var(--s-7);
 }
 
+/*
+ * The element also carries the global .serif class, whose `text-wrap: balance`
+ * shorthand resets text-wrap-mode to "wrap". Both rules have equal specificity,
+ * so the result depended on stylesheet order — which differs between dev and
+ * the production bundle (it wrapped to three lines live). The doubled selector
+ * and explicit longhands make single-line deterministic in every build.
+ */
+.driftWrap .drift {
+  white-space: nowrap;
+  text-wrap: nowrap;
+  width: max-content;
+}
+
 .drift {
   font-size: clamp(4rem, 12vw, 12.5rem);
   line-height: 0.9;

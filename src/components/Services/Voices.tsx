@@ -36,7 +36,6 @@ export default function Voices() {
                     ) : (
                       v.word
                     )}
-                    {v.key === "medical" && <sup>1,2</sup>}
                   </span>
                 </span>
                 <span className={styles.line}>{v.line}</span>

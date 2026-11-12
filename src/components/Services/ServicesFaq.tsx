@@ -54,16 +54,13 @@ export default function ServicesFaq() {
         <div className={styles.side}>
           <p className={styles.mark}>
             <span className={styles.no}>
-              <i>&sect;</i> 07
+              07
             </span>
             <span className={styles.label}>{servicesFaq.label}</span>
           </p>
           <h2 id="faq-title" className={`display ${styles.title}`}>
             {renderRich(servicesFaq.title)}
           </h2>
-          <span className={styles.amp} aria-hidden="true">
-            &amp;
-          </span>
 
           <div className={styles.tabs} role="tablist" aria-label="Question topics">
             {servicesFaq.groups.map((g, i) => (

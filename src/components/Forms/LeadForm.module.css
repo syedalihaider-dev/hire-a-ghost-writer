@@ -148,3 +148,48 @@ textarea.input {
 .submit {
   min-width: 200px;
 }
+
+/* ---------- "letter" tone: fields written on the lines of a letter ---------- */
+.letter {
+  --f-line: rgba(20, 26, 42, 0.22);
+  --f-focus: var(--gold-800);
+  column-gap: var(--s-7);
+  row-gap: var(--s-6);
+}
+
+.letter .label {
+  font-size: 10px;
+  letter-spacing: 0.14em;
+}
+
+.letter .input {
+  min-height: 52px;
+  font-family: var(--font-serif);
+  font-size: 1.35rem;
+}
+
+.letter .input::placeholder {
+  font-style: italic;
+  opacity: 0.55;
+}
+
+.letter textarea.input {
+  min-height: 168px;
+  line-height: 36px;
+  border-bottom: 0;
+  /* the message is written on ruled lines */
+  background: repeating-linear-gradient(180deg, transparent 0 35px, var(--f-line) 35px 36px);
+  background-attachment: local;
+}
+
+.letter textarea.input:focus-visible {
+  box-shadow: none;
+  background: repeating-linear-gradient(180deg, transparent 0 35px, color-mix(in srgb, var(--f-focus) 55%, transparent) 35px 36px);
+  background-attachment: local;
+}
+
+.letter .note {
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-size: 1rem;
+}

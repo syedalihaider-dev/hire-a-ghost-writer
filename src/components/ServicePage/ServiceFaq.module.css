@@ -1,0 +1,147 @@
+.faq {
+  --line: rgba(20, 26, 42, 0.14);
+  padding-block: var(--pad-md);
+  color: var(--navy-800);
+  background: var(--bone-50);
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(12, minmax(0, 1fr));
+  column-gap: var(--gutter);
+  align-items: start;
+}
+
+.side {
+  grid-column: 1 / span 4;
+  display: grid;
+  gap: var(--s-4);
+  position: sticky;
+  top: calc(var(--header-h) + var(--s-6));
+}
+
+.title {
+  font-size: clamp(2.6rem, 4.2vw, 4.6rem);
+}
+
+.note {
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-size: 1.25rem;
+  color: var(--slate-600);
+}
+
+.list {
+  grid-column: 6 / -1;
+  border-top: 1px solid rgba(20, 26, 42, 0.3);
+}
+
+.item {
+  border-bottom: 1px solid var(--line);
+}
+
+/* smooth open where supported (progressive) */
+.item::details-content {
+  block-size: 0;
+  overflow: hidden;
+  transition:
+    block-size 0.5s var(--ease-in-out),
+    content-visibility 0.5s allow-discrete;
+}
+
+.item[open]::details-content {
+  block-size: auto;
+}
+
+@supports (interpolate-size: allow-keywords) {
+  .faq {
+    interpolate-size: allow-keywords;
+  }
+}
+
+.q {
+  display: grid;
+  grid-template-columns: 2.5rem 1fr 28px;
+  align-items: center;
+  gap: var(--s-4);
+  padding-block: var(--s-5);
+  cursor: pointer;
+  list-style: none;
+}
+
+.q::-webkit-details-marker {
+  display: none;
+}
+
+.qNo {
+  font-family: var(--font-mono);
+  font-size: var(--fs-label);
+  color: var(--gold-800);
+}
+
+.qText {
+  font-family: var(--font-serif);
+  font-size: clamp(1.25rem, 1.6vw, 1.6rem);
+  line-height: 1.2;
+}
+
+.qIcon {
+  position: relative;
+  width: 28px;
+  height: 28px;
+  border: 1px solid rgba(20, 26, 42, 0.3);
+  border-radius: 50%;
+  transition: background var(--dur-base) var(--ease-out), border-color var(--dur-base) var(--ease-out);
+}
+
+.qIcon::before,
+.qIcon::after {
+  content: "";
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 11px;
+  height: 1px;
+  margin: -0.5px 0 0 -5.5px;
+  background: currentColor;
+  transition: transform var(--dur-base) var(--ease-roll);
+}
+
+.qIcon::after {
+  transform: rotate(90deg);
+}
+
+.item[open] .qIcon {
+  background: var(--gold-500);
+  border-color: var(--gold-500);
+}
+
+.item[open] .qIcon::after {
+  transform: rotate(0deg);
+}
+
+.a {
+  max-width: 44rem;
+  padding: 0 0 var(--s-6) calc(2.5rem + var(--s-4));
+  font-size: var(--fs-md);
+  line-height: 1.65;
+  color: var(--slate-600);
+}
+
+@media (max-width: 1023px) {
+  .grid {
+    grid-template-columns: minmax(0, 1fr);
+    row-gap: var(--s-6);
+  }
+  .side,
+  .list {
+    grid-column: 1;
+  }
+  .side {
+    position: relative;
+    top: 0;
+  }
+  .a {
+    padding-left: 0;
+  }
+}

@@ -80,7 +80,7 @@ export default function Stories() {
         <div className={styles.head}>
           <p className={styles.mark}>
             <span className={styles.no}>
-              <i>&sect;</i> 06
+              06
             </span>
             <span className={styles.label}>{stories.label}</span>
           </p>

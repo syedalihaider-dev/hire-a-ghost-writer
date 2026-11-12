@@ -1,0 +1,297 @@
+.hero {
+  position: relative;
+  overflow: hidden;
+  isolation: isolate;
+  min-height: 100svh;
+  display: flex;
+  align-items: center;
+  padding: calc(var(--header-h) + var(--s-6)) 0 var(--s-8);
+  color: var(--bone-50);
+  background: var(--ink-950);
+}
+
+/* the service's own colour washes up behind the book */
+.wash {
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background:
+    radial-gradient(45% 60% at 72% 48%, color-mix(in srgb, var(--glow) 34%, transparent), transparent 70%),
+    linear-gradient(160deg, var(--tone), var(--ink-950) 80%);
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(12, minmax(0, 1fr));
+  column-gap: var(--gutter);
+  align-items: center;
+  width: 100%;
+}
+
+/* ---------- Copy ---------- */
+.copy {
+  grid-column: 1 / span 7;
+  display: grid;
+  gap: var(--s-5);
+  justify-items: start;
+}
+
+.crumbs {
+  display: flex;
+  align-items: center;
+  gap: var(--s-3);
+  font-family: var(--font-mono);
+  font-size: var(--fs-label);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--slate-300);
+}
+
+.crumbs a {
+  color: var(--slate-300);
+  transition: color var(--dur-base) var(--ease-out);
+}
+
+.crumbs a:hover {
+  color: var(--bone-50);
+}
+
+.crumbs [aria-current] {
+  color: var(--gold-500);
+}
+
+.crumbRule {
+  width: 24px;
+  height: 1px;
+  background: var(--line-strong);
+}
+
+.title {
+  max-width: 14ch;
+  font-size: clamp(3rem, 5.8vw, 6.6rem);
+  line-height: 0.9;
+}
+
+.tagline {
+  font-style: italic;
+  font-size: clamp(1.5rem, 2.2vw, 2.3rem);
+  line-height: 1.15;
+  color: color-mix(in srgb, var(--glow) 55%, var(--gold-400));
+}
+
+.lead {
+  max-width: 34rem;
+  font-size: var(--fs-md);
+  line-height: 1.65;
+  color: rgba(246, 244, 239, 0.8);
+}
+
+.ctas {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--s-6);
+  margin-top: var(--s-2);
+}
+
+.textLink {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--s-3);
+  font-size: 0.8125rem;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+.textLine {
+  position: relative;
+  width: 40px;
+  height: 1px;
+  background: var(--gold-500);
+  transition: width var(--dur-base) var(--ease-out);
+}
+
+.textLine::after {
+  content: "";
+  position: absolute;
+  right: 0;
+  top: -3px;
+  width: 7px;
+  height: 7px;
+  border-top: 1px solid var(--gold-500);
+  border-right: 1px solid var(--gold-500);
+  transform: rotate(45deg);
+}
+
+.textLink:hover .textLine {
+  width: 72px;
+}
+
+/* ---------- The standing book ---------- */
+.stage {
+  grid-column: 8 / -1;
+  position: relative;
+  display: grid;
+  place-items: center;
+  perspective: 1800px;
+  padding-block: var(--s-6);
+}
+
+.book {
+  --bw: min(100%, 380px);
+  position: relative;
+  width: var(--bw);
+  aspect-ratio: 2 / 3;
+  transform-style: preserve-3d;
+  transform: rotateY(-22deg) rotateX(3deg);
+  will-change: transform;
+}
+
+.jacket {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  border-radius: 2px 6px 6px 2px;
+  background: var(--tone);
+  transform: translateZ(18px);
+  box-shadow: 0 60px 90px -30px rgba(0, 0, 0, 0.8);
+}
+
+.jacketShade {
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(90deg, rgba(0, 0, 0, 0.5) 0%, rgba(255, 255, 255, 0.14) 2.4%, rgba(0, 0, 0, 0.2) 5%, transparent 10%),
+    linear-gradient(180deg, color-mix(in srgb, var(--tone) 70%, transparent) 0%, transparent 38%, transparent 55%, color-mix(in srgb, var(--tone) 92%, transparent) 100%);
+}
+
+.jacketType {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  padding: 12% 10% 10%;
+  text-align: center;
+}
+
+.jacketKicker {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  letter-spacing: 0.24em;
+  text-transform: uppercase;
+  color: var(--gold-400);
+}
+
+.jacketTitle {
+  margin-top: auto;
+  font-family: var(--font-serif);
+  font-size: clamp(2.2rem, 3.2vw, 3.4rem);
+  line-height: 0.95;
+  color: var(--bone-50);
+  text-shadow: 0 4px 30px rgba(0, 0, 0, 0.5);
+}
+
+.jacketRule {
+  width: 34%;
+  height: 5px;
+  margin: 6% 0;
+  border-block: 1px solid var(--gold-500);
+}
+
+.jacketFoot {
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-size: 1rem;
+  color: rgba(246, 244, 239, 0.85);
+}
+
+/* page block seen past the fore-edge */
+.pages {
+  position: absolute;
+  top: 1.5%;
+  bottom: 1.5%;
+  right: -2px;
+  width: 36px;
+  transform-origin: 100% 50%;
+  transform: translateZ(16px) rotateY(90deg);
+  background: repeating-linear-gradient(90deg, #f1ebdd 0 1px, #d8cfbb 1px 2.4px);
+}
+
+.spine {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  width: 36px;
+  display: grid;
+  place-items: center;
+  transform-origin: 0 50%;
+  transform: translateZ(18px) rotateY(90deg);
+  background: linear-gradient(90deg, color-mix(in srgb, var(--tone) 50%, #000), var(--tone) 40%, color-mix(in srgb, var(--tone) 70%, var(--glow)) 60%, color-mix(in srgb, var(--tone) 50%, #000));
+}
+
+.spine span {
+  writing-mode: vertical-rl;
+  font-family: var(--font-serif);
+  font-size: 0.85rem;
+  letter-spacing: 0.1em;
+  color: var(--gold-400);
+}
+
+.ribbon {
+  position: absolute;
+  left: 62%;
+  top: -2%;
+  width: 14px;
+  height: 22%;
+  transform: translateZ(19px);
+  transform-origin: 50% 0;
+  background: linear-gradient(90deg, var(--gold-800), var(--gold-500) 50%, var(--gold-800));
+  clip-path: polygon(0 0, 100% 0, 100% 100%, 50% 88%, 0 100%);
+  box-shadow: 2px 4px 8px rgba(0, 0, 0, 0.4);
+}
+
+.floor {
+  position: absolute;
+  bottom: var(--s-4);
+  left: 15%;
+  right: 15%;
+  height: 40px;
+  border-radius: 50%;
+  background: radial-gradient(closest-side, rgba(0, 0, 0, 0.55), transparent);
+  z-index: -1;
+}
+
+@media (max-width: 1023px) {
+  .hero {
+    display: block;
+    min-height: 0;
+  }
+  .grid {
+    grid-template-columns: minmax(0, 1fr);
+    row-gap: var(--s-8);
+  }
+  .copy,
+  .stage {
+    grid-column: 1;
+  }
+  .title {
+    font-size: clamp(2.8rem, 9vw, 5rem);
+  }
+  .book {
+    --bw: min(62vw, 340px);
+  }
+}
+
+@media (max-width: 767px) {
+  .book {
+    --bw: min(70vw, 280px);
+    transform: rotateY(-16deg) rotateX(2deg);
+  }
+  .title {
+    font-size: clamp(2.5rem, 11.4vw, 3.6rem);
+  }
+}

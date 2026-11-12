@@ -17,7 +17,7 @@ export default function Interlude() {
           {[...names, ...names].map((n, i) => (
             <span key={i}>
               {n}
-              <i>&#10022;</i>
+              <i aria-hidden="true" />
             </span>
           ))}
         </div>

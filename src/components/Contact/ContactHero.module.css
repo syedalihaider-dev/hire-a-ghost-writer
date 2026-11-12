@@ -1,0 +1,306 @@
+.hero {
+  position: relative;
+  overflow: hidden;
+  isolation: isolate;
+  min-height: 100svh;
+  display: flex;
+  align-items: center;
+  padding: calc(var(--header-h) + var(--s-6)) 0 var(--s-8);
+  background:
+    radial-gradient(60% 70% at 78% 55%, rgba(74, 26, 33, 0.55), transparent 70%),
+    linear-gradient(170deg, var(--ink-900), var(--ink-950) 70%);
+}
+
+.glow {
+  position: absolute;
+  z-index: -1;
+  right: 8%;
+  top: 14%;
+  width: 46vw;
+  height: 70vh;
+  border-radius: 50%;
+  background: radial-gradient(closest-side, rgba(212, 179, 115, 0.14), transparent);
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(12, minmax(0, 1fr));
+  column-gap: var(--gutter);
+  align-items: center;
+  width: 100%;
+}
+
+/* ---------- Copy ---------- */
+.copy {
+  grid-column: 1 / span 6;
+  display: grid;
+  gap: var(--s-5);
+  justify-items: start;
+}
+
+.title {
+  font-size: clamp(3rem, 5.8vw, 6.6rem);
+  line-height: 0.9;
+}
+
+.kicker {
+  font-style: italic;
+  font-size: clamp(1.4rem, 2vw, 2.1rem);
+  color: var(--gold-400);
+}
+
+.text {
+  max-width: 30rem;
+  font-size: var(--fs-md);
+  line-height: 1.65;
+  color: rgba(246, 244, 239, 0.8);
+}
+
+.ctas {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--s-7);
+  margin-top: var(--s-3);
+}
+
+.primary {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--s-4);
+  min-height: 56px;
+  padding: 0 var(--s-6);
+  border-radius: var(--r-1);
+  background: var(--gold-500);
+  color: var(--ink-950);
+  font-weight: 600;
+  font-size: 0.9375rem;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  transition: background var(--dur-roll) var(--ease-roll);
+}
+
+.primary:hover {
+  background: var(--gold-400);
+}
+
+.primaryLine {
+  position: relative;
+  width: 26px;
+  height: 1px;
+  background: currentColor;
+  transition: width var(--dur-base) var(--ease-out);
+}
+
+.primaryLine::after {
+  content: "";
+  position: absolute;
+  right: 0;
+  top: -3px;
+  width: 7px;
+  height: 7px;
+  border-right: 1px solid currentColor;
+  border-bottom: 1px solid currentColor;
+  transform: rotate(45deg);
+}
+
+.primary:hover .primaryLine {
+  width: 40px;
+}
+
+.call {
+  display: grid;
+  gap: 2px;
+}
+
+.callLabel {
+  font-family: var(--font-mono);
+  font-size: var(--fs-label);
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--slate-300);
+}
+
+.callNo {
+  font-family: var(--font-serif);
+  font-size: 1.6rem;
+  line-height: 1.1;
+  transition: color var(--dur-base) var(--ease-out);
+}
+
+.call:hover .callNo {
+  color: var(--gold-400);
+}
+
+/* ---------- The desk: envelope + photograph + note card ---------- */
+.desk {
+  grid-column: 7 / -1;
+  position: relative;
+  min-height: min(68vh, 640px);
+  perspective: 1600px;
+}
+
+.envelope {
+  --ew: min(100%, 520px);
+  position: absolute;
+  right: 0;
+  bottom: 6%;
+  width: var(--ew);
+  aspect-ratio: 1.45;
+  transform: rotate(-4deg);
+  transform-style: preserve-3d;
+}
+
+/* inside of the envelope */
+.back {
+  position: absolute;
+  inset: 0;
+  border-radius: 4px;
+  background: linear-gradient(180deg, #d9cfb8, #c7bb9f);
+}
+
+/* photograph tucked inside, sliding up */
+.photo {
+  position: absolute;
+  left: 7%;
+  right: 7%;
+  bottom: 8%;
+  height: 112%;
+  overflow: hidden;
+  border: 8px solid #f6f1e4;
+  border-bottom-width: 8px;
+  background: #f6f1e4;
+  box-shadow: 0 -10px 30px rgba(0, 0, 0, 0.25);
+  will-change: transform;
+}
+
+/* the front pocket (bottom + side folds) */
+.pocket {
+  position: absolute;
+  inset: 0;
+  border-radius: 4px;
+  background:
+    linear-gradient(160deg, rgba(0, 0, 0, 0.08), transparent 40%),
+    linear-gradient(180deg, #f2ebdb, #e6dcc4);
+  clip-path: polygon(0 28%, 50% 62%, 100% 28%, 100% 100%, 0 100%);
+  box-shadow: 0 50px 80px -30px rgba(0, 0, 0, 0.8);
+}
+
+.flap {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  height: 62%;
+  transform-origin: 50% 0;
+  transform: rotateX(178deg);
+  background: linear-gradient(180deg, #efe7d4, #ddd2b9);
+  clip-path: polygon(0 0, 100% 0, 50% 100%);
+  backface-visibility: visible;
+}
+
+.seal {
+  position: absolute;
+  left: 50%;
+  top: 56%;
+  display: grid;
+  place-items: center;
+  width: 54px;
+  height: 54px;
+  margin: -27px 0 0 -27px;
+  border-radius: 50%;
+  background: radial-gradient(circle at 35% 30%, #a33a2a, #6e1c14 70%);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.4), inset 0 0 0 3px rgba(0, 0, 0, 0.18);
+  font-family: var(--font-serif);
+  font-size: 1.1rem;
+  letter-spacing: 0.04em;
+  color: rgba(246, 244, 239, 0.75);
+}
+
+.card {
+  position: absolute;
+  left: 0;
+  top: 8%;
+  display: grid;
+  gap: var(--s-2);
+  width: min(56%, 300px);
+  padding: var(--s-5);
+  background:
+    repeating-linear-gradient(180deg, transparent 0 25px, rgba(122, 92, 36, 0.16) 25px 26px),
+    linear-gradient(180deg, #fbf8f1, #efe7d4);
+  color: var(--navy-800);
+  box-shadow: 0 30px 50px -20px rgba(0, 0, 0, 0.75);
+  transform: rotate(5deg);
+}
+
+.cardRow {
+  display: flex;
+  align-items: baseline;
+  gap: var(--s-3);
+  font-family: var(--font-serif);
+  font-size: 1.15rem;
+}
+
+.cardRow i {
+  min-width: 2.6em;
+  font-family: var(--font-mono);
+  font-style: normal;
+  font-size: 10px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--gold-800);
+}
+
+.cardNote {
+  margin-top: var(--s-2);
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-size: 1.35rem;
+  color: var(--wine-700);
+}
+
+@media (max-width: 1023px) {
+  .hero {
+    display: block;
+    min-height: 0;
+  }
+  .grid {
+    grid-template-columns: minmax(0, 1fr);
+    row-gap: var(--s-8);
+  }
+  .copy,
+  .desk {
+    grid-column: 1;
+  }
+  .title {
+    font-size: clamp(2.8rem, 9vw, 5rem);
+  }
+  .desk {
+    min-height: 0;
+    aspect-ratio: 1 / 0.92;
+    width: min(100%, 620px);
+    justify-self: center;
+  }
+}
+
+@media (max-width: 767px) {
+  .title {
+    font-size: clamp(2.5rem, 11.6vw, 3.8rem);
+  }
+  .desk {
+    aspect-ratio: 1 / 1.05;
+  }
+  .card {
+    width: 62%;
+    padding: var(--s-4);
+  }
+  .cardNote {
+    font-size: 1.1rem;
+  }
+  .seal {
+    width: 44px;
+    height: 44px;
+    margin: -22px 0 0 -22px;
+    font-size: 0.9rem;
+  }
+}

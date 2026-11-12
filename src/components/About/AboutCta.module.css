@@ -127,25 +127,35 @@
   border-block: 1px solid var(--gold-600);
 }
 
-.firstLine {
-  display: flex;
-  align-items: flex-end;
-  gap: 1.4cqw;
-  height: 14cqw;
-  border-bottom: 1px solid rgba(20, 26, 42, 0.18);
+/* the writing sits on ruled lines; line-height and rules share one unit */
+.writing {
+  --lh: 8.4cqw;
+  flex: 1;
+  min-height: 0;
+  overflow: hidden;
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-size: 5.4cqw;
+  line-height: var(--lh);
+  color: var(--navy-800);
+  background: repeating-linear-gradient(180deg, transparent 0 calc(var(--lh) - 1px), rgba(20, 26, 42, 0.16) calc(var(--lh) - 1px) var(--lh));
 }
 
 .dropCap {
-  font-family: var(--font-serif);
-  font-size: 16cqw;
-  line-height: 0.85;
+  float: left;
+  margin: 0.04em 0.08em 0 0;
+  font-style: normal;
+  font-size: calc(var(--lh) * 2.2);
+  line-height: calc(var(--lh) * 2);
   color: var(--gold-800);
 }
 
 .caret {
+  display: inline-block;
   width: 2px;
-  height: 7cqw;
-  margin-bottom: 1.4cqw;
+  height: 0.95em;
+  margin-left: 2px;
+  vertical-align: -0.12em;
   background: var(--navy-800);
   animation: blink 1.1s steps(1) infinite;
 }
@@ -154,12 +164,6 @@
   50% {
     opacity: 0;
   }
-}
-
-.ruled {
-  display: block;
-  height: 1px;
-  background: rgba(20, 26, 42, 0.14);
 }
 
 .prompt {

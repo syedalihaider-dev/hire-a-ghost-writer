@@ -45,13 +45,12 @@ export default function AboutCta() {
           <div className={styles.page}>
             <span className={styles.pageKicker}>{c.page.chapter}</span>
             <span className={styles.pageRule} />
-            <span className={styles.firstLine}>
-              <span className={styles.dropCap}>Y</span>
-              <span className={styles.caret} />
+            {/* Full text is in the HTML; AboutMotion writes it out in step with scroll. */}
+            <span className={styles.writing} data-cta-writing>
+              <span className={styles.dropCap}>{c.page.story[0]}</span>
+              <span data-cta-typed>{c.page.story.slice(1)}</span>
+              <span className={styles.caret} data-cta-caret />
             </span>
-            {Array.from({ length: 9 }, (_, i) => (
-              <span key={i} className={styles.ruled} />
-            ))}
             <span className={styles.prompt}>{c.page.prompt}</span>
           </div>
         </div>

@@ -196,6 +196,30 @@ export default function AboutMotion() {
 
       /* ---------------- Epilogue · the blank page ---------------- */
       const page = document.querySelector<HTMLElement>("[data-cta-page] > *");
+      // The story writes itself in step with scroll (and un-writes on the way back).
+      const typed = document.querySelector<HTMLElement>("[data-cta-typed]");
+      if (typed && motion) {
+        const full = typed.textContent ?? "";
+        let shown = -1;
+        const write = (p: number) => {
+          // ease the pace a little so it never races ahead of the reader
+          const n = Math.round(gsap.parseEase("power1.inOut")(p) * full.length);
+          if (n === shown) return;
+          shown = n;
+          typed.textContent = full.slice(0, n);
+        };
+        write(0);
+        ScrollTrigger.create({
+          trigger: typed.closest("[data-cta-page]") ?? typed,
+          start: "top 78%",
+          end: "bottom 62%",
+          onUpdate: (self) => write(self.progress),
+          onLeave: () => write(1),
+          onLeaveBack: () => write(0),
+        });
+        // restore the complete text if motion is turned off / the page unmounts
+        cleanups.push(() => void (typed.textContent = full));
+      }
       if (page && motion) {
         gsap.set(page, { rotation: 3, rotationY: -8 });
         gsap.from(page, { y: 140, rotation: 14, autoAlpha: 0, duration: 1.8, ease: EASE.reveal, scrollTrigger: { trigger: page, start: "top 88%", once: true } });

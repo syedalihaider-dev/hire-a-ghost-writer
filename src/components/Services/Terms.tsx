@@ -12,7 +12,7 @@ export default function Terms() {
   const right = terms.clauses.slice(3);
   const clause = (c: (typeof terms.clauses)[number], i: number) => (
     <li key={c.title} className={styles.clause} data-clause>
-      <span className={styles.section}>&sect; {i + 1}</span>
+      <span className={styles.section}>{String(i + 1).padStart(2, "0")}</span>
       <h3 className={`serif ${styles.cTitle}`}>{c.title}</h3>
       <p className={styles.cText}>{c.text}</p>
     </li>
@@ -24,7 +24,7 @@ export default function Terms() {
       <div className="container">
         <p className={styles.mark} data-reveal="fade">
           <span className={styles.no}>
-            <i>&sect;</i> 04
+            04
           </span>
           <span className={styles.label}>{terms.label}</span>
         </p>

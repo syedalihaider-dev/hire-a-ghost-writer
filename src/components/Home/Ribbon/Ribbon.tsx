@@ -19,7 +19,7 @@ export default function Ribbon() {
         {items.map((w) => (
           <span key={`${key}-${rep}-${w}`} className={styles.item} aria-hidden={rep > 0 || undefined}>
             {w}
-            {mark ? <BookMark className={styles.mark} size={34} /> : <span className={styles.dot}>✦</span>}
+            {mark ? <BookMark className={styles.mark} size={34} /> : <span className={styles.dot} aria-hidden="true" />}
           </span>
         ))}
       </Fragment>

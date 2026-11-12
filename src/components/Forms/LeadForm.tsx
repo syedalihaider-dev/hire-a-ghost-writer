@@ -12,7 +12,8 @@ type Status = "idle" | "submitting" | "success" | "error";
 type Props = {
   form: keyof typeof forms;
   prefill?: string;
-  tone?: "light" | "dark";
+  /** light / dark surfaces, or "letter": the same form typeset as a handwritten letter (Contact page). */
+  tone?: "light" | "dark" | "letter";
   onSuccess?: () => void;
 };
 
@@ -144,7 +145,7 @@ export default function LeadForm({ form, prefill = "", tone = "light", onSuccess
       </div>
 
       <div className={`${styles.full} ${styles.actions}`}>
-        <Button type="submit" size="lg" variant={tone === "light" ? "dark" : "solid"} disabled={status === "submitting"} className={styles.submit}>
+        <Button type="submit" size="lg" variant={tone === "dark" ? "solid" : "dark"} disabled={status === "submitting"} className={styles.submit}>
           {status === "submitting" ? "Sending…" : config.submitLabel}
         </Button>
         <p className={styles.note}>{siteConfig.footer.confidentiality}</p>

@@ -1,0 +1,119 @@
+.story {
+  position: relative;
+  padding-block: var(--pad-md);
+  color: var(--navy-800);
+  background: var(--bone-50);
+  --line: rgba(20, 26, 42, 0.14);
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(12, minmax(0, 1fr));
+  column-gap: var(--gutter);
+  align-items: start;
+}
+
+/* ---------- The drafts column ---------- */
+.drafts {
+  grid-column: 1 / span 5;
+  display: grid;
+  gap: 2px;
+  position: sticky;
+  top: calc(var(--header-h) + var(--s-6));
+}
+
+.draft {
+  position: relative;
+  display: grid;
+  grid-template-columns: 2.5rem 1fr;
+  align-items: baseline;
+  padding-block: var(--s-3);
+  border-bottom: 1px solid var(--line);
+  color: var(--slate-600);
+}
+
+.draftNo {
+  font-family: var(--font-mono);
+  font-size: var(--fs-label);
+  color: var(--gold-800);
+}
+
+.draftText {
+  font-family: var(--font-serif);
+  font-size: clamp(1.3rem, 1.8vw, 1.8rem);
+}
+
+.draftText i {
+  font-size: 0.8em;
+  color: var(--slate-600);
+}
+
+/* the strike drawn through an abandoned draft */
+.strike {
+  position: absolute;
+  left: 2.5rem;
+  right: 8%;
+  top: 52%;
+  height: 2px;
+  background: rgba(163, 58, 42, 0.75);
+  transform: scaleX(0);
+  transform-origin: 0 50%;
+}
+
+.final {
+  border-bottom: 0;
+  color: var(--navy-800);
+}
+
+.final .draftText i {
+  color: var(--gold-800);
+}
+
+.figure {
+  margin-top: var(--s-6);
+}
+
+/* ---------- Text ---------- */
+.text {
+  grid-column: 7 / -1;
+  display: grid;
+  gap: var(--s-6);
+  padding-top: var(--s-4);
+}
+
+.rest {
+  font-family: var(--font-serif);
+  font-size: clamp(1.45rem, 2vw, 2rem);
+  line-height: 1.35;
+}
+
+.title {
+  padding-top: var(--s-6);
+  border-top: 1px solid var(--line);
+  font-size: clamp(2.2rem, 3.8vw, 4rem);
+  line-height: 1.02;
+}
+
+.body {
+  font-size: var(--fs-md);
+  line-height: 1.7;
+  color: var(--slate-600);
+}
+
+@media (max-width: 1023px) {
+  .grid {
+    grid-template-columns: minmax(0, 1fr);
+    row-gap: var(--s-8);
+  }
+  .drafts {
+    position: relative;
+    top: 0;
+    grid-column: 1;
+    grid-row: 2;
+  }
+  .text {
+    grid-column: 1;
+    grid-row: 1;
+    padding-top: 0;
+  }
+}

@@ -14,16 +14,14 @@ type Props = {
 
 /**
  * The Services page reads like a publisher's catalogue: each section opens
- * with a section mark (§ + number on a ruled line, like a catalogue index),
+ * with a section mark (number + label on a ruled line, like a catalogue index),
  * then its title — distinct from the About page's book chapters.
  */
 export default function SectionMark({ no, label, title, id, intro, align = "split", className }: Props) {
   return (
     <header className={[styles.head, styles[align], className].filter(Boolean).join(" ")}>
       <p className={styles.mark} data-reveal="fade">
-        <span className={styles.no}>
-          <i>§</i> {no}
-        </span>
+        <span className={styles.no}>{no}</span>
         <span className={styles.label}>{label}</span>
         <span className={styles.rule} aria-hidden="true" />
       </p>

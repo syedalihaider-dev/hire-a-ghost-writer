@@ -83,7 +83,7 @@ export default function AboutHero() {
             </span>
             {manuscript.notes.map((n, i) => (
               <span key={n.text} className={`${styles.note} ${styles[`note${i + 1}`]}`} data-ah-note>
-                <i>{n.mark}</i> {n.text}
+                {n.text}
               </span>
             ))}
             <span className={styles.mark} data-ah-note />

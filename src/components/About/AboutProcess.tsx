@@ -61,10 +61,9 @@ export default function AboutProcess() {
             <div className={`${styles.layer} ${styles.marks}`} data-pr-layer>
               <span className={`${styles.strike} ${styles.s1}`} />
               <span className={`${styles.strike} ${styles.s2}`} />
-              <span className={`${styles.caret} ${styles.c1}`}>^</span>
               <span className={`${styles.margin} ${styles.m1}`}>tighten</span>
-              <span className={`${styles.margin} ${styles.m2}`}>¶ new para</span>
-              <span className={`${styles.margin} ${styles.m3}`}>✓ your voice</span>
+              <span className={`${styles.margin} ${styles.m2}`}>new paragraph</span>
+              <span className={`${styles.margin} ${styles.m3}`}>your voice</span>
             </div>
 
             {/* 05 — the bound book */}

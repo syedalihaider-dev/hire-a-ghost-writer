@@ -19,7 +19,7 @@ export default function Journey() {
         <div className={styles.head}>
           <p className={styles.mark}>
             <span className={styles.no}>
-              <i>&sect;</i> 05
+              05
             </span>
             <span className={styles.label}>{journey.label}</span>
           </p>

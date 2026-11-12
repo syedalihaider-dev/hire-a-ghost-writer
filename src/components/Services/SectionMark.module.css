@@ -23,13 +23,6 @@
   color: var(--accent-text);
 }
 
-.no i {
-  font-family: var(--font-serif);
-  font-weight: 500;
-  font-style: normal;
-  margin-right: 0.1em;
-}
-
 .label {
   flex: none;
   font-family: var(--font-mono);

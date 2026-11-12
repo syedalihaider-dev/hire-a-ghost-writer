@@ -140,14 +140,21 @@ export default function Services() {
 
               <div className={styles.right} data-part="right">
                 <p className={styles.desc}>{s.description}</p>
-                <p className="label">What&rsquo;s included</p>
-                <ul role="list" className={styles.tags}>
-                  {s.included.map((tag) => (
-                    <li key={tag} className={tag === PLACEHOLDER_TAG ? styles.tagPlaceholder : styles.tag}>
-                      {tag}
-                    </li>
-                  ))}
-                </ul>
+                {/* Placeholder tags stay in the data (to be filled in) but are never shown. */}
+                {s.included.some((t) => t !== PLACEHOLDER_TAG) && (
+                  <>
+                    <p className="label">What&rsquo;s included</p>
+                    <ul role="list" className={styles.tags}>
+                      {s.included
+                        .filter((tag) => tag !== PLACEHOLDER_TAG)
+                        .map((tag) => (
+                          <li key={tag} className={styles.tag}>
+                            {tag}
+                          </li>
+                        ))}
+                    </ul>
+                  </>
+                )}
                 <QuoteButton variant="outline" prefill={`I'm interested in ${s.title}.`}>
                   Get A Quote<span className="visually-hidden"> for {s.title}</span>
                 </QuoteButton>

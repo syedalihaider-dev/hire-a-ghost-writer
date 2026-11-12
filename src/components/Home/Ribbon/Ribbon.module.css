@@ -63,10 +63,14 @@
   color: var(--bone-50);
 }
 
+/* a short gold hairline between phrases (no ornament glyph) */
 .dot {
-  color: var(--gold-500);
-  font-style: normal;
-  font-size: 0.6em;
+  display: inline-block;
+  flex: none;
+  width: 0.9em;
+  height: 1px;
+  background: var(--gold-500);
+  vertical-align: middle;
 }
 
 .mark path {

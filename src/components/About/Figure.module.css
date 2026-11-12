@@ -11,12 +11,12 @@
   background: var(--navy-700);
 }
 
-/* .js + motion: hidden until ScrollEffects wipes it open */
-@media (prefers-reduced-motion: no-preference) {
-  :global(.js) .frame[data-reveal] {
-    clip-path: inset(100% 0% 0% 0%);
-  }
-}
+/*
+ * No CSS pre-hide here. revealImage() finishes with clearProps: "clipPath",
+ * so a stylesheet clip-path would re-apply the moment the wipe completed and
+ * the image would vanish. Pre-hydration hiding comes from the global
+ * `.js [data-reveal] { opacity: 0 }` rule, which ScrollEffects lifts inline.
+ */
 
 .inner {
   position: absolute;

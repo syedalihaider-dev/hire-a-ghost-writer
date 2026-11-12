@@ -1,0 +1,171 @@
+.process {
+  position: relative;
+  overflow: hidden;
+  min-height: 100svh;
+  display: flex;
+  align-items: center;
+  padding-block: calc(var(--header-h) + var(--s-5)) var(--s-7);
+  color: var(--bone-50);
+  background: var(--ink-950);
+}
+
+.wrap {
+  display: grid;
+  gap: var(--s-6);
+  width: 100%;
+}
+
+.head {
+  display: grid;
+  gap: var(--s-4);
+}
+
+.kicker {
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-size: 1.3rem;
+  color: var(--gold-500);
+}
+
+/* live process headings are long — kept compact so the pinned shelf fits one screen */
+.title {
+  max-width: 26ch;
+  font-size: clamp(2.2rem, 3.3vw, 3.7rem);
+}
+
+/* ---------- Spines ---------- */
+.spines {
+  display: flex;
+  gap: var(--s-3);
+  height: min(54vh, 500px);
+}
+
+.spine {
+  position: relative;
+  flex: 1 1 0;
+  min-width: 0;
+  display: flex;
+  overflow: hidden;
+  border-radius: 3px;
+  background:
+    linear-gradient(90deg, rgba(0, 0, 0, 0.35), transparent 14%, transparent 86%, rgba(0, 0, 0, 0.35)),
+    linear-gradient(180deg, color-mix(in srgb, var(--tone) 80%, var(--glow)), var(--tone));
+  transition:
+    flex-grow 0.9s var(--ease-in-out),
+    background 0.6s var(--ease-out),
+    color 0.6s var(--ease-out);
+}
+
+.spine[data-open] {
+  flex-grow: 6;
+  background: linear-gradient(160deg, #fbf8f1, #ebe4d3);
+  color: var(--navy-800);
+}
+
+/* the narrow edge: number + vertical title, like a book spine */
+.edge {
+  flex: none;
+  width: 84px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--s-4);
+  padding-block: var(--s-6);
+  border-right: 1px solid rgba(246, 244, 239, 0.12);
+}
+
+.spine[data-open] .edge {
+  border-right-color: rgba(20, 26, 42, 0.12);
+}
+
+.edgeNo {
+  font-family: var(--font-mono);
+  font-size: var(--fs-label);
+  color: var(--gold-500);
+}
+
+.edgeTitle {
+  writing-mode: vertical-rl;
+  transform: rotate(180deg);
+  font-family: var(--font-serif);
+  font-size: 1.15rem;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-height: 100%;
+}
+
+.body {
+  flex: 1;
+  min-width: 0;
+  display: grid;
+  align-content: center;
+  gap: var(--s-4);
+  padding: var(--s-6) var(--s-7);
+  opacity: 0;
+  transition: opacity 0.4s var(--ease-out);
+}
+
+.spine[data-open] .body {
+  opacity: 1;
+  transition-delay: 0.2s;
+}
+
+.bigNo {
+  font-family: var(--font-serif);
+  font-size: clamp(4rem, 6vw, 6.5rem);
+  line-height: 0.85;
+  color: var(--gold-800);
+}
+
+.stepTitle {
+  max-width: 18ch;
+  font-size: clamp(1.8rem, 2.6vw, 2.8rem);
+  line-height: 1.04;
+}
+
+.stepText {
+  max-width: 36rem;
+  font-size: var(--fs-base);
+  line-height: 1.7;
+  color: var(--slate-600);
+}
+
+/* ============================================================
+   Touch / narrow — every step open, stacked
+   ============================================================ */
+@media (max-width: 1023px) {
+  .process {
+    display: block;
+    min-height: 0;
+    padding-block: var(--pad-md);
+  }
+  .spines {
+    flex-direction: column;
+    height: auto;
+    gap: var(--s-4);
+  }
+  .spine,
+  .spine[data-open] {
+    flex: none;
+    flex-direction: column;
+    background: linear-gradient(160deg, #fbf8f1, #ebe4d3);
+    color: var(--navy-800);
+  }
+  .edge {
+    width: auto;
+    flex-direction: row;
+    padding: var(--s-4) var(--s-5) 0;
+    border-right: 0;
+  }
+  .edgeTitle {
+    display: none;
+  }
+  .body {
+    opacity: 1;
+    padding: var(--s-2) var(--s-5) var(--s-6);
+  }
+  .bigNo {
+    display: none;
+  }
+}

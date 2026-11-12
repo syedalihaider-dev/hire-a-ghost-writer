@@ -62,8 +62,8 @@ export const aboutHero = {
       "voice.",
     ],
     notes: [
-      { mark: "¶", text: "keep — this is you" },
-      { mark: "✓", text: "voice" },
+      { text: "keep — this is you" },
+      { text: "your voice" },
     ],
   },
   scrollCue: "Chapter I — Who we are",
@@ -191,7 +191,13 @@ export const aboutCta = {
   label: "Epilogue",
   title: "Your Story Deserves *to Be* Told.",
   text: "Every book begins with a single conversation. Share your idea — however rough, however early — and we'll show you the path from first thought to finished manuscript.",
-  page: { chapter: "Chapter One", prompt: "Your story starts here." },
+  page: {
+    chapter: "Chapter One",
+    // Written onto the blank page as the reader scrolls (starts with the drop cap "Y").
+    story:
+      "Years from now, someone you love will open this book and meet you here — the kitchen table where it began, the chances you took, the people who changed you, and every lesson you paid for in full. It starts with one honest sentence, then another, until the whole of it is finally on the page.",
+    prompt: "Your story starts here.",
+  },
   contact: { label: "Contact us", href: siteConfig.cta.contact.href },
   image: {
     src: "/images/editorial/typeset-book-stack.jpg",
