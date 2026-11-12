@@ -128,26 +128,3 @@
   --b-border-hover: var(--gold-500);
 }
 
-/* Corner brackets */
-.bracket {
-  --c: var(--line-strong);
-  --len: 8px;
-  position: relative;
-  display: inline-flex;
-  padding: 7px;
-  background:
-    linear-gradient(var(--c), var(--c)) top left / var(--len) 1px no-repeat,
-    linear-gradient(var(--c), var(--c)) top left / 1px var(--len) no-repeat,
-    linear-gradient(var(--c), var(--c)) top right / var(--len) 1px no-repeat,
-    linear-gradient(var(--c), var(--c)) top right / 1px var(--len) no-repeat,
-    linear-gradient(var(--c), var(--c)) bottom left / var(--len) 1px no-repeat,
-    linear-gradient(var(--c), var(--c)) bottom left / 1px var(--len) no-repeat,
-    linear-gradient(var(--c), var(--c)) bottom right / var(--len) 1px no-repeat,
-    linear-gradient(var(--c), var(--c)) bottom right / 1px var(--len) no-repeat;
-  transition: padding var(--dur-roll) var(--ease-roll);
-}
-
-.bracket:hover {
-  --c: var(--gold-500);
-  padding: 4px;
-}

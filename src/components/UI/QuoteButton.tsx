@@ -2,7 +2,6 @@
 
 import type { ReactNode } from "react";
 import { quoteStore } from "@/lib/quoteStore";
-import { sound } from "@/lib/audio";
 import { siteConfig } from "@/content/siteConfig";
 import Button from "./Button";
 
@@ -23,10 +22,7 @@ export default function QuoteButton({ variant = "solid", size = "md", prefill, c
       className={className}
       aria-haspopup="dialog"
       aria-controls="quote-drawer"
-      onClick={() => {
-        sound.pageFlip(0.7);
-        quoteStore.open(prefill);
-      }}
+      onClick={() => quoteStore.open(prefill)}
     >
       {children ?? siteConfig.cta.quote.label}
     </Button>

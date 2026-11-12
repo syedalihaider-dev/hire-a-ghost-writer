@@ -1,0 +1,244 @@
+.stories {
+  position: relative;
+  overflow: hidden;
+  padding-block: var(--pad-md);
+  background:
+    radial-gradient(50% 60% at 75% 50%, rgba(197, 160, 89, 0.08), transparent 70%),
+    var(--navy-800);
+}
+
+.layout {
+  display: grid;
+  grid-template-columns: repeat(12, minmax(0, 1fr));
+  column-gap: var(--gutter);
+  align-items: center;
+}
+
+.head {
+  grid-column: 1 / span 5;
+  display: grid;
+  gap: var(--s-6);
+  align-content: center;
+}
+
+.mark {
+  display: flex;
+  align-items: baseline;
+  gap: var(--s-4);
+}
+
+.no {
+  font-family: var(--font-display);
+  font-variation-settings: "opsz" 72;
+  font-weight: 800;
+  font-size: 1.6rem;
+  line-height: 1;
+  color: var(--gold-500);
+}
+
+.no i {
+  font-family: var(--font-serif);
+  font-style: normal;
+  font-weight: 500;
+}
+
+.label {
+  font-family: var(--font-mono);
+  font-size: var(--fs-label);
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.title {
+  font-size: var(--fs-h2);
+}
+
+.intro {
+  max-width: 26rem;
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-size: 1.35rem;
+  line-height: 1.35;
+  color: var(--slate-300);
+}
+
+.controls {
+  display: flex;
+  align-items: center;
+  gap: var(--s-5);
+  margin-top: var(--s-4);
+}
+
+.btn {
+  display: grid;
+  place-items: center;
+  width: 56px;
+  height: 56px;
+  border: 1px solid var(--line-strong);
+  border-radius: 50%;
+  color: var(--bone-50);
+  transition:
+    background var(--dur-base) var(--ease-out),
+    border-color var(--dur-base) var(--ease-out),
+    color var(--dur-base) var(--ease-out);
+}
+
+.btn:hover,
+.btn:focus-visible {
+  background: var(--gold-500);
+  border-color: var(--gold-500);
+  color: var(--ink-950);
+}
+
+.arrow {
+  position: relative;
+  width: 18px;
+  height: 1px;
+  background: currentColor;
+}
+
+.arrow::after {
+  content: "";
+  position: absolute;
+  top: -3px;
+  width: 7px;
+  height: 7px;
+  border-top: 1px solid currentColor;
+}
+
+.arrow[data-dir="next"]::after {
+  right: 0;
+  border-right: 1px solid currentColor;
+  transform: rotate(45deg);
+}
+
+.arrow[data-dir="prev"]::after {
+  left: 0;
+  border-left: 1px solid currentColor;
+  transform: rotate(-45deg);
+}
+
+.count {
+  display: flex;
+  align-items: baseline;
+  gap: var(--s-2);
+}
+
+.countNow {
+  font-family: var(--font-serif);
+  font-size: 2.4rem;
+  line-height: 1;
+  color: var(--gold-400);
+}
+
+.countOf {
+  font-family: var(--font-mono);
+  font-size: var(--fs-label);
+  color: var(--slate-300);
+}
+
+/* ---------- The deck ---------- */
+.deck {
+  grid-column: 7 / -1;
+  position: relative;
+  display: grid;
+  min-height: 460px;
+  outline-offset: 12px;
+}
+
+.letter {
+  grid-area: 1 / 1;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: var(--s-6);
+  margin: 0;
+  padding: var(--s-7) var(--s-7) var(--s-6);
+  border-radius: 2px;
+  background:
+    linear-gradient(180deg, rgba(0, 0, 0, 0.05), transparent 10%),
+    radial-gradient(120% 90% at 40% 30%, #fbf8f1, #ebe4d3);
+  color: var(--navy-800);
+  box-shadow: 0 40px 70px -30px rgba(0, 0, 0, 0.75);
+  will-change: transform;
+}
+
+.letterHead {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-family: var(--font-mono);
+  font-size: var(--fs-label);
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--gold-800);
+}
+
+.postmark {
+  display: grid;
+  place-items: center;
+  width: 58px;
+  height: 58px;
+  border: 1.5px dashed rgba(163, 58, 42, 0.55);
+  border-radius: 50%;
+  color: rgba(163, 58, 42, 0.75);
+  transform: rotate(-12deg);
+}
+
+.quote {
+  margin: 0;
+  flex: 1;
+}
+
+.quote p {
+  font-family: var(--font-serif);
+  font-size: clamp(1.5rem, 2.2vw, 2.2rem);
+  line-height: 1.25;
+  text-wrap: pretty;
+}
+
+.cite {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  row-gap: var(--s-1);
+  gap: var(--s-4);
+  padding-top: var(--s-4);
+  border-top: 1px solid rgba(20, 26, 42, 0.15);
+}
+
+.name {
+  white-space: nowrap;
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-size: 1.4rem;
+}
+
+.role {
+  font-family: var(--font-mono);
+  font-size: var(--fs-label);
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--slate-600);
+}
+
+@media (max-width: 1023px) {
+  .layout {
+    grid-template-columns: minmax(0, 1fr);
+    row-gap: var(--s-8);
+  }
+  .head,
+  .deck {
+    grid-column: 1;
+  }
+  .controls {
+    order: 5;
+  }
+  .deck {
+    min-height: 0;
+    margin-right: var(--s-6);
+  }
+  .letter {
+    padding: var(--s-6) var(--s-5) var(--s-5);
+  }
+}

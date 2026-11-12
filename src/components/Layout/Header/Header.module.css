@@ -59,58 +59,6 @@
   transform: translateY(-50%);
 }
 
-/* Sound toggle: its own dark pill keeps it legible over light and dark chapters
-   (no blend modes — those force full-page compositing while scrolling). */
-.sound {
-  display: inline-flex;
-  align-items: center;
-  gap: var(--s-3);
-  min-height: 36px;
-  padding: 0 var(--s-4);
-  border-radius: var(--r-pill);
-  background: rgba(11, 15, 25, 0.72);
-  color: #fff;
-}
-
-.sound :global(.label) {
-  color: #fff;
-}
-
-.bars {
-  display: inline-flex;
-  align-items: flex-end;
-  gap: 2px;
-  height: 12px;
-}
-
-.bars i {
-  width: 2px;
-  height: 3px;
-  background: #fff;
-  transition: height var(--dur-fast);
-}
-
-.bars[data-on] i {
-  animation: eq 1s ease-in-out infinite alternate;
-}
-
-.bars[data-on] i:nth-child(2) {
-  animation-delay: 0.25s;
-}
-
-.bars[data-on] i:nth-child(3) {
-  animation-delay: 0.5s;
-}
-
-@keyframes eq {
-  from {
-    height: 3px;
-  }
-  to {
-    height: 12px;
-  }
-}
-
 .actions {
   margin-left: auto;
   display: flex;
@@ -118,8 +66,11 @@
   gap: var(--s-3);
 }
 
-.actions :global([class*="bracket"]) {
-  --c: rgba(255, 255, 255, 0.55);
+/* Fine vertical hairline between the two controls — a typesetter's rule, not a frame */
+.rule {
+  width: 1px;
+  height: 22px;
+  background: linear-gradient(180deg, transparent, rgba(246, 244, 239, 0.45), transparent);
 }
 
 .menuBtn {
@@ -184,17 +135,9 @@
   .logoFull {
     width: 150px;
   }
-  .sound {
-    display: none;
-  }
-  .quote {
+  .quote,
+  .rule {
     display: none !important;
-  }
-}
-
-@media (max-width: 1023px) and (min-width: 768px) {
-  .sound :global(.label) {
-    display: none;
   }
 }
 

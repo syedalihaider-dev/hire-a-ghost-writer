@@ -7,7 +7,6 @@ import { gsap, useGSAP } from "@/lib/gsap";
 import { EASE } from "@/lib/motion";
 import { lockScroll } from "@/lib/lenis";
 import { quoteStore } from "@/lib/quoteStore";
-import { sound, useSoundEnabled } from "@/lib/audio";
 import QuoteButton from "@/components/UI/QuoteButton";
 import styles from "./Menu.module.css";
 
@@ -20,7 +19,6 @@ export default function Menu({ open, onClose }: { open: boolean; onClose: () => 
   const root = useRef<HTMLDivElement>(null);
   const tl = useRef<gsap.core.Timeline | null>(null);
   const wasOpen = useRef(false);
-  const soundOn = useSoundEnabled();
 
   useGSAP(
     () => {
@@ -45,7 +43,6 @@ export default function Menu({ open, onClose }: { open: boolean; onClose: () => 
 
     if (open) {
       lockScroll(true);
-      sound.pageFlip(0.8);
       t.timeScale(1).play();
       [main, footer].forEach((el) => el && (el.inert = true));
       const id = window.setTimeout(() => root.current?.querySelector<HTMLElement>(FOCUSABLE)?.focus(), 400);
@@ -87,7 +84,7 @@ export default function Menu({ open, onClose }: { open: boolean; onClose: () => 
           <ul role="list">
             {navigation.map((item, i) => (
               <li key={item.href} className={styles.row}>
-                <Link href={item.href} className={styles.link} onClick={onClose} onMouseEnter={() => sound.tick()}>
+                <Link href={item.href} className={styles.link} onClick={onClose}>
                   <span className={styles.linkInner}>
                     <span className="label">{pad(i)}</span>
                     {item.label}
@@ -104,7 +101,7 @@ export default function Menu({ open, onClose }: { open: boolean; onClose: () => 
             {services.map((s, i) => (
               <li key={s.href}>
                 <Link href={s.href} onClick={onClose} className="link-line">
-                  {s.label} <span className={styles.idx}>[ {pad(i)} ]</span>
+                  {s.label} <span className={styles.idx}>{pad(i)}</span>
                 </Link>
               </li>
             ))}
@@ -117,9 +114,6 @@ export default function Menu({ open, onClose }: { open: boolean; onClose: () => 
             {contact.phone.display}
           </a>
           <address className={styles.address}>{contact.address.display}</address>
-          <button type="button" className="label" onClick={() => sound.setEnabled(!soundOn)} aria-pressed={soundOn}>
-            Sound: {soundOn ? "On" : "Off"}
-          </button>
           <QuoteButton size="lg" />
         </div>
       </div>

@@ -1,0 +1,192 @@
+.philosophy {
+  position: relative;
+  overflow: hidden;
+  padding-block: var(--s-9) var(--s-7);
+  background:
+    radial-gradient(60% 60% at 80% 30%, rgba(197, 160, 89, 0.12), transparent 70%),
+    var(--bone-50);
+}
+
+.viewport {
+  overflow: hidden;
+}
+
+/* horizontal track — translated by AboutMotion on desktop
+   (doubled class outranks the global ol[role="list"] padding reset) */
+.track.track {
+  display: flex;
+  align-items: stretch;
+  width: max-content;
+  padding-inline: var(--margin);
+  will-change: transform;
+}
+
+.panel {
+  flex: none;
+  position: relative;
+  min-height: min(74vh, 720px);
+}
+
+/* ---------- Opening spread ---------- */
+.opening {
+  width: min(78vw, 1120px);
+  display: grid;
+  grid-template-columns: 1.35fr 1fr;
+  grid-template-rows: auto 1fr;
+  column-gap: var(--s-8);
+  padding-right: var(--s-10);
+}
+
+.mark {
+  grid-column: 1 / -1;
+  display: flex;
+  align-items: center;
+  gap: var(--s-4);
+  padding-bottom: var(--s-4);
+  margin-bottom: var(--s-7);
+  border-bottom: 1px solid var(--line);
+}
+
+.chapter {
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-size: 1.35rem;
+  line-height: 1;
+  color: var(--accent-text);
+}
+
+.title {
+  align-self: start;
+  font-size: clamp(3rem, 6.4vw, 7rem);
+}
+
+.figure {
+  align-self: end;
+  grid-row: 2;
+  grid-column: 2;
+}
+
+/* ---------- Tenets ---------- */
+.tenet {
+  width: min(62vw, 860px);
+  display: grid;
+  grid-template-columns: auto 1fr;
+  column-gap: var(--s-7);
+  align-items: center;
+  padding-inline: var(--s-8);
+  border-left: 1px solid var(--line);
+}
+
+.numeral {
+  min-width: 1.4em;
+  font-family: var(--font-serif);
+  font-weight: 500;
+  font-size: clamp(8rem, 15vw, 15rem);
+  line-height: 0.8;
+  text-align: center;
+  color: transparent;
+  -webkit-text-stroke: 1px var(--gold-600);
+  will-change: transform;
+}
+
+.tenetBody {
+  display: grid;
+  gap: var(--s-5);
+  max-width: 30rem;
+}
+
+.tenetTitle {
+  font-size: clamp(2.2rem, 3.6vw, 3.8rem);
+  line-height: 1.02;
+}
+
+.tenetRule {
+  display: block;
+  width: 72px;
+  height: 1px;
+  background: var(--gold-600);
+  transform-origin: 0 50%;
+}
+
+.tenetText {
+  font-size: var(--fs-md);
+  line-height: 1.6;
+  color: var(--slate-600);
+}
+
+/* ---------- Progress rail ---------- */
+.rail {
+  display: grid;
+  gap: var(--s-3);
+  margin-top: var(--s-6);
+}
+
+.railTrack {
+  position: relative;
+  display: block;
+  height: 1px;
+  background: var(--line);
+}
+
+.railFill {
+  position: absolute;
+  inset: 0;
+  background: var(--gold-600);
+  transform: scaleX(0);
+  transform-origin: 0 50%;
+}
+
+.railLabels {
+  display: flex;
+  justify-content: space-between;
+  font-family: var(--font-serif);
+  font-style: italic;
+  color: var(--accent-text);
+}
+
+/* ============================================================
+   Touch / narrow — stacked spreads
+   ============================================================ */
+@media (max-width: 1023px) {
+  .philosophy {
+    padding-block: var(--pad-md);
+  }
+  .track.track {
+    flex-direction: column;
+    width: auto;
+    gap: var(--s-8);
+  }
+  .panel {
+    min-height: 0;
+  }
+  .opening,
+  .tenet {
+    width: auto;
+    padding: 0;
+  }
+  .opening {
+    grid-template-columns: 1fr;
+    row-gap: var(--s-6);
+  }
+  .figure {
+    grid-row: auto;
+    grid-column: 1;
+    width: min(70%, 360px);
+    justify-self: end;
+  }
+  .tenet {
+    grid-template-columns: 1fr;
+    row-gap: var(--s-4);
+    padding-top: var(--s-6);
+    border-left: 0;
+    border-top: 1px solid var(--line);
+  }
+  .numeral {
+    min-width: 0;
+    text-align: left;
+    font-size: clamp(5rem, 22vw, 9rem);
+  }
+  .rail {
+    display: none;
+  }
+}

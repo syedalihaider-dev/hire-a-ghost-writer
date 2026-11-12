@@ -1,0 +1,373 @@
+.craft {
+  position: relative;
+  overflow: hidden;
+  padding-block: var(--pad-md);
+  background:
+    radial-gradient(45% 40% at 15% 30%, rgba(197, 160, 89, 0.07), transparent 70%),
+    var(--navy-800);
+}
+
+.lede {
+  display: grid;
+  grid-template-columns: repeat(12, minmax(0, 1fr));
+  column-gap: var(--gutter);
+  align-items: end;
+  margin-top: var(--s-9);
+}
+
+.statement {
+  grid-column: 1 / span 8;
+  font-size: clamp(2rem, 4.2vw, 4.4rem);
+  line-height: 1.06;
+  font-style: italic;
+  color: var(--gold-400);
+}
+
+.text {
+  grid-column: 9 / -1;
+  font-size: var(--fs-md);
+  line-height: 1.6;
+  color: rgba(246, 244, 239, 0.78);
+}
+
+/* ---------- Instruments: wide typographic rows ---------- */
+.instruments {
+  margin-top: var(--s-9);
+  border-top: 1px solid var(--line);
+}
+
+.instrument {
+  position: relative;
+  display: grid;
+  grid-template-columns: 4rem minmax(0, 5fr) minmax(0, 4fr) minmax(0, 3fr);
+  align-items: center;
+  column-gap: var(--s-6);
+  padding-block: var(--s-6);
+  border-bottom: 1px solid var(--line);
+  isolation: isolate;
+}
+
+/* a gold wash sweeps in from the left on hover */
+.instrument::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background: linear-gradient(90deg, rgba(197, 160, 89, 0.1), transparent 70%);
+  transform: scaleX(0);
+  transform-origin: 0 50%;
+  transition: transform 0.9s var(--ease-out);
+}
+
+.instrument:hover::before {
+  transform: scaleX(1);
+}
+
+.iNo {
+  font-family: var(--font-mono);
+  font-size: var(--fs-label);
+  color: var(--gold-500);
+}
+
+.iTitle {
+  font-size: clamp(2.2rem, 4.2vw, 4.4rem);
+  transition: transform var(--dur-base) var(--ease-out);
+}
+
+.instrument:hover .iTitle {
+  transform: translateX(var(--s-3));
+}
+
+.iText {
+  font-size: var(--fs-md);
+  line-height: 1.55;
+  color: rgba(246, 244, 239, 0.75);
+}
+
+.iVisual {
+  justify-self: end;
+  width: 100%;
+  max-width: 260px;
+}
+
+/* waveform */
+.wave {
+  display: grid;
+  gap: var(--s-2);
+}
+
+.rec {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-family: var(--font-mono);
+  font-size: 10px;
+  letter-spacing: 0.12em;
+  color: var(--slate-300);
+}
+
+.rec i {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: #c4523e;
+  animation: pulse 1.6s ease-in-out infinite;
+}
+
+.bars {
+  display: flex;
+  align-items: center;
+  gap: 3px;
+  height: 56px;
+}
+
+.bars i {
+  flex: 1;
+  border-radius: 2px;
+  background: var(--gold-500);
+  transform-origin: 50% 50%;
+  animation: wave 1.4s ease-in-out infinite alternate;
+}
+
+@keyframes wave {
+  from {
+    transform: scaleY(0.35);
+  }
+  to {
+    transform: scaleY(1);
+  }
+}
+
+@keyframes pulse {
+  50% {
+    opacity: 0.25;
+  }
+}
+
+/* narrative: fragments become a sentence */
+.narrative {
+  display: grid;
+  gap: var(--s-2);
+}
+
+.fragments {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.fragments i {
+  padding: 2px 6px;
+  border: 1px dashed rgba(246, 244, 239, 0.3);
+  font-family: var(--font-mono);
+  font-style: normal;
+  font-size: 10px;
+  color: var(--slate-300);
+}
+
+.arrow {
+  width: 1px;
+  height: 16px;
+  margin-left: 10px;
+  background: var(--gold-500);
+}
+
+.sentence {
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-size: 1.15rem;
+  line-height: 1.25;
+  color: var(--bone-50);
+}
+
+/* voice: a signature drawn in gold */
+.voice {
+  display: grid;
+  justify-items: end;
+  gap: 4px;
+}
+
+.signature {
+  width: 100%;
+  height: auto;
+  overflow: visible;
+}
+
+.signature path {
+  fill: none;
+  stroke: var(--gold-400);
+  stroke-width: 2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.voiceLabel {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--slate-300);
+}
+
+/* ---------- Margins: refinements annotated around a page ---------- */
+.margins {
+  position: relative;
+  display: grid;
+  grid-template-columns: 1fr minmax(260px, 30%) 1fr;
+  grid-template-rows: auto auto auto;
+  column-gap: var(--s-9);
+  row-gap: var(--s-6);
+  align-items: center;
+  margin-top: var(--s-10);
+}
+
+.marginsLabel {
+  grid-column: 1 / -1;
+  justify-self: center;
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-size: 1.3rem;
+  color: var(--gold-500);
+}
+
+.page {
+  grid-column: 2;
+  grid-row: 2 / span 2;
+}
+
+.annot {
+  position: relative;
+  display: grid;
+  gap: var(--s-3);
+  max-width: 24rem;
+}
+
+.a1 {
+  grid-column: 1;
+  grid-row: 2;
+  justify-self: end;
+  text-align: right;
+}
+
+.a2 {
+  grid-column: 3;
+  grid-row: 2;
+  align-self: start;
+  margin-top: var(--s-9);
+}
+
+.a3 {
+  grid-column: 1;
+  grid-row: 3;
+  justify-self: end;
+  text-align: right;
+}
+
+/* leader line pointing at the page */
+.leader {
+  position: absolute;
+  top: 0.8em;
+  width: var(--s-8);
+  height: 1px;
+  background: var(--gold-500);
+}
+
+.leader::after {
+  content: "";
+  position: absolute;
+  top: -3px;
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--gold-500);
+}
+
+.a1 .leader,
+.a3 .leader {
+  left: calc(100% + var(--s-3));
+  transform-origin: 0 50%;
+}
+
+.a1 .leader::after,
+.a3 .leader::after {
+  right: -3px;
+}
+
+.a2 .leader {
+  right: calc(100% + var(--s-3));
+  transform-origin: 100% 50%;
+}
+
+.a2 .leader::after {
+  left: -3px;
+}
+
+.aTitle {
+  font-size: clamp(1.5rem, 2vw, 2.1rem);
+  line-height: 1.1;
+}
+
+.aText {
+  font-size: var(--fs-sm);
+  line-height: 1.7;
+  color: rgba(246, 244, 239, 0.72);
+}
+
+/* ============================================================
+   Tablet & phone
+   ============================================================ */
+@media (max-width: 1023px) {
+  .lede {
+    grid-template-columns: minmax(0, 1fr);
+    row-gap: var(--s-5);
+    margin-top: var(--s-7);
+  }
+  .statement,
+  .text {
+    grid-column: 1;
+  }
+  .instrument {
+    grid-template-columns: 2.5rem minmax(0, 1fr);
+    row-gap: var(--s-3);
+  }
+  .iTitle,
+  .iText,
+  .iVisual {
+    grid-column: 2;
+  }
+  .iVisual {
+    justify-self: start;
+    margin-top: var(--s-2);
+  }
+  .iTitle {
+    font-size: clamp(1.9rem, 8.6vw, 3.4rem);
+  }
+  .margins {
+    grid-template-columns: minmax(0, 1fr);
+    row-gap: var(--s-6);
+    margin-top: var(--s-9);
+  }
+  .marginsLabel,
+  .page,
+  .a1,
+  .a2,
+  .a3 {
+    grid-column: 1;
+    grid-row: auto;
+    justify-self: stretch;
+    text-align: left;
+    margin-top: 0;
+    max-width: none;
+  }
+  .page {
+    width: min(78%, 380px);
+    justify-self: center;
+  }
+  .annot {
+    padding-left: var(--s-6);
+    border-left: 1px solid var(--gold-500);
+  }
+  .leader {
+    display: none;
+  }
+}

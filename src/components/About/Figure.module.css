@@ -1,0 +1,54 @@
+.figure {
+  position: relative;
+  margin: 0;
+}
+
+.frame {
+  position: relative;
+  overflow: hidden;
+  aspect-ratio: var(--ratio, 4 / 5);
+  border-radius: var(--r-1);
+  background: var(--navy-700);
+}
+
+/* .js + motion: hidden until ScrollEffects wipes it open */
+@media (prefers-reduced-motion: no-preference) {
+  :global(.js) .frame[data-reveal] {
+    clip-path: inset(100% 0% 0% 0%);
+  }
+}
+
+.inner {
+  position: absolute;
+  inset: 0;
+}
+
+/* room for the scrubbed drift so no edge ever shows */
+.drift {
+  inset: -7% 0;
+  will-change: transform;
+}
+
+.img {
+  object-fit: cover;
+}
+
+.caption {
+  display: flex;
+  align-items: baseline;
+  gap: var(--s-3);
+  margin-top: var(--s-3);
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-size: 0.95rem;
+  color: var(--muted);
+}
+
+.caption::before {
+  content: "";
+  flex: none;
+  width: 24px;
+  height: 1px;
+  background: var(--accent);
+  transform: translateY(-0.3em);
+}

@@ -1,6 +1,6 @@
 import Image from "next/image";
 import Link from "@/components/UI/AppLink";
-import { chapters, insights } from "@/content/homeContent";
+import { chapters, CHAPTER_NO, insights } from "@/content/homeContent";
 import SectionHead from "@/components/UI/SectionHead";
 import Button from "@/components/UI/Button";
 import { ArrowUpRightIcon } from "@/components/UI/Icons";
@@ -15,7 +15,7 @@ export default function Insights() {
   return (
     <section className="surface-dark pad-md" aria-labelledby="insights-title">
       <div className="container">
-        <SectionHead chapter={11} id="insights-title" label={chapters.insights.label} title={chapters.insights.title} lead={insights.text}>
+        <SectionHead chapter={CHAPTER_NO.insights} id="insights-title" label={chapters.insights.label} title={chapters.insights.title} lead={insights.text}>
           <Button href={insights.allHref} variant="outline">
             All Articles
           </Button>

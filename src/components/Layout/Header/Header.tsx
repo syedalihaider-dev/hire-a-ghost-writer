@@ -7,9 +7,7 @@ import { siteConfig } from "@/content/siteConfig";
 import { gsap, useGSAP, ScrollTrigger, prefersReducedMotion } from "@/lib/gsap";
 import { EASE } from "@/lib/motion";
 import { onLoaderDone } from "@/lib/loader";
-import { sound, useSoundEnabled } from "@/lib/audio";
 import QuoteButton from "@/components/UI/QuoteButton";
-import { Bracket } from "@/components/UI/Button";
 import Menu from "../Menu/Menu";
 import styles from "./Header.module.css";
 
@@ -19,7 +17,6 @@ export default function Header() {
   const root = useRef<HTMLElement>(null);
   const menuBtn = useRef<HTMLButtonElement>(null);
   const [open, setOpen] = useState(false);
-  const soundOn = useSoundEnabled();
 
   useGSAP(
     () => {
@@ -54,30 +51,19 @@ export default function Header() {
           <Image src="/images/brand/icon-192.png" alt="" width={44} height={44} className={styles.logoMark} sizes="44px" />
         </Link>
 
-        <button type="button" className={`${styles.item} ${styles.sound}`} aria-pressed={soundOn} onClick={() => sound.setEnabled(!soundOn)}>
-          <span className="label">Sound: {soundOn ? "On" : "Off"}</span>
-          <span className={styles.bars} data-on={soundOn || undefined} aria-hidden="true">
-            <i />
-            <i />
-            <i />
-          </span>
-        </button>
-
         <div className={styles.actions}>
-          <Bracket className={`${styles.item} ${styles.quote}`}>
+          <span className={`${styles.item} ${styles.quote}`}>
             <QuoteButton size="sm" />
-          </Bracket>
-          <Bracket className={styles.item}>
+          </span>
+          <span className={styles.rule} aria-hidden="true" />
+          <span className={styles.item}>
             <button
               ref={menuBtn}
               type="button"
               className={styles.menuBtn}
               aria-expanded={open}
               aria-controls="site-menu"
-              onClick={() => {
-                sound.tick();
-                setOpen((v) => !v);
-              }}
+              onClick={() => setOpen((v) => !v)}
               data-magnetic
             >
               <span className={styles.menuLabel}>{open ? "Close" : "Menu"}</span>
@@ -87,7 +73,7 @@ export default function Header() {
                 <i />
               </span>
             </button>
-          </Bracket>
+          </span>
         </div>
       </div>
 

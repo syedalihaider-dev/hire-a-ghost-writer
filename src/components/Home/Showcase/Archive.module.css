@@ -1,0 +1,501 @@
+/* ============================================================
+   The Archive — portfolio bookshelf
+   ============================================================ */
+.archive {
+  position: relative;
+  display: flex;
+  align-items: center;
+  min-height: 100svh;
+  padding-block: calc(var(--header-h) + var(--s-5)) var(--s-8);
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(12, minmax(0, 1fr));
+  column-gap: var(--gutter);
+  align-items: center;
+  width: 100%;
+}
+
+/* ---------- Readout (left column) ---------- */
+.readout {
+  grid-column: 1 / span 4;
+  display: grid;
+  gap: var(--s-7);
+  align-content: center;
+}
+
+.roHead {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  padding-bottom: var(--s-3);
+  border-bottom: 1px solid var(--line);
+}
+
+.roCount {
+  font-family: var(--font-mono);
+  font-size: var(--fs-label);
+  letter-spacing: 0.08em;
+  color: var(--bone-50);
+}
+
+.roCount i {
+  font-style: normal;
+  color: var(--slate-300);
+}
+
+.roBody {
+  display: grid;
+  gap: var(--s-3);
+  justify-items: start;
+}
+
+.mask {
+  display: block;
+  overflow: hidden;
+  /* room for descenders / italic overhang inside the mask */
+  padding-block: 0.06em;
+  margin-block: -0.06em;
+}
+
+.mask > * {
+  display: block;
+  will-change: transform;
+}
+
+.roNo {
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-size: clamp(1.4rem, 1.8vw, 1.9rem);
+  line-height: 1;
+  color: var(--gold-500);
+}
+
+.roTitle {
+  min-height: 2.1em;
+  font-size: clamp(2.2rem, 3.4vw, 3.6rem);
+  line-height: 1.02;
+  display: flex;
+  align-items: flex-end;
+}
+
+.roAuthor {
+  font-size: var(--fs-sm);
+  color: var(--slate-300);
+}
+
+.roKind {
+  margin-top: var(--s-2);
+}
+
+/* "Open the volume": a typeset link whose rule extends on hover */
+.openBtn {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--s-4);
+  margin-top: var(--s-4);
+  padding-block: var(--s-2);
+  font-size: 0.8125rem;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--bone-50);
+}
+
+.openLine {
+  position: relative;
+  width: 48px;
+  height: 1px;
+  background: var(--gold-500);
+  transition: width var(--dur-base) var(--ease-out);
+}
+
+.openLine::after {
+  content: "";
+  position: absolute;
+  right: 0;
+  top: -3px;
+  width: 7px;
+  height: 7px;
+  border-top: 1px solid var(--gold-500);
+  border-right: 1px solid var(--gold-500);
+  transform: rotate(45deg);
+}
+
+.openBtn:hover .openLine,
+.openBtn:focus-visible .openLine {
+  width: 84px;
+}
+
+/* Contents: the four works as an index with hairline rules */
+.index {
+  border-top: 1px solid var(--line);
+}
+
+.indexBtn {
+  position: relative;
+  display: grid;
+  grid-template-columns: 2.5rem 1fr;
+  align-items: baseline;
+  width: 100%;
+  padding-block: var(--s-3);
+  border-bottom: 1px solid var(--line);
+  text-align: left;
+  color: rgba(246, 244, 239, 0.45);
+  transition: color var(--dur-base) var(--ease-out);
+}
+
+.indexBtn:hover,
+.indexBtn[data-current] {
+  color: var(--bone-50);
+}
+
+.indexNo {
+  font-family: var(--font-mono);
+  font-size: var(--fs-label);
+  color: var(--slate-300);
+}
+
+.indexBtn[data-current] .indexNo {
+  color: var(--gold-500);
+}
+
+.indexTitle {
+  font-family: var(--font-serif);
+  font-size: 1.15rem;
+  line-height: 1.2;
+}
+
+.indexBar {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: -1px;
+  height: 1px;
+  background: var(--gold-500);
+  transform: scaleX(0);
+  transform-origin: 0 50%;
+  transition: transform 0.9s var(--ease-out);
+}
+
+.indexBtn[data-current] .indexBar {
+  transform: scaleX(1);
+}
+
+.hint {
+  font-family: var(--font-mono);
+  font-size: var(--fs-label);
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--slate-300);
+}
+
+.hintTouch {
+  display: none;
+}
+
+/* ---------- Stage (the alcove) ---------- */
+.stage {
+  --w: clamp(128px, 12.5vw, 220px);
+  --ph: 18px; /* shelf front-edge height */
+  --lx: 30%;
+  position: relative;
+  grid-column: 5 / -1;
+  height: clamp(440px, 66vh, 720px);
+  perspective: 1700px;
+  perspective-origin: 50% 30%;
+  isolation: isolate;
+}
+
+/* Reading-lamp pool that follows the selected volume */
+.lamp {
+  position: absolute;
+  inset: -12% -6% 0;
+  z-index: -1;
+  pointer-events: none;
+  background: radial-gradient(30% 52% at var(--lx) 50%, rgba(212, 179, 115, 0.17), rgba(197, 160, 89, 0.05) 50%, transparent 75%);
+}
+
+/* Oversized outlined numeral behind the shelf */
+.numeral {
+  position: absolute;
+  z-index: -1;
+  top: -4%;
+  right: 2%;
+  overflow: hidden;
+  font-size: clamp(9rem, 22vw, 22rem);
+  line-height: 0.9;
+  color: transparent;
+  -webkit-text-stroke: 1px rgba(197, 160, 89, 0.22);
+  perspective: 600px;
+  pointer-events: none;
+}
+
+.numeral > span {
+  display: block;
+  transform-origin: 50% 100%;
+}
+
+.rail {
+  position: absolute;
+  inset: 0;
+  transform-style: preserve-3d;
+}
+
+.books {
+  position: absolute;
+  inset: 0 0 var(--ph);
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  transform-style: preserve-3d;
+}
+
+.slot {
+  position: relative;
+  transform-style: preserve-3d;
+  margin-right: calc(var(--w) * -0.34);
+}
+
+.volBtn {
+  display: block;
+  padding: 0;
+  transform-style: preserve-3d;
+  border-radius: 2px;
+  cursor: pointer;
+}
+
+.volBtn:focus-visible {
+  outline: none;
+}
+
+/* focus ring drawn on the spine/cover plane rather than the flat layout box */
+.volBtn:focus-visible [data-vol-tilt] {
+  outline: 2px solid var(--gold-500);
+  outline-offset: 6px;
+}
+
+/* SSR / pre-hydration pose: spines out, first volume pulled forward */
+.slot [data-vol-pose] {
+  transform: rotateY(60deg);
+}
+.slot[data-active] [data-vol-pose] {
+  transform: translate3d(0, -26px, 160px) rotateY(12deg);
+}
+
+/* ---- Set dressing: brass bookend and a stack of manuscripts ---- */
+.bookend {
+  position: relative;
+  align-self: flex-end;
+  width: 14px;
+  height: calc(var(--w) * 0.95);
+  margin-right: calc(var(--w) * 0.08);
+}
+
+.bookend span {
+  position: absolute;
+  inset: 0;
+  border-radius: 2px 2px 0 0;
+  background: linear-gradient(90deg, var(--gold-800), var(--gold-400) 40%, var(--gold-600) 70%, var(--gold-800));
+  box-shadow: 6px 0 14px rgba(0, 0, 0, 0.35);
+}
+
+.bookend span::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: calc(var(--w) * 0.42);
+  height: 5px;
+  background: linear-gradient(180deg, var(--gold-400), var(--gold-800));
+}
+
+.stack {
+  margin-left: calc(var(--w) * 0.34 + var(--s-6));
+  display: grid;
+  justify-items: center;
+  align-self: flex-end;
+  transform: rotateY(-16deg);
+}
+
+.stack span {
+  display: block;
+  height: calc(var(--w) * 0.13);
+  border-radius: 2px;
+  box-shadow: inset 0 -2px 0 rgba(0, 0, 0, 0.25), 0 3px 8px rgba(0, 0, 0, 0.25);
+}
+
+/* loose manuscript, a navy volume, a wine volume — brand tones only */
+.stack span:nth-child(1) {
+  width: calc(var(--w) * 1.02);
+  height: calc(var(--w) * 0.08);
+  transform: translateX(6%) rotate(-1.5deg);
+  background: repeating-linear-gradient(180deg, #f1ebdd 0 1px, #d9d0bd 1px 2.5px);
+}
+
+.stack span:nth-child(2) {
+  width: calc(var(--w) * 1.12);
+  background:
+    linear-gradient(90deg, transparent 8%, var(--gold-600) 8% 9%, transparent 9% 91%, var(--gold-600) 91% 92%, transparent 92%),
+    linear-gradient(180deg, var(--navy-600), var(--navy-800));
+}
+
+.stack span:nth-child(3) {
+  width: calc(var(--w) * 1.2);
+  background:
+    linear-gradient(90deg, transparent 10%, var(--gold-600) 10% 11%, transparent 11% 89%, var(--gold-600) 89% 90%, transparent 90%),
+    linear-gradient(180deg, var(--wine-700), var(--wine-900));
+}
+
+/* ---- The shelf ---- */
+.plank {
+  position: absolute;
+  left: -6%;
+  right: -6%;
+  bottom: 0;
+  height: var(--ph);
+  transform-style: preserve-3d;
+}
+
+/* top surface: lies flat, running from the front edge back into the alcove */
+.plankTop {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 100%;
+  height: 300px;
+  transform-origin: 50% 100%;
+  transform: translateZ(70px) rotateX(90deg);
+  background: linear-gradient(0deg, var(--navy-600), var(--navy-700) 30%, rgba(20, 26, 42, 0) 100%);
+  mask-image: linear-gradient(90deg, transparent, #000 14%, #000 86%, transparent);
+}
+
+.plankFront {
+  position: absolute;
+  inset: 0;
+  transform: translateZ(70px);
+  border-top: 1px solid var(--gold-500);
+  background: linear-gradient(180deg, var(--navy-600), var(--ink-950));
+  box-shadow: 0 30px 40px -10px rgba(0, 0, 0, 0.6);
+  mask-image: linear-gradient(90deg, transparent, #000 10%, #000 90%, transparent);
+}
+
+/* ============================================================
+   Tablet & phone — swipeable shelf
+   ============================================================ */
+@media (max-width: 1023px) {
+  .archive {
+    display: block;
+    min-height: 0;
+    padding-block: var(--s-7) var(--s-8);
+  }
+
+  .grid {
+    grid-template-columns: minmax(0, 1fr);
+    row-gap: var(--s-6);
+  }
+
+  .stage {
+    --w: clamp(150px, 34vw, 240px);
+    grid-column: 1;
+    order: -1;
+    height: auto;
+    margin-inline: calc(var(--margin) * -1);
+    perspective: none;
+  }
+
+  .numeral {
+    top: auto;
+    bottom: 10%;
+    right: var(--margin);
+    font-size: clamp(7rem, 30vw, 14rem);
+  }
+
+  .lamp {
+    --lx: 50%;
+    inset: 0;
+  }
+
+  .rail {
+    position: relative;
+  }
+
+  /* the row itself scrolls; each book carries its own perspective
+     (doubled class: outranks the global ul[role="list"] reset) */
+  .books.books {
+    position: relative;
+    inset: auto;
+    justify-content: flex-start;
+    overflow-x: auto;
+    overscroll-behavior-x: contain;
+    scroll-snap-type: x mandatory;
+    scrollbar-width: none;
+    padding: var(--s-9) calc(50% - var(--w) * 0.4) calc(var(--s-6) + var(--ph));
+    transform-style: flat;
+  }
+
+  .books::-webkit-scrollbar {
+    display: none;
+  }
+
+  .slot {
+    flex: none;
+    width: calc(var(--w) * 0.8);
+    margin-right: 0;
+    display: flex;
+    justify-content: center;
+    scroll-snap-align: center;
+    perspective: 1100px;
+  }
+
+  .bookend,
+  .stack {
+    display: none;
+  }
+
+  .plank {
+    left: 0;
+    right: 0;
+    bottom: var(--s-6);
+    height: auto;
+  }
+
+  .plankTop {
+    display: none;
+  }
+
+  .plankFront {
+    position: relative;
+    display: block;
+    height: var(--ph);
+    transform: none;
+  }
+
+  .readout {
+    grid-column: 1;
+    gap: var(--s-5);
+  }
+
+  .roTitle {
+    min-height: 0;
+  }
+
+  .index {
+    display: none;
+  }
+
+  .hintDesk {
+    display: none;
+  }
+
+  .hintTouch {
+    display: inline;
+  }
+}
+
+@media (max-width: 767px) {
+  .stage {
+    --w: clamp(140px, 48vw, 210px);
+  }
+}

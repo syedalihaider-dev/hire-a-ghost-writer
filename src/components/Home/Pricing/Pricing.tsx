@@ -1,4 +1,4 @@
-import { chapters } from "@/content/homeContent";
+import { chapters, CHAPTER_NO } from "@/content/homeContent";
 import { pricing } from "@/content/siteConfig";
 import SectionHead from "@/components/UI/SectionHead";
 import QuoteButton from "@/components/UI/QuoteButton";
@@ -9,7 +9,7 @@ export default function Pricing() {
   return (
     <section className={`surface-light pad-md ${styles.pricing}`} aria-labelledby="pricing-title">
       <div className="container">
-        <SectionHead chapter={7} id="pricing-title" label={chapters.pricing.label} title={chapters.pricing.title} align="center" />
+        <SectionHead chapter={CHAPTER_NO.pricing} id="pricing-title" label={chapters.pricing.label} title={chapters.pricing.title} align="center" />
 
         <ul role="list" className={styles.plans} data-reveal-group="0.12">
           {pricing.plans.map((plan, i) => {

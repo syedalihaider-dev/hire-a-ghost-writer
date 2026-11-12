@@ -1,5 +1,5 @@
 import Image from "next/image";
-import { chapters, commitment, includes, simplerWay } from "@/content/homeContent";
+import { chapters, CHAPTER_NO, commitment, includes, simplerWay } from "@/content/homeContent";
 import SectionHead from "@/components/UI/SectionHead";
 import RichTitle from "@/components/UI/RichTitle";
 import QuoteButton from "@/components/UI/QuoteButton";
@@ -18,7 +18,7 @@ export default function WhyUs() {
   return (
     <section className={`surface-light pad-md ${styles.why}`} aria-labelledby="why-title">
       <div className={`container ${styles.inner}`}>
-        <SectionHead chapter={8} id="why-title" label={chapters.why.label} title={chapters.why.title} />
+        <SectionHead chapter={CHAPTER_NO.why} id="why-title" label={chapters.why.label} title={chapters.why.title} />
 
         <div className={styles.split}>
           <div className={styles.aside}>

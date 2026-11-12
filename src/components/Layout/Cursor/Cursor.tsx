@@ -65,6 +65,11 @@ export default function Cursor() {
       shown = false;
       releaseMagnet();
     };
+    // Overlays that open under a stationary pointer ask the ring to drop its label.
+    const onReset = () => {
+      el.dataset.state = "";
+      if (label.current) label.current.textContent = "";
+    };
     const onDown = () => (el.dataset.pressed = "true");
     const onUp = () => (el.dataset.pressed = "");
 
@@ -72,7 +77,9 @@ export default function Cursor() {
     document.documentElement.addEventListener("pointerleave", onLeave);
     window.addEventListener("pointerdown", onDown);
     window.addEventListener("pointerup", onUp);
+    window.addEventListener("cursor:reset", onReset);
     return () => {
+      window.removeEventListener("cursor:reset", onReset);
       window.removeEventListener("pointermove", onMove);
       document.documentElement.removeEventListener("pointerleave", onLeave);
       window.removeEventListener("pointerdown", onDown);

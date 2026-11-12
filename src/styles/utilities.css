@@ -55,7 +55,7 @@
   color: var(--fg);
 }
 
-/* Bracketed mono label: [ OUR SERVICES ] */
+/* Editorial mono label, led by a fine hairline rule: —— OUR SERVICES */
 .label {
   display: inline-flex;
   align-items: center;
@@ -70,10 +70,12 @@
 }
 
 .label::before {
-  content: "[";
-}
-.label::after {
-  content: "]";
+  content: "";
+  flex: none;
+  width: 1.75em;
+  height: 1px;
+  background: currentColor;
+  opacity: 0.55;
 }
 
 .label--accent {

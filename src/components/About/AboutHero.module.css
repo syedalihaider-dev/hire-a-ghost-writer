@@ -1,0 +1,477 @@
+/* ============================================================
+   About — Frontispiece
+   ============================================================ */
+.hero {
+  position: relative;
+  overflow: hidden;
+  isolation: isolate;
+  min-height: 100svh;
+  padding: calc(var(--header-h) + var(--s-5)) 0 var(--s-7);
+  background:
+    radial-gradient(70% 60% at 78% 40%, rgba(46, 54, 70, 0.55), transparent 70%),
+    linear-gradient(180deg, var(--ink-950), var(--ink-900) 60%, var(--navy-800));
+}
+
+.backdrop {
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+}
+
+/* warm reading-lamp pool behind the composition */
+.light {
+  position: absolute;
+  right: 4%;
+  top: 6%;
+  width: 62vw;
+  height: 80vh;
+  border-radius: 50%;
+  background: radial-gradient(closest-side, rgba(212, 179, 115, 0.16), rgba(197, 160, 89, 0.05) 55%, transparent);
+}
+
+.watermark {
+  position: absolute;
+  right: -3vw;
+  bottom: -9vw;
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-size: 30vw;
+  line-height: 0.8;
+  color: transparent;
+  -webkit-text-stroke: 1px rgba(197, 160, 89, 0.12);
+  white-space: nowrap;
+  will-change: transform;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(12, minmax(0, 1fr));
+  grid-template-rows: auto auto 1fr auto;
+  column-gap: var(--gutter);
+  min-height: calc(100svh - var(--header-h) - var(--s-5) - var(--s-7));
+}
+
+/* running head, like the top of a printed page */
+.running {
+  grid-column: 1 / -1;
+  grid-row: 1;
+  display: flex;
+  align-items: center;
+  gap: var(--s-4);
+  padding-bottom: var(--s-6);
+  font-family: var(--font-mono);
+  font-size: var(--fs-label);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--slate-300);
+}
+
+.runRule {
+  flex: 1;
+  height: 1px;
+  background: var(--line);
+}
+
+/* ---------- Copy ---------- */
+.top {
+  grid-column: 1 / span 7;
+  grid-row: 2;
+  display: grid;
+  gap: var(--s-5);
+  align-content: start;
+  position: relative;
+  z-index: 2;
+}
+
+.title {
+  font-size: clamp(3.1rem, 6.1vw, 7rem);
+  line-height: 0.88;
+  text-wrap: balance;
+}
+
+.title :global(.w-serif) {
+  font-size: 0.72em;
+  padding-inline: 0.06em;
+  color: var(--gold-400);
+}
+
+.bottom {
+  grid-column: 1 / span 5;
+  grid-row: 3;
+  align-self: end;
+  display: grid;
+  gap: var(--s-6);
+  padding-top: var(--s-7);
+  position: relative;
+  z-index: 2;
+}
+
+.intro {
+  max-width: 30rem;
+  font-size: var(--fs-md);
+  line-height: 1.6;
+  color: rgba(246, 244, 239, 0.8);
+}
+
+.ctas {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--s-6);
+}
+
+.textLink {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--s-3);
+  font-size: 0.8125rem;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--bone-50);
+}
+
+.textLine {
+  position: relative;
+  width: 40px;
+  height: 1px;
+  background: var(--gold-500);
+  transition: width var(--dur-base) var(--ease-out);
+}
+
+.textLine::after {
+  content: "";
+  position: absolute;
+  right: 0;
+  top: -3px;
+  width: 7px;
+  height: 7px;
+  border-top: 1px solid var(--gold-500);
+  border-right: 1px solid var(--gold-500);
+  transform: rotate(45deg);
+}
+
+.textLink:hover .textLine,
+.textLink:focus-visible .textLine {
+  width: 72px;
+}
+
+/* ---------- The composition ---------- */
+.scene {
+  grid-column: 7 / -1;
+  grid-row: 2 / span 2;
+  position: relative;
+  align-self: stretch;
+  min-height: min(74vh, 720px);
+}
+
+.plate {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 76%;
+  aspect-ratio: 4 / 5;
+  overflow: hidden;
+  border-radius: 999px 999px var(--r-1) var(--r-1);
+  background: var(--navy-700);
+  box-shadow: 0 40px 80px -30px rgba(0, 0, 0, 0.7);
+  will-change: transform;
+}
+
+.plateImg {
+  position: absolute;
+  inset: -6% 0;
+}
+
+.plateShade {
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(180deg, transparent 45%, rgba(11, 15, 25, 0.55)),
+    radial-gradient(90% 70% at 50% 30%, transparent 40%, rgba(11, 15, 25, 0.35));
+}
+
+/* caption set vertically along the plate's edge */
+.caption {
+  position: absolute;
+  top: 4%;
+  right: calc(var(--s-6) * -1);
+  writing-mode: vertical-rl;
+  transform: rotate(180deg);
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-size: 0.95rem;
+  color: var(--slate-300);
+  white-space: nowrap;
+}
+
+/* typeset manuscript leaf */
+.leaf {
+  position: absolute;
+  left: 0;
+  bottom: 4%;
+  width: 54%;
+  container-type: inline-size;
+  border-radius: 2px;
+  background:
+    linear-gradient(90deg, rgba(0, 0, 0, 0.08), transparent 6%),
+    radial-gradient(120% 90% at 40% 30%, #fbf8f1, #ebe4d3);
+  color: var(--navy-800);
+  box-shadow:
+    0 2px 0 #e2dac8,
+    0 4px 0 #d6cdb8,
+    0 50px 70px -20px rgba(0, 0, 0, 0.65);
+  transform: rotate(-4deg);
+  will-change: transform;
+}
+
+/* cq units resolve against .leaf only from its descendants */
+.leafInner {
+  display: grid;
+  gap: 4cqw;
+  padding: 9cqw 9cqw 11cqw;
+}
+
+.leafHead {
+  display: flex;
+  justify-content: space-between;
+  font-family: var(--font-mono);
+  font-size: max(9px, 3.4cqw);
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--gold-800);
+}
+
+.leafFolio {
+  color: var(--slate-600);
+}
+
+.leafRule {
+  display: block;
+  height: 4px;
+  border-block: 1px solid var(--gold-600);
+  width: 30%;
+}
+
+.leafBody {
+  display: grid;
+  font-family: var(--font-serif);
+  font-size: max(11px, 5.6cqw);
+  line-height: 1.45;
+}
+
+.leafLine {
+  display: block;
+  white-space: nowrap;
+}
+
+.dropCap {
+  float: left;
+  font-size: 2.6em;
+  line-height: 0.82;
+  padding-right: 0.08em;
+  color: var(--gold-800);
+}
+
+/* proofreader's notes in the margin */
+.note {
+  position: absolute;
+  left: calc(100% - 2cqw); /* not a transform: GSAP owns this element's x */
+  display: inline-flex;
+  align-items: baseline;
+  gap: 0.4em;
+  padding-left: 6cqw;
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-size: max(11px, 5cqw);
+  color: var(--gold-400);
+  white-space: nowrap;
+}
+
+.note::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 55%;
+  width: 4.5cqw;
+  height: 1px;
+  background: var(--gold-500);
+}
+
+.note i {
+  font-style: normal;
+  color: var(--gold-500);
+}
+
+.note1 {
+  top: 34%;
+}
+
+.note2 {
+  top: 66%;
+}
+
+/* hand-drawn underline under the last word */
+.mark {
+  position: absolute;
+  left: 9cqw;
+  bottom: 9.5cqw;
+  width: 18cqw;
+  height: 2px;
+  border-radius: 2px;
+  background: var(--gold-500);
+  transform: rotate(-2deg);
+  transform-origin: 0 50%;
+}
+
+.slip {
+  position: absolute;
+  right: 6%;
+  bottom: 0;
+  display: grid;
+  gap: var(--s-2);
+  padding: var(--s-4) var(--s-5);
+  border-left: 2px solid var(--gold-500);
+  background: rgba(15, 20, 33, 0.82);
+  backdrop-filter: blur(6px);
+  transform: rotate(2deg);
+  box-shadow: 0 24px 40px -18px rgba(0, 0, 0, 0.7);
+  will-change: transform;
+}
+
+.slipText {
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-size: 1.5rem;
+  line-height: 1;
+}
+
+/* ---------- Scroll cue ---------- */
+.cue {
+  grid-column: 1 / -1;
+  grid-row: 4;
+  display: inline-flex;
+  align-items: center;
+  gap: var(--s-4);
+  justify-self: start;
+  margin-top: var(--s-7);
+}
+
+.cueLine {
+  position: relative;
+  width: 1px;
+  height: 40px;
+  overflow: hidden;
+  background: var(--line);
+}
+
+.cueLine::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: -40%;
+  width: 1px;
+  height: 40%;
+  background: var(--gold-500);
+  animation: cue 2.2s var(--ease-in-out) infinite;
+}
+
+@keyframes cue {
+  to {
+    top: 100%;
+  }
+}
+
+/* ============================================================
+   Tablet
+   ============================================================ */
+@media (max-width: 1023px) {
+  .grid {
+    grid-template-columns: minmax(0, 1fr);
+    grid-template-rows: none;
+    row-gap: var(--s-7);
+    min-height: 0;
+  }
+  .running {
+    padding-bottom: 0;
+  }
+  .top,
+  .bottom,
+  .scene,
+  .cue {
+    grid-column: 1;
+    grid-row: auto;
+  }
+  .top {
+    max-width: 44rem;
+  }
+  .title {
+    font-size: clamp(3rem, 9.4vw, 6rem);
+  }
+  .scene {
+    min-height: 0;
+    width: min(100%, 640px);
+    aspect-ratio: 1 / 1.02;
+    justify-self: center;
+  }
+  .bottom {
+    padding-top: 0;
+    max-width: 36rem;
+  }
+  .cue {
+    display: none;
+  }
+}
+
+/* ============================================================
+   Phone — a composition of its own, not a shrunken desktop
+   ============================================================ */
+@media (max-width: 767px) {
+  .hero {
+    padding-top: calc(var(--header-h) + var(--s-4));
+  }
+  .grid {
+    row-gap: var(--s-6);
+  }
+  .running {
+    font-size: 10px;
+  }
+  .running span:last-child {
+    display: none;
+  }
+  .title {
+    font-size: clamp(2.7rem, 13.2vw, 4.2rem);
+  }
+  .scene {
+    aspect-ratio: 1 / 1.12;
+  }
+  .plate {
+    width: 80%;
+  }
+  .caption {
+    display: none;
+  }
+  .leaf {
+    width: 62%;
+    bottom: 2%;
+  }
+  .note {
+    display: none;
+  }
+  .slip {
+    right: 0;
+    bottom: -2%;
+    padding: var(--s-3) var(--s-4);
+  }
+  .slipText {
+    font-size: 1.2rem;
+  }
+  .ctas {
+    gap: var(--s-5);
+  }
+  .watermark {
+    font-size: 46vw;
+    bottom: 30%;
+  }
+}

@@ -1,0 +1,460 @@
+/* ============================================================
+   Services — the catalogue desk
+   ============================================================ */
+.hero {
+  position: relative;
+  overflow: hidden;
+  isolation: isolate;
+  min-height: 100svh;
+  padding: calc(var(--header-h) + var(--s-7)) 0 var(--s-6);
+  background:
+    radial-gradient(65% 70% at 75% 45%, rgba(46, 54, 70, 0.6), transparent 70%),
+    linear-gradient(160deg, var(--ink-900), var(--ink-950) 55%, #07090f);
+}
+
+.backdrop {
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+}
+
+.light {
+  position: absolute;
+  right: 6%;
+  top: 4%;
+  width: 56vw;
+  height: 84vh;
+  border-radius: 50%;
+  background: radial-gradient(closest-side, rgba(212, 179, 115, 0.15), rgba(197, 160, 89, 0.04) 60%, transparent);
+}
+
+/* three hairline column rules, like a printed catalogue grid */
+.rules {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  justify-content: space-around;
+  padding-inline: 18%;
+}
+
+.rules i {
+  width: 1px;
+  background: linear-gradient(180deg, transparent, rgba(246, 244, 239, 0.06) 30%, rgba(246, 244, 239, 0.06) 70%, transparent);
+  transform-origin: 50% 0;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(12, minmax(0, 1fr));
+  grid-template-rows: 1fr auto;
+  column-gap: var(--gutter);
+  min-height: calc(100svh - var(--header-h) - var(--s-7) - var(--s-6));
+}
+
+/* ---------- Copy ---------- */
+.copy {
+  grid-column: 1 / span 6;
+  align-self: center;
+  display: grid;
+  gap: var(--s-6);
+  position: relative;
+  z-index: 2;
+}
+
+.title {
+  font-size: clamp(3rem, 5.6vw, 6.4rem);
+  line-height: 0.9;
+  text-wrap: balance;
+}
+
+.title :global(.w-serif) {
+  font-size: 0.62em;
+  color: var(--gold-400);
+}
+
+.intro {
+  max-width: 31rem;
+  font-size: var(--fs-md);
+  line-height: 1.6;
+  color: rgba(246, 244, 239, 0.8);
+}
+
+.ctas {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--s-6);
+}
+
+.textLink {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--s-3);
+  font-size: 0.8125rem;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--bone-50);
+}
+
+.textLine {
+  position: relative;
+  width: 40px;
+  height: 1px;
+  background: var(--gold-500);
+  transition: width var(--dur-base) var(--ease-out);
+}
+
+.textLine::after {
+  content: "";
+  position: absolute;
+  right: 0;
+  top: -3px;
+  width: 7px;
+  height: 7px;
+  border-top: 1px solid var(--gold-500);
+  border-right: 1px solid var(--gold-500);
+  transform: rotate(45deg);
+}
+
+.textLink:hover .textLine,
+.textLink:focus-visible .textLine {
+  width: 72px;
+}
+
+/* ---------- The desk ---------- */
+.stage {
+  grid-column: 7 / -1;
+  position: relative;
+  align-self: stretch;
+  min-height: min(70vh, 700px);
+}
+
+.plate {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 70%;
+  aspect-ratio: 3 / 4;
+  overflow: hidden;
+  border-radius: var(--r-1);
+  background: var(--navy-700);
+  box-shadow: 0 50px 90px -30px rgba(0, 0, 0, 0.75);
+  will-change: transform;
+}
+
+.plateImg {
+  position: absolute;
+  inset: -6% 0;
+}
+
+.plateShade {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(200deg, transparent 40%, rgba(7, 9, 15, 0.6));
+}
+
+.inset {
+  position: absolute;
+  left: 2%;
+  top: 12%;
+  width: 36%;
+  aspect-ratio: 4 / 5;
+  overflow: hidden;
+  border: 6px solid #f3eee2;
+  border-bottom-width: 26px;
+  background: #f3eee2;
+  box-shadow: 0 30px 50px -20px rgba(0, 0, 0, 0.7);
+  transform: rotate(-5deg);
+  will-change: transform;
+}
+
+/* catalogue index card */
+.card {
+  position: absolute;
+  left: 10%;
+  bottom: 9%;
+  width: max(46%, 270px);
+  container-type: inline-size;
+  display: grid;
+  gap: 2.4%;
+  padding: var(--s-5) var(--s-5) var(--s-6);
+  background:
+    repeating-linear-gradient(180deg, transparent 0 27px, rgba(122, 92, 36, 0.18) 27px 28px),
+    linear-gradient(180deg, #f8f3e6, #efe6cf);
+  color: var(--navy-800);
+  box-shadow: 0 34px 60px -24px rgba(0, 0, 0, 0.75);
+  transform: rotate(3deg);
+  will-change: transform;
+}
+
+.card::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 46px;
+  height: 1px;
+  background: rgba(163, 58, 42, 0.45);
+}
+
+.punch {
+  position: absolute;
+  left: 50%;
+  bottom: 10px;
+  width: 14px;
+  height: 14px;
+  margin-left: -7px;
+  border-radius: 50%;
+  background: var(--ink-950);
+  box-shadow: inset 0 2px 3px rgba(0, 0, 0, 0.6);
+}
+
+.cardKicker {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--gold-800);
+}
+
+.cardTitle {
+  margin: 10px 0 6px;
+  font-family: var(--font-serif);
+  font-size: clamp(1.4rem, 2vw, 2rem);
+  line-height: 1;
+}
+
+.cardRow {
+  display: flex;
+  justify-content: space-between;
+  gap: var(--s-3);
+  font-family: var(--font-mono);
+  font-size: 11px;
+  line-height: 1.6;
+}
+
+.cardRow span:first-child {
+  color: var(--slate-600);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+
+.cardRow span:last-child {
+  white-space: nowrap;
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-size: 15px;
+}
+
+.stamp {
+  position: absolute;
+  right: 8%;
+  top: 10px;
+  padding: 4px 8px;
+  border: 1.5px solid rgba(163, 58, 42, 0.7);
+  border-radius: 3px;
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 0.1em;
+  color: rgba(163, 58, 42, 0.85);
+  transform: rotate(-8deg);
+}
+
+/* bound volumes lying flat */
+.spines {
+  position: absolute;
+  right: 2%;
+  bottom: 0;
+  display: grid;
+  justify-items: end;
+  will-change: transform;
+}
+
+.spine {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--s-4);
+  height: 34px;
+  padding-inline: var(--s-4);
+  font-family: var(--font-serif);
+  font-size: 0.95rem;
+  letter-spacing: 0.08em;
+  color: var(--bone-50);
+  box-shadow: inset 0 -3px 0 rgba(0, 0, 0, 0.3), 0 6px 14px rgba(0, 0, 0, 0.35);
+}
+
+.spine i {
+  width: 18px;
+  height: 5px;
+  border-block: 1px solid var(--gold-500);
+}
+
+.spine:nth-child(1) {
+  width: 250px;
+  background: linear-gradient(180deg, var(--navy-600), var(--navy-800));
+  transform: translateX(-18px);
+}
+
+.spine:nth-child(2) {
+  width: 290px;
+  background: linear-gradient(180deg, var(--wine-700), var(--wine-900));
+}
+
+.spine:nth-child(3) {
+  width: 270px;
+  background: linear-gradient(180deg, #3b3427, #1d1a14);
+  transform: translateX(-30px);
+}
+
+.note {
+  position: absolute;
+  left: 2%;
+  top: 0;
+  max-width: 26%;
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-size: 1.05rem;
+  line-height: 1.3;
+  color: var(--slate-300);
+}
+
+/* ---------- Contents strip ---------- */
+.contents {
+  grid-column: 1 / -1;
+  grid-row: 2;
+  display: flex;
+  align-items: baseline;
+  gap: var(--s-6);
+  margin-top: var(--s-7);
+  padding-top: var(--s-4);
+  border-top: 1px solid var(--line);
+}
+
+.contentsLabel {
+  flex: none;
+  font-family: var(--font-serif);
+  font-style: italic;
+  color: var(--gold-500);
+}
+
+.contents ol {
+  flex: 1;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: var(--s-2) var(--s-5);
+}
+
+.contents a {
+  font-family: var(--font-mono);
+  font-size: var(--fs-label);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--slate-300);
+  transition: color var(--dur-base) var(--ease-out);
+}
+
+.contents a i {
+  font-style: normal;
+  color: var(--gold-500);
+}
+
+.contents a:hover,
+.contents a:focus-visible {
+  color: var(--bone-50);
+}
+
+/* small laptops: lift the card clear of the spines */
+@media (min-width: 1024px) and (max-width: 1279px) {
+  .card {
+    bottom: 19%;
+  }
+}
+
+/* ============================================================
+   Tablet
+   ============================================================ */
+@media (max-width: 1023px) {
+  .grid {
+    grid-template-columns: minmax(0, 1fr);
+    grid-template-rows: none;
+    row-gap: var(--s-8);
+    min-height: 0;
+  }
+  .copy,
+  .stage,
+  .contents {
+    grid-column: 1;
+    grid-row: auto;
+  }
+  .title {
+    font-size: clamp(3rem, 9vw, 5.6rem);
+  }
+  .stage {
+    width: min(100%, 640px);
+    justify-self: center;
+    min-height: 0;
+    aspect-ratio: 1 / 1.05;
+  }
+  .note {
+    display: none;
+  }
+  .contents {
+    display: none;
+  }
+}
+
+/* ============================================================
+   Phone — the desk recomposed for a narrow column
+   ============================================================ */
+@media (max-width: 767px) {
+  .hero {
+    padding-top: calc(var(--header-h) + var(--s-5));
+  }
+  .grid {
+    row-gap: var(--s-7);
+  }
+  .title {
+    font-size: clamp(2.6rem, 12.4vw, 4rem);
+  }
+  .stage {
+    aspect-ratio: 1 / 1.18;
+  }
+  .plate {
+    width: 74%;
+  }
+  .inset {
+    width: 40%;
+    top: 6%;
+    border-width: 4px;
+    border-bottom-width: 16px;
+  }
+  .card {
+    left: 0;
+    bottom: 13%;
+    width: 64%;
+    padding: var(--s-4) var(--s-4) var(--s-5);
+  }
+  .cardRow span:last-child {
+    font-size: 13px;
+  }
+  .spines {
+    right: 0;
+  }
+  .spine {
+    height: 26px;
+    font-size: 0.78rem;
+  }
+  .spine:nth-child(1) {
+    width: 170px;
+  }
+  .spine:nth-child(2) {
+    width: 200px;
+  }
+  .spine:nth-child(3) {
+    width: 186px;
+  }
+}

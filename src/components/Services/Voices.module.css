@@ -1,0 +1,185 @@
+.voices {
+  --fg: var(--bone-50);
+  --muted: rgba(246, 244, 239, 0.7);
+  --accent-text: var(--gold-400);
+  --line: rgba(246, 244, 239, 0.14);
+  --line-strong: rgba(246, 244, 239, 0.3);
+  position: relative;
+  overflow: hidden;
+  padding-block: var(--pad-md);
+  color: var(--bone-50);
+  background:
+    radial-gradient(55% 60% at 50% 0%, rgba(197, 160, 89, 0.12), transparent 70%),
+    linear-gradient(180deg, var(--wine-800), var(--wine-900));
+}
+
+/* ---------- Typographic collage ---------- */
+.collage {
+  display: grid;
+  grid-template-columns: repeat(12, minmax(0, 1fr));
+  column-gap: var(--gutter);
+  row-gap: var(--s-8);
+  margin-top: var(--s-10);
+}
+
+.item {
+  border-top: 1px solid var(--line);
+  padding-top: var(--s-4);
+  transition: opacity 0.6s var(--ease-out);
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .collage:has(.item:hover) .item:not(:hover) {
+    opacity: 0.3;
+  }
+}
+
+.link {
+  display: grid;
+  gap: var(--s-3);
+}
+
+.mask {
+  display: block;
+  overflow: hidden;
+  padding-block: 0.06em;
+}
+
+.word {
+  display: block;
+  line-height: 0.95;
+  transition: color var(--dur-base) var(--ease-out);
+}
+
+.link:hover .word,
+.link:focus-visible .word {
+  color: var(--gold-400);
+}
+
+.line {
+  max-width: 26rem;
+  font-size: var(--fs-sm);
+  line-height: 1.6;
+  color: var(--muted);
+}
+
+/* Fiction — sweeping italic serif */
+.fiction {
+  grid-column: 1 / span 7;
+}
+.fiction .word {
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-size: clamp(4rem, 10vw, 10.5rem);
+  letter-spacing: -0.03em;
+}
+
+/* Memoir — quiet, letter-spaced small capitals */
+.memoir {
+  grid-column: 9 / -1;
+  align-self: end;
+}
+.memoir .word {
+  font-family: var(--font-serif);
+  font-variant: small-caps;
+  font-size: clamp(2.4rem, 4vw, 4rem);
+  letter-spacing: 0.22em;
+}
+
+/* Business — condensed, decisive */
+.business {
+  grid-column: 1 / span 5;
+}
+.business .word {
+  font-family: var(--font-display);
+  font-variation-settings: "opsz" 72;
+  font-weight: 800;
+  font-size: clamp(3.6rem, 7.4vw, 8rem);
+  text-transform: uppercase;
+}
+
+/* Medical & Academic — footnoted, technical */
+.medical {
+  grid-column: 7 / -1;
+  align-self: center;
+}
+.medical .word {
+  font-family: var(--font-mono);
+  font-size: clamp(1.6rem, 2.8vw, 2.8rem);
+  letter-spacing: -0.02em;
+  text-transform: uppercase;
+}
+.medical sup {
+  font-size: 0.4em;
+  color: var(--gold-400);
+  margin-left: 0.2em;
+}
+
+/* Children's — a playful bounce */
+.children {
+  grid-column: 2 / span 5;
+}
+.children .word {
+  font-family: var(--font-serif);
+  font-size: clamp(3rem, 6.4vw, 6.6rem);
+  font-weight: 500;
+}
+.bounce {
+  display: inline-block;
+  animation: bounce 2.8s var(--ease-in-out) infinite;
+}
+.bounce:nth-child(odd) {
+  color: var(--gold-400);
+}
+@keyframes bounce {
+  0%,
+  70%,
+  100% {
+    transform: translateY(0) rotate(0deg);
+  }
+  80% {
+    transform: translateY(-0.12em) rotate(-4deg);
+  }
+}
+
+/* Legal — sober, ruled */
+.legal {
+  grid-column: 8 / -1;
+  align-self: end;
+}
+.legal .word {
+  display: inline-block;
+  padding-block: 0.12em;
+  border-block: 1px solid var(--gold-500);
+  font-family: var(--font-display);
+  font-variation-settings: "opsz" 72;
+  font-weight: 300;
+  font-size: clamp(3rem, 5.6vw, 6rem);
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+@media (max-width: 1023px) {
+  .collage {
+    grid-template-columns: minmax(0, 1fr);
+    row-gap: var(--s-7);
+    margin-top: var(--s-8);
+  }
+  .item {
+    grid-column: 1 !important;
+  }
+  .memoir,
+  .legal,
+  .medical {
+    justify-self: end;
+    text-align: right;
+  }
+  .memoir .line,
+  .legal .line,
+  .medical .line {
+    margin-left: auto;
+  }
+  .memoir .word {
+    letter-spacing: 0.14em;
+  }
+}

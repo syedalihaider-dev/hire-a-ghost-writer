@@ -1,0 +1,339 @@
+/* ============================================================
+   The reading room — a volume opened from the archive
+   ============================================================ */
+.detail {
+  position: fixed;
+  inset: 0;
+  z-index: calc(var(--z-menu) + 5); /* above header + menu, below the quote drawer */
+  visibility: hidden;
+  color: var(--bone-50);
+}
+
+.panel {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  background:
+    radial-gradient(60% 70% at 28% 50%, color-mix(in srgb, var(--light) 22%, transparent), transparent 70%),
+    linear-gradient(120deg, color-mix(in srgb, var(--tone) 55%, var(--ink-950)) 0%, var(--ink-950) 70%);
+  transition: background 0.8s var(--ease-out);
+}
+
+/* a warm pool of light where the book rests */
+.glow {
+  position: absolute;
+  left: 8%;
+  top: 18%;
+  width: 46%;
+  height: 70%;
+  border-radius: 50%;
+  background: radial-gradient(closest-side, rgba(212, 179, 115, 0.14), transparent);
+}
+
+.ghostNo {
+  position: absolute;
+  right: -2%;
+  bottom: -6%;
+  font-size: clamp(14rem, 34vw, 34rem);
+  line-height: 0.8;
+  color: transparent;
+  -webkit-text-stroke: 1px rgba(246, 244, 239, 0.07);
+  user-select: none;
+}
+
+.inner {
+  position: relative;
+  display: grid;
+  grid-template-columns: repeat(12, minmax(0, 1fr));
+  column-gap: var(--gutter);
+  align-items: center;
+  height: 100%;
+  padding: calc(var(--header-h) + var(--s-4)) var(--margin) calc(var(--s-9) + var(--s-4));
+  overflow-y: auto;
+  overscroll-behavior: contain;
+}
+
+/* ---- Book ---- */
+.bookStage {
+  grid-column: 1 / span 7;
+  display: grid;
+  place-items: center;
+  min-height: 0;
+  perspective: 2000px;
+  perspective-origin: 50% 40%;
+}
+
+.book {
+  --w: clamp(170px, min(17vw, 34vh), 320px);
+}
+
+/* ---- Notes ---- */
+.info {
+  grid-column: 8 / -1;
+  display: grid;
+  gap: var(--s-4);
+  max-width: 34rem;
+}
+
+.mask {
+  display: block;
+  overflow: hidden;
+  padding-block: 0.08em;
+  margin-block: -0.08em;
+}
+
+.mask > * {
+  display: block;
+}
+
+.meta {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: var(--s-4);
+}
+
+.no {
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-size: 1.6rem;
+  line-height: 1;
+  color: var(--gold-500);
+}
+
+.no i {
+  font-size: 0.65em;
+  color: var(--slate-300);
+}
+
+.title {
+  font-size: clamp(2.6rem, 4.6vw, 5rem);
+  line-height: 0.98;
+}
+
+.author {
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-size: clamp(1.1rem, 1.3vw, 1.35rem);
+  color: var(--slate-300);
+}
+
+.rule {
+  display: block;
+  height: 1px;
+  margin-block: var(--s-3);
+  background: linear-gradient(90deg, var(--gold-500), rgba(197, 160, 89, 0.15) 70%, transparent);
+  transform-origin: 0 50%;
+}
+
+.lead {
+  font-size: var(--fs-md);
+  line-height: 1.55;
+  color: rgba(246, 244, 239, 0.82);
+}
+
+.standards {
+  display: grid;
+  gap: var(--s-3);
+  margin-top: var(--s-3);
+}
+
+.standards ol {
+  border-top: 1px solid var(--line);
+}
+
+.standards li {
+  border-bottom: 1px solid var(--line);
+}
+
+.std {
+  display: grid !important;
+  grid-template-columns: 2.25rem 1fr;
+  align-items: baseline;
+  padding-block: var(--s-2);
+  font-size: var(--fs-sm);
+}
+
+.stdNo {
+  font-family: var(--font-mono);
+  font-size: var(--fs-label);
+  color: var(--gold-500);
+}
+
+.actions {
+  margin-top: var(--s-4);
+}
+
+.actionsInner {
+  display: inline-flex !important;
+  padding: 4px 0;
+}
+
+/* ---- Chrome: close + previous / next ---- */
+.close {
+  position: absolute;
+  top: calc((var(--header-h) - 40px) / 2);
+  right: var(--margin);
+  display: inline-flex;
+  align-items: center;
+  gap: var(--s-3);
+  min-height: 40px;
+  padding: 0 var(--s-4);
+  border-radius: var(--r-1);
+  background: var(--bone-50);
+  color: var(--navy-800);
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  transition: background var(--dur-roll) var(--ease-roll);
+}
+
+.close:hover {
+  background: var(--gold-500);
+}
+
+.cross {
+  position: relative;
+  width: 12px;
+  height: 12px;
+}
+
+.cross::before,
+.cross::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 50%;
+  width: 100%;
+  height: 1.5px;
+  background: currentColor;
+  transition: transform var(--dur-base) var(--ease-roll);
+}
+
+.cross::before {
+  transform: rotate(45deg);
+}
+
+.cross::after {
+  transform: rotate(-45deg);
+}
+
+.close:hover .cross::before {
+  transform: rotate(135deg);
+}
+
+.close:hover .cross::after {
+  transform: rotate(45deg);
+}
+
+.chrome {
+  position: absolute;
+  left: var(--margin);
+  right: var(--margin);
+  bottom: var(--s-6);
+  display: flex;
+  align-items: center;
+  gap: var(--s-5);
+}
+
+.chromeRule {
+  flex: 1;
+  height: 1px;
+  background: var(--line);
+}
+
+.stepBtn {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--s-3);
+  min-height: 44px;
+  font-family: var(--font-mono);
+  font-size: var(--fs-label);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--slate-300);
+  transition: color var(--dur-base) var(--ease-out);
+}
+
+.stepBtn:hover,
+.stepBtn:focus-visible {
+  color: var(--bone-50);
+}
+
+.arrow {
+  position: relative;
+  width: 36px;
+  height: 1px;
+  background: currentColor;
+  transition: width var(--dur-base) var(--ease-out);
+}
+
+.arrow::after {
+  content: "";
+  position: absolute;
+  top: -3px;
+  width: 7px;
+  height: 7px;
+  border-top: 1px solid currentColor;
+}
+
+.arrow[data-dir="next"]::after {
+  right: 0;
+  border-right: 1px solid currentColor;
+  transform: rotate(45deg);
+}
+
+.arrow[data-dir="prev"]::after {
+  left: 0;
+  border-left: 1px solid currentColor;
+  transform: rotate(-45deg);
+}
+
+.stepBtn:hover .arrow {
+  width: 56px;
+}
+
+/* ---- Tablet & phone: book above, notes scroll below ---- */
+@media (max-width: 1023px) {
+  .inner {
+    grid-template-columns: minmax(0, 1fr);
+    grid-auto-rows: max-content; /* rows never shrink under the book when the notes overflow */
+    align-items: start;
+    align-content: start;
+    row-gap: var(--s-6);
+    padding-bottom: calc(var(--s-9) + var(--s-6));
+  }
+
+  .bookStage {
+    grid-column: 1;
+    min-height: auto;
+    padding-block: var(--s-5) var(--s-3);
+  }
+
+  .book {
+    --w: clamp(120px, min(30vw, 26vh), 220px);
+  }
+
+  .info {
+    grid-column: 1;
+    max-width: none;
+  }
+
+  .chrome {
+    bottom: 0;
+    left: 0;
+    right: 0;
+    padding: var(--s-3) var(--margin);
+    background: linear-gradient(180deg, transparent, rgba(11, 15, 25, 0.92) 35%);
+  }
+}
+
+@media (max-width: 767px) {
+  .title {
+    font-size: clamp(2.2rem, 10vw, 3rem);
+  }
+  .stepText {
+    display: none;
+  }
+}

@@ -68,7 +68,3 @@ export default function Button(props: AsLink | AsButton) {
   );
 }
 
-/** Corner-bracket frame around a control: ⌜ ⌝ ⌞ ⌟ */
-export function Bracket({ children, className }: { children: ReactNode; className?: string }) {
-  return <span className={[styles.bracket, className].filter(Boolean).join(" ")}>{children}</span>;
-}

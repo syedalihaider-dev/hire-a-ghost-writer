@@ -53,14 +53,23 @@ export const portfolio = {
   title: "Portfolio",
   lead: "Our sample work shows how thoughtful formatting improves the way a book reads, looks, and feels.",
   text: "A formatted book should not look crowded, uneven, or assembled at the last minute. It should have a clear chapter flow, balanced spacing, clean page structure, and a layout that suits the genre. Our samples reflect the kind of professional finish authors need before sending a book into the world.",
-  // `render` = the same cover photographed as a finished hardcover (transparent PNG, intrinsic size).
+  /*
+   * Each work is drawn as a physical CSS 3D book on the portfolio shelf.
+   * To swap in your own artwork, change `cover.src` and its intrinsic
+   * `width`/`height` — the book's proportions follow the image, so nothing is
+   * cropped. `tone` colours the spine, endpapers and the detail-view light;
+   * `light` is the highlight used across the spine and the lamp glow.
+   * `render` = the same cover photographed as a finished hardcover (kept for reuse).
+   */
   items: [
-    { src: "/images/portfolio/cover-1.jpg", render: { src: "/images/portfolio/book-1.png", width: 993, height: 1495 }, title: "The Past Is Rising", author: "Kathryn Bywaters" },
-    { src: "/images/portfolio/cover-2.jpg", render: { src: "/images/portfolio/book-2.png", width: 1003, height: 1486 }, title: "Daughter of Man", author: "The Chronicles of Otherwhere, Book 1" },
-    { src: "/images/portfolio/cover-3.jpg", render: { src: "/images/portfolio/book-3.png", width: 1012, height: 1475 }, title: "Fortress of Blood", author: "L. D. Goffigan" },
-    { src: "/images/portfolio/cover-4.jpg", render: { src: "/images/portfolio/book-4.png", width: 989, height: 1497 }, title: "A Rose in the Snow", author: "Damon Frostheart" },
+    { cover: { src: "/images/portfolio/cover-1.jpg", width: 262, height: 378 }, render: { src: "/images/portfolio/book-1.png", width: 993, height: 1495 }, title: "The Past Is Rising", author: "Kathryn Bywaters", tone: "#2c3d47", light: "#7895a1" },
+    { cover: { src: "/images/portfolio/cover-2.jpg", width: 263, height: 378 }, render: { src: "/images/portfolio/book-2.png", width: 1003, height: 1486 }, title: "Daughter of Man", author: "The Chronicles of Otherwhere, Book 1", tone: "#2a1f3d", light: "#86578f" },
+    { cover: { src: "/images/portfolio/cover-3.jpg", width: 262, height: 378 }, render: { src: "/images/portfolio/book-3.png", width: 1012, height: 1475 }, title: "Fortress of Blood", author: "L. D. Goffigan", tone: "#1f2549", light: "#5d6cad" },
+    { cover: { src: "/images/portfolio/cover-4.jpg", width: 262, height: 378 }, render: { src: "/images/portfolio/book-4.png", width: 989, height: 1497 }, title: "A Rose in the Snow", author: "Damon Frostheart", tone: "#3a1d18", light: "#a5543a" },
   ],
 };
+
+export type PortfolioItem = (typeof portfolio.items)[number];
 
 export const process = {
   title: "4-Step Method",
@@ -182,7 +191,23 @@ export const finalCta = {
 /* renders in gold.                                                    */
 /* ------------------------------------------------------------------ */
 
-export const TOTAL_CHAPTERS = 11;
+/**
+ * Pricing is temporarily hidden from the homepage (component + data kept).
+ * Flip to true — and restore <Pricing /> in app/page.tsx — to bring it back;
+ * chapter numbers after it re-flow automatically.
+ */
+export const SHOW_PRICING = false;
+
+export const TOTAL_CHAPTERS = SHOW_PRICING ? 11 : 10;
+
+/** Chapter numbers shown in section heads ("08 / 11"). */
+const afterPricing = SHOW_PRICING ? 0 : -1;
+export const CHAPTER_NO = {
+  pricing: 7,
+  why: 8 + afterPricing,
+  testimonials: 10 + afterPricing,
+  insights: 11 + afterPricing,
+} as const;
 
 export const chapters = {
   hero: { label: "Professional Ghostwriting & Book Formatting", title: "Turn Your Idea *into a* Finished Book." },

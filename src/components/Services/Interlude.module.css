@@ -1,0 +1,70 @@
+.interlude {
+  --fg: var(--ink-950);
+  --line: rgba(11, 15, 25, 0.18);
+  position: relative;
+  overflow: hidden;
+  padding-bottom: var(--s-9);
+  color: var(--ink-950);
+  background:
+    radial-gradient(60% 120% at 80% 100%, rgba(255, 255, 255, 0.18), transparent 60%),
+    linear-gradient(120deg, var(--gold-600), var(--gold-500) 45%, var(--gold-400));
+}
+
+.ribbon {
+  overflow: hidden;
+  padding-block: var(--s-4);
+  border-bottom: 1px solid var(--line);
+}
+
+.track {
+  display: flex;
+  width: max-content;
+  will-change: transform;
+}
+
+.track span {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--s-6);
+  padding-right: var(--s-6);
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-size: clamp(1.2rem, 1.8vw, 1.7rem);
+  white-space: nowrap;
+}
+
+.track i {
+  font-style: normal;
+  font-size: 0.7em;
+  opacity: 0.6;
+}
+
+.inner {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: var(--s-8);
+  padding-top: var(--s-9);
+}
+
+.title {
+  max-width: 15ch;
+  font-size: clamp(2.8rem, 6vw, 6.4rem);
+}
+
+.title :global(.w-light) {
+  font-weight: 300;
+}
+
+.title :global(.dot) {
+  color: var(--ink-950);
+}
+
+@media (max-width: 767px) {
+  .inner {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: var(--s-6);
+    padding-top: var(--s-8);
+  }
+}

@@ -48,16 +48,17 @@ export const metadata: Metadata = {
   title: seo.title,
   description: seo.description,
   applicationName: brand.name,
-  alternates: { canonical: "/" },
+  // Site-wide default: NOT indexable. Only routes that export their own
+  // `robots` (currently /about-us/) override this — metadata merges shallowly.
+  // Canonicals are set per page, never here, so no route inherits another's.
   robots: {
-    index: true,
-    follow: true,
-    googleBot: { index: true, follow: true, "max-image-preview": "large", "max-snippet": -1, "max-video-preview": -1 },
+    index: false,
+    follow: false,
+    googleBot: { index: false, follow: false },
   },
   openGraph: {
     type: "website",
     locale: "en_US",
-    url: "/",
     siteName: brand.name,
     title: seo.title,
     description: seo.description,

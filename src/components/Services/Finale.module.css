@@ -1,0 +1,203 @@
+.finale {
+  position: relative;
+  overflow: hidden;
+  isolation: isolate;
+  padding-block: var(--pad-lg);
+}
+
+.wrap {
+  perspective: 2200px;
+}
+
+/* ---------- The open book ---------- */
+.book {
+  position: relative;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  max-width: 1180px;
+  margin-inline: auto;
+  /* no filter here — it would flatten the pages' 3D swing */
+  transform-style: preserve-3d;
+}
+
+.page {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: var(--s-6);
+  min-height: min(68vh, 620px);
+  padding: var(--s-9) var(--s-8) var(--s-7);
+  color: var(--navy-800);
+  box-shadow: 0 60px 80px -30px rgba(0, 0, 0, 0.65);
+  backface-visibility: hidden;
+  will-change: transform;
+}
+
+.left {
+  justify-content: center;
+  border-radius: 6px 0 0 6px;
+  background:
+    linear-gradient(270deg, rgba(0, 0, 0, 0.22), transparent 9%),
+    radial-gradient(120% 90% at 60% 40%, #fbf8f1, #e9e1cf);
+  transform-origin: 100% 50%;
+}
+
+.right {
+  justify-content: center;
+  border-radius: 0 6px 6px 0;
+  background:
+    linear-gradient(90deg, rgba(0, 0, 0, 0.2), transparent 9%),
+    radial-gradient(120% 90% at 40% 40%, #fbf8f1, #e9e1cf);
+  transform-origin: 0% 50%;
+}
+
+/* page block edges */
+.left::after,
+.right::after {
+  content: "";
+  position: absolute;
+  bottom: -6px;
+  height: 6px;
+  background: repeating-linear-gradient(180deg, #e2dac8 0 1px, #cfc6b1 1px 2px);
+}
+
+.left::after {
+  left: 6px;
+  right: 0;
+}
+
+.right::after {
+  left: 0;
+  right: 6px;
+}
+
+.gutter {
+  position: absolute;
+  left: 50%;
+  top: 0;
+  bottom: 0;
+  width: 1px;
+  background: rgba(20, 26, 42, 0.25);
+}
+
+.eyebrow {
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-size: 1.35rem;
+  color: var(--gold-800);
+}
+
+.title {
+  font-size: clamp(2.8rem, 5vw, 5.4rem);
+  color: var(--navy-800);
+}
+
+.title :global(.w-light) {
+  font-weight: 300;
+}
+
+.ornament {
+  width: 60px;
+  height: 5px;
+  border-block: 1px solid var(--gold-600);
+}
+
+.text {
+  max-width: 26rem;
+  font-family: var(--font-serif);
+  font-size: clamp(1.4rem, 1.9vw, 1.9rem);
+  line-height: 1.3;
+}
+
+.actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--s-6);
+}
+
+.phone {
+  display: grid;
+  gap: 2px;
+}
+
+.phoneLabel {
+  font-family: var(--font-mono);
+  font-size: var(--fs-label);
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--slate-600);
+}
+
+.phoneNo {
+  font-family: var(--font-serif);
+  font-size: 1.5rem;
+  line-height: 1.1;
+  transition: color var(--dur-base) var(--ease-out);
+}
+
+.phone:hover .phoneNo {
+  color: var(--gold-800);
+}
+
+.contact {
+  align-self: flex-start;
+  font-size: 0.8125rem;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+.folio {
+  position: absolute;
+  bottom: var(--s-5);
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-size: 0.95rem;
+  color: var(--slate-600);
+}
+
+.left .folio {
+  left: var(--s-8);
+}
+
+.right .folio {
+  right: var(--s-8);
+}
+
+@media (max-width: 1023px) {
+  .finale {
+    padding-block: var(--pad-md);
+  }
+  .book {
+    grid-template-columns: minmax(0, 1fr);
+  }
+  .gutter {
+    display: none;
+  }
+  .page {
+    min-height: 0;
+    padding: var(--s-8) var(--s-6) var(--s-8);
+  }
+  .left {
+    border-radius: 6px 6px 0 0;
+    background:
+      linear-gradient(0deg, rgba(0, 0, 0, 0.12), transparent 8%),
+      radial-gradient(120% 90% at 60% 40%, #fbf8f1, #e9e1cf);
+  }
+  .right {
+    border-radius: 0 0 6px 6px;
+    background:
+      linear-gradient(180deg, rgba(0, 0, 0, 0.12), transparent 8%),
+      radial-gradient(120% 90% at 40% 40%, #fbf8f1, #e9e1cf);
+  }
+  .left::after {
+    display: none;
+  }
+  .left .folio {
+    left: var(--s-6);
+  }
+  .right .folio {
+    right: var(--s-6);
+  }
+}

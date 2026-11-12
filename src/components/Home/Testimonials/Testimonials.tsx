@@ -2,7 +2,7 @@
 
 import Image from "next/image";
 import { useEffect, useRef, useState } from "react";
-import { chapters, testimonials, TOTAL_CHAPTERS } from "@/content/homeContent";
+import { chapters, CHAPTER_NO, testimonials, TOTAL_CHAPTERS } from "@/content/homeContent";
 import { gsap, SplitText } from "@/lib/gsap";
 import { EASE } from "@/lib/motion";
 import styles from "./Testimonials.module.css";
@@ -143,7 +143,7 @@ export default function Testimonials() {
           <div className={styles.meta}>
             <span className="label label--accent">{chapters.testimonials.label}</span>
             <span className="label">
-              10 / {pad(TOTAL_CHAPTERS)}
+              {pad(CHAPTER_NO.testimonials)} / {pad(TOTAL_CHAPTERS)}
             </span>
           </div>
           <h2 id="testimonials-title" className={`serif ${styles.title}`}>

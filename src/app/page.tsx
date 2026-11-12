@@ -1,4 +1,5 @@
-import { faq } from "@/content/homeContent";
+import type { Metadata } from "next";
+import { faq, SHOW_PRICING } from "@/content/homeContent";
 import { genres, pricing, siteConfig } from "@/content/siteConfig";
 import Hero from "@/components/Home/Hero/Hero";
 import Ribbon from "@/components/Home/Ribbon/Ribbon";
@@ -7,7 +8,9 @@ import Services from "@/components/Home/Services/Services";
 import Genres from "@/components/Home/Genres/Genres";
 import Showcase from "@/components/Home/Showcase/Showcase";
 import Process from "@/components/Home/Process/Process";
-import Pricing from "@/components/Home/Pricing/Pricing";
+// Pricing is temporarily hidden from the homepage (not removed). To restore it,
+// uncomment this import and <Pricing /> below, and set SHOW_PRICING to true in content/homeContent.ts.
+// import Pricing from "@/components/Home/Pricing/Pricing";
 import WhyUs from "@/components/Home/WhyUs/WhyUs";
 import StartBand from "@/components/Home/StartBand/StartBand";
 import Testimonials from "@/components/Home/Testimonials/Testimonials";
@@ -15,6 +18,12 @@ import Insights from "@/components/Home/Insights/Insights";
 import FAQ from "@/components/Home/FAQ/FAQ";
 import Contact from "@/components/Home/Contact/Contact";
 import ScrollEffects from "@/components/Animation/ScrollEffects";
+
+/* Homepage is intentionally noindex, nofollow for now (explicit, not just inherited). */
+export const metadata: Metadata = {
+  alternates: { canonical: "/" },
+  robots: { index: false, follow: false, googleBot: { index: false, follow: false } },
+};
 
 function buildJsonLd() {
   const { brand, contact } = siteConfig;
@@ -50,7 +59,7 @@ function buildJsonLd() {
           name: "Ghostwriting Services",
           itemListElement: genres.map((g) => ({ "@type": "Offer", itemOffered: { "@type": "Service", name: g.title, url: `${brand.url}${g.href}` } })),
         },
-        offers: pricing.plans.map((p) => ({ "@type": "Offer", name: `${p.name} Package`, price: p.price.replace(/[^0-9.]/g, ""), priceCurrency: "USD" })),
+        ...(SHOW_PRICING ? { offers: pricing.plans.map((p) => ({ "@type": "Offer", name: `${p.name} Package`, price: p.price.replace(/[^0-9.]/g, ""), priceCurrency: "USD" })) } : {}),
       },
       {
         "@type": "FAQPage",
@@ -71,7 +80,7 @@ export default function Home() {
       <Genres />
       <Showcase />
       <Process />
-      <Pricing />
+      {/* <Pricing /> — hidden for now, see the import note above */}
       <WhyUs />
       <StartBand />
       <Testimonials />

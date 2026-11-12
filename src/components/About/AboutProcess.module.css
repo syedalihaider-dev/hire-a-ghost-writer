@@ -1,0 +1,415 @@
+.process {
+  position: relative;
+  padding-block: var(--pad-md);
+  background:
+    radial-gradient(45% 50% at 22% 55%, rgba(197, 160, 89, 0.08), transparent 70%),
+    var(--navy-800);
+}
+
+.layout {
+  display: grid;
+  grid-template-columns: repeat(12, minmax(0, 1fr));
+  column-gap: var(--gutter);
+  margin-top: var(--s-9);
+}
+
+/* ---------- Sticky artifact ---------- */
+.stickyWrap {
+  grid-column: 1 / span 6;
+  position: relative;
+}
+
+.artifact {
+  position: sticky;
+  top: calc(var(--header-h) + 6vh);
+  width: min(100%, 520px);
+  aspect-ratio: 4 / 5;
+  margin-inline: auto;
+  container-type: inline-size;
+}
+
+.layer {
+  position: absolute;
+  inset: 0;
+}
+
+/* 01 · notes */
+.card {
+  position: absolute;
+  width: 54%;
+  padding: 6cqw 6cqw 8cqw;
+  background: #f6f1e4;
+  color: var(--navy-800);
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-size: 5.4cqw;
+  line-height: 1.2;
+  box-shadow: 0 30px 40px -20px rgba(0, 0, 0, 0.6);
+}
+
+.card b {
+  display: block;
+  margin-bottom: 1.5cqw;
+  font-family: var(--font-mono);
+  font-style: normal;
+  font-weight: 500;
+  font-size: 3cqw;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--gold-800);
+}
+
+.card1 {
+  left: 4%;
+  top: 10%;
+  transform: rotate(-6deg);
+}
+
+.card2 {
+  right: 2%;
+  top: 30%;
+  width: 40%;
+  background: #efe6cf;
+  transform: rotate(5deg);
+}
+
+.card3 {
+  left: 16%;
+  bottom: 10%;
+  background: #fbf8f1;
+  border-top: 3px solid var(--gold-500);
+  transform: rotate(-2deg);
+}
+
+/* 02–03 · typeset page */
+.page {
+  inset: 2% 10%;
+  display: flex;
+  flex-direction: column;
+  gap: 3.4cqw;
+  padding: 10cqw 9cqw;
+  border-radius: 2px;
+  background:
+    linear-gradient(90deg, rgba(0, 0, 0, 0.08), transparent 6%),
+    radial-gradient(120% 90% at 40% 30%, #fbf8f1, #ebe4d3);
+  color: var(--navy-800);
+  box-shadow:
+    0 2px 0 #e2dac8,
+    0 4px 0 #d6cdb8,
+    0 50px 70px -24px rgba(0, 0, 0, 0.7);
+}
+
+.pageKicker {
+  font-family: var(--font-mono);
+  font-size: 3cqw;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--gold-800);
+}
+
+.pageRule {
+  width: 26%;
+  height: 4px;
+  border-block: 1px solid var(--gold-600);
+}
+
+.toc {
+  display: grid;
+  grid-template-columns: 6cqw auto 1fr auto;
+  align-items: baseline;
+  gap: 2cqw;
+  font-family: var(--font-serif);
+  font-size: 5.2cqw;
+}
+
+.toc i {
+  font-style: italic;
+  color: var(--gold-800);
+}
+
+.leader {
+  border-bottom: 1px dotted rgba(20, 26, 42, 0.4);
+}
+
+.draftTitle {
+  font-family: var(--font-serif);
+  font-size: 8cqw;
+  line-height: 1;
+}
+
+.lines {
+  display: grid;
+  gap: 2.6cqw;
+  margin-top: 1cqw;
+}
+
+.lines span {
+  display: block;
+  height: 1.3cqw;
+  border-radius: 2px;
+  background: rgba(20, 26, 42, 0.22);
+}
+
+/* 04 · proof marks over the draft (transparent layer) */
+.strike {
+  position: absolute;
+  height: 2px;
+  background: var(--gold-600);
+  transform: rotate(-1.5deg);
+}
+
+.s1 {
+  left: 24%;
+  width: 30%;
+  top: 46.5%;
+}
+
+.s2 {
+  left: 40%;
+  width: 34%;
+  top: 64.5%;
+}
+
+.caret {
+  position: absolute;
+  font-family: var(--font-serif);
+  font-size: 7cqw;
+  color: var(--gold-600);
+}
+
+.c1 {
+  left: 56%;
+  top: 52%;
+}
+
+.margin {
+  position: absolute;
+  right: -6%;
+  padding: 1.6cqw 3cqw;
+  background: var(--ink-950);
+  color: var(--gold-400);
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-size: 4.4cqw;
+  white-space: nowrap;
+  box-shadow: 0 14px 24px -12px rgba(0, 0, 0, 0.6);
+}
+
+.m1 {
+  top: 42%;
+  transform: rotate(3deg);
+}
+
+.m2 {
+  top: 58%;
+  right: auto;
+  left: -6%;
+  transform: rotate(-3deg);
+}
+
+.m3 {
+  top: 76%;
+  transform: rotate(-2deg);
+}
+
+/* 05 · the bound book */
+.bookLayer {
+  display: grid;
+  place-items: center;
+  perspective: 1400px;
+}
+
+.book {
+  position: relative;
+  display: block;
+  width: 64%;
+  aspect-ratio: 2 / 3;
+  transform: rotateY(-22deg) rotateX(4deg);
+  transform-style: preserve-3d;
+}
+
+.bookSpine {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 9cqw;
+  height: 100%;
+  transform-origin: 0 50%;
+  transform: rotateY(90deg);
+  background: linear-gradient(90deg, #070a12, var(--navy-700) 50%, #070a12);
+}
+
+.bookCover {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  padding: 5cqw;
+  border-radius: 2px 5px 5px 2px;
+  background:
+    linear-gradient(90deg, rgba(0, 0, 0, 0.45) 0%, rgba(255, 255, 255, 0.08) 3%, transparent 8%),
+    linear-gradient(115deg, transparent 35%, rgba(255, 255, 255, 0.08) 48%, transparent 60%),
+    linear-gradient(160deg, var(--navy-600), var(--navy-800) 55%, var(--ink-950));
+  box-shadow: 30px 50px 70px -30px rgba(0, 0, 0, 0.8);
+}
+
+.bookFrame {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 4cqw;
+  border: 1px solid rgba(197, 160, 89, 0.6);
+  outline: 1px solid rgba(197, 160, 89, 0.25);
+  outline-offset: -2.4cqw;
+  text-align: center;
+}
+
+.bookKicker {
+  font-family: var(--font-mono);
+  font-size: 2.6cqw;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--gold-500);
+}
+
+.bookTitle {
+  font-family: var(--font-serif);
+  font-size: 9cqw;
+  line-height: 0.95;
+  color: var(--bone-50);
+}
+
+.bookRule {
+  width: 20%;
+  height: 4px;
+  border-block: 1px solid var(--gold-500);
+}
+
+.bookAuthor {
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-size: 4.4cqw;
+  color: var(--gold-400);
+}
+
+/* ---------- Stages ---------- */
+.stagesWrap {
+  grid-column: 8 / -1;
+  position: relative;
+  padding-left: var(--s-7);
+}
+
+.rail {
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 1px;
+  background: var(--line);
+}
+
+.railFill {
+  position: absolute;
+  inset: 0;
+  background: var(--gold-500);
+  transform: scaleY(0);
+  transform-origin: 50% 0;
+}
+
+.stage {
+  position: relative;
+  display: grid;
+  align-content: center;
+  gap: var(--s-3);
+  min-height: 72vh;
+  padding-block: var(--s-7);
+}
+
+.marker {
+  position: absolute;
+  left: calc(var(--s-7) * -1 - 15px);
+  top: 50%;
+  display: grid;
+  place-items: center;
+  width: 30px;
+  height: 30px;
+  margin-top: -15px;
+  border: 1px solid var(--line-strong);
+  border-radius: 50%;
+  background: var(--navy-800);
+  font-family: var(--font-mono);
+  font-size: 10px;
+  color: var(--slate-300);
+  transition:
+    border-color var(--dur-base) var(--ease-out),
+    color var(--dur-base) var(--ease-out),
+    background var(--dur-base) var(--ease-out);
+}
+
+.stage[data-active] .marker {
+  border-color: var(--gold-500);
+  background: var(--gold-500);
+  color: var(--ink-950);
+}
+
+.stageName {
+  font-size: clamp(3.4rem, 6.4vw, 6.6rem);
+  color: transparent;
+  -webkit-text-stroke: 1px rgba(246, 244, 239, 0.3);
+  transition: color 0.8s var(--ease-out), -webkit-text-stroke-color 0.8s var(--ease-out);
+}
+
+.stage[data-active] .stageName {
+  color: var(--bone-50);
+  -webkit-text-stroke-color: transparent;
+}
+
+.stageTitle {
+  font-size: clamp(1.5rem, 2vw, 2.1rem);
+  color: var(--gold-400);
+}
+
+.stageText {
+  max-width: 28rem;
+  font-size: var(--fs-md);
+  line-height: 1.6;
+  color: rgba(246, 244, 239, 0.72);
+}
+
+/* ============================================================
+   Touch / narrow — the artifact rides along at the top
+   ============================================================ */
+@media (max-width: 1023px) {
+  .layout {
+    grid-template-columns: minmax(0, 1fr);
+    margin-top: var(--s-7);
+  }
+  .stickyWrap {
+    grid-column: 1;
+    position: sticky;
+    top: var(--header-h);
+    z-index: 2;
+    padding-block: var(--s-3) var(--s-5);
+    margin-inline: calc(var(--margin) * -1);
+    background: linear-gradient(180deg, var(--navy-800) 82%, rgba(20, 26, 42, 0));
+  }
+  .artifact {
+    position: relative;
+    top: 0;
+    width: auto;
+    height: min(36svh, 340px);
+  }
+  .stagesWrap {
+    grid-column: 1;
+    padding-left: var(--s-6);
+  }
+  .marker {
+    left: calc(var(--s-6) * -1 - 15px);
+  }
+  .stage {
+    min-height: 58svh;
+  }
+  .stageName {
+    font-size: clamp(2.8rem, 13vw, 4.6rem);
+  }
+}

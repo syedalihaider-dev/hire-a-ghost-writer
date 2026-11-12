@@ -1,0 +1,265 @@
+.journey {
+  position: relative;
+  overflow: hidden;
+  min-height: 100svh;
+  display: flex;
+  align-items: center;
+  padding-block: calc(var(--header-h) + var(--s-6)) var(--s-8);
+  background:
+    radial-gradient(45% 60% at 70% 50%, rgba(197, 160, 89, 0.1), transparent 70%),
+    var(--ink-950);
+}
+
+.layout {
+  display: grid;
+  grid-template-columns: repeat(12, minmax(0, 1fr));
+  column-gap: var(--gutter);
+  align-items: center;
+  width: 100%;
+}
+
+/* ---------- Left: title + index ---------- */
+.head {
+  grid-column: 1 / span 5;
+  display: grid;
+  gap: var(--s-6);
+}
+
+.mark {
+  display: flex;
+  align-items: baseline;
+  gap: var(--s-4);
+}
+
+.no {
+  font-family: var(--font-display);
+  font-variation-settings: "opsz" 72;
+  font-weight: 800;
+  font-size: 1.6rem;
+  line-height: 1;
+  color: var(--gold-500);
+}
+
+.no i {
+  font-family: var(--font-serif);
+  font-style: normal;
+  font-weight: 500;
+}
+
+.label {
+  font-family: var(--font-mono);
+  font-size: var(--fs-label);
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.title {
+  font-size: clamp(2.8rem, 5vw, 5.4rem);
+}
+
+.index {
+  display: grid;
+  border-top: 1px solid var(--line);
+}
+
+.index li {
+  display: flex;
+  gap: var(--s-4);
+  align-items: baseline;
+  padding-block: 10px;
+  border-bottom: 1px solid var(--line);
+  font-family: var(--font-serif);
+  font-size: 1.35rem;
+  color: rgba(246, 244, 239, 0.35);
+  transition: color 0.6s var(--ease-out), padding 0.6s var(--ease-out);
+}
+
+.index li span {
+  font-family: var(--font-mono);
+  font-size: var(--fs-label);
+}
+
+.index li[data-active] {
+  padding-left: var(--s-3);
+  color: var(--bone-50);
+  box-shadow: inset 2px 0 0 var(--gold-500);
+}
+
+.index li[data-active] span {
+  color: var(--gold-500);
+}
+
+.counter {
+  display: flex;
+  align-items: baseline;
+  gap: var(--s-2);
+}
+
+.counterNow {
+  font-family: var(--font-serif);
+  font-size: clamp(4rem, 6vw, 6rem);
+  line-height: 0.9;
+  color: var(--gold-400);
+}
+
+.counterOf {
+  font-family: var(--font-mono);
+  font-size: var(--fs-label);
+  color: var(--slate-300);
+}
+
+/* ---------- Right: the pad ---------- */
+.pad {
+  grid-column: 7 / -1;
+  position: relative;
+  perspective: 1800px;
+  perspective-origin: 50% 0%;
+}
+
+.binding {
+  position: absolute;
+  z-index: 20;
+  left: 6%;
+  right: 6%;
+  top: -10px;
+  display: flex;
+  justify-content: space-between;
+  pointer-events: none;
+}
+
+.binding i {
+  width: 10px;
+  height: 26px;
+  border: 2px solid #b9b2a2;
+  border-radius: 6px;
+  background: linear-gradient(90deg, #8f887a, #e6e0d2, #8f887a);
+}
+
+.sheets {
+  position: relative;
+  display: grid;
+  transform-style: preserve-3d;
+}
+
+/* all sheets share one grid cell — a stacked pad */
+.sheet {
+  grid-area: 1 / 1;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: var(--s-4);
+  min-height: min(64vh, 560px);
+  padding: var(--s-8) var(--s-7) var(--s-6);
+  border-radius: 2px 2px 4px 4px;
+  background:
+    linear-gradient(180deg, rgba(0, 0, 0, 0.08), transparent 8%),
+    radial-gradient(120% 90% at 40% 30%, #fbf8f1, #ebe4d3);
+  color: var(--navy-800);
+  box-shadow:
+    0 1px 0 #e2dac8,
+    0 40px 70px -30px rgba(0, 0, 0, 0.8);
+  transform-origin: 50% 0%;
+  backface-visibility: hidden;
+  will-change: transform;
+}
+
+.sheetHead {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  padding-bottom: var(--s-3);
+  border-bottom: 1px solid rgba(163, 58, 42, 0.35);
+}
+
+.stageNo {
+  font-family: var(--font-mono);
+  font-size: var(--fs-label);
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--gold-800);
+}
+
+.stageName {
+  font-family: var(--font-display);
+  font-variation-settings: "opsz" 72;
+  font-weight: 800;
+  font-size: clamp(2.4rem, 4vw, 4rem);
+  line-height: 0.9;
+  text-transform: uppercase;
+}
+
+.sheetTitle {
+  margin-top: var(--s-3);
+  font-size: clamp(1.8rem, 2.6vw, 2.6rem);
+  font-style: italic;
+  color: var(--gold-800);
+}
+
+.sheetText {
+  max-width: 32rem;
+  font-size: var(--fs-md);
+  line-height: 1.65;
+  color: var(--slate-600);
+}
+
+.ruled {
+  display: grid;
+  gap: 22px;
+  margin-top: auto;
+  padding-top: var(--s-5);
+}
+
+.ruled i {
+  height: 1px;
+  background: rgba(20, 26, 42, 0.12);
+}
+
+.folio {
+  align-self: flex-end;
+  font-family: var(--font-serif);
+  font-style: italic;
+  color: var(--slate-600);
+}
+
+/* ============================================================
+   Touch / narrow — a fanned stack, read top to bottom
+   ============================================================ */
+@media (max-width: 1023px) {
+  .journey {
+    display: block;
+    min-height: 0;
+    padding-block: var(--pad-md);
+  }
+  .layout {
+    grid-template-columns: minmax(0, 1fr);
+    row-gap: var(--s-8);
+  }
+  .head,
+  .pad {
+    grid-column: 1;
+  }
+  .index,
+  .counter {
+    display: none;
+  }
+  .binding {
+    display: none;
+  }
+  .sheets {
+    row-gap: var(--s-6);
+  }
+  .sheet {
+    grid-area: auto;
+    min-height: 0;
+    padding: var(--s-6) var(--s-5) var(--s-5);
+  }
+  .sheet:nth-child(odd) {
+    transform: rotate(-1.2deg);
+  }
+  .sheet:nth-child(even) {
+    transform: rotate(1deg);
+  }
+  .ruled {
+    display: none;
+  }
+}
