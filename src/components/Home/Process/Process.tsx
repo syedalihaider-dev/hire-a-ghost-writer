@@ -1,11 +1,13 @@
 import { chapters, process } from "@/content/homeContent";
 import SectionHead from "@/components/UI/SectionHead";
+import CoverImage from "@/components/UI/CoverImage/CoverImage";
 import styles from "./Process.module.css";
 
 /** 06 — the 4-step method as tall columns; outlined numerals fill with gold as you scroll. */
 export default function Process() {
   return (
     <section className={`surface-dark pad-md ${styles.process}`} aria-labelledby="process-title">
+      <CoverImage src="/images/editorial/notes-fountain-pen.jpg" tone="navy" shade={0.8} position="60% 50%" />
       <div className={`container ${styles.inner}`}>
         <SectionHead chapter={6} id="process-title" label={chapters.process.label} title={chapters.process.title} />
 

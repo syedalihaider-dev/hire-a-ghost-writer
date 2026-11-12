@@ -14,12 +14,16 @@ export function initLenis() {
   if (lenis || prefersReducedMotion()) return lenis;
 
   lenis = new Lenis({
-    lerp: 0.1,
+    // Slightly longer glide than the default; touch keeps native momentum
+    // (syncTouch off) — smoothing touch on phones feels laggy and costs frames.
+    lerp: 0.085,
     smoothWheel: true,
-    wheelMultiplier: 0.9,
-    touchMultiplier: 1.4,
+    syncTouch: false,
+    wheelMultiplier: 1,
     autoRaf: false,
     anchors: { offset: -72 },
+    // Scrollable overlays (menu, quote drawer) scroll natively.
+    prevent: (node: HTMLElement) => !!node.closest?.('[data-lenis-prevent], [aria-modal="true"]'),
   });
 
   lenis.on("scroll", ScrollTrigger.update);

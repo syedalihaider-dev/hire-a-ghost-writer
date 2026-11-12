@@ -1,6 +1,7 @@
 import { chapters } from "@/content/homeContent";
 import { genres, siteConfig } from "@/content/siteConfig";
 import RichTitle from "@/components/UI/RichTitle";
+import CoverImage from "@/components/UI/CoverImage/CoverImage";
 import QuoteButton from "@/components/UI/QuoteButton";
 import Button from "@/components/UI/Button";
 import { PhoneIcon } from "@/components/UI/Icons";
@@ -22,6 +23,7 @@ export default function StartBand() {
 
   return (
     <section className={`surface-ink pad-md ${styles.band}`} aria-labelledby="start-title">
+      <CoverImage src="/images/editorial/library-classic-books.jpg" tone="ink" shade={0.8} />
       <div className={styles.marquee} aria-hidden="true">
         <div className={styles.track} data-marquee="-1">
           {row(true)}
@@ -34,7 +36,7 @@ export default function StartBand() {
           {chapters.start.label} · 09 / 11
         </p>
         <RichTitle text={chapters.start.title} id="start-title" className={styles.title} />
-        <p className={`lead ${styles.text}`} data-reveal="up">
+        <p className={`lead ${styles.text}`} data-reveal="lines">
           {chapters.start.text}
         </p>
         <div className={styles.ctas} data-reveal="up" data-reveal-delay="0.1">

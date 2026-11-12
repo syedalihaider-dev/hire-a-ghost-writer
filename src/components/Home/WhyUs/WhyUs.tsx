@@ -43,8 +43,8 @@ export default function WhyUs() {
 
             <div className={styles.group}>
               <p className="label label--accent">{chapters.includes.label}</p>
-              <RichTitle as="h3" text={chapters.includes.title} className={styles.groupTitle} />
-              <p className="lead" data-reveal="up">
+              <RichTitle as="h3" text={chapters.includes.title} className={styles.groupTitle} reveal="words" />
+              <p className="lead" data-reveal="lines">
                 {includes.text}
               </p>
               <ul role="list" className={styles.grid2} data-reveal-group="0.08">
@@ -60,8 +60,8 @@ export default function WhyUs() {
 
             <div className={styles.group}>
               <p className="label label--accent">{chapters.simpler.label}</p>
-              <RichTitle as="h3" text={chapters.simpler.title} className={styles.groupTitle} />
-              <p className="lead" data-reveal="up">
+              <RichTitle as="h3" text={chapters.simpler.title} className={styles.groupTitle} reveal="words" />
+              <p className="lead" data-reveal="lines">
                 {simplerWay.text}
               </p>
               <ul role="list" className={styles.grid2} data-reveal-group="0.08">

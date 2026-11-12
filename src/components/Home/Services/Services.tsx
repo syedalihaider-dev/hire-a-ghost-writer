@@ -79,6 +79,11 @@ export default function Services() {
           start: "top top",
           end: () => `+=${window.innerHeight * 0.8 * (total - 1)}`,
           pin: true,
+          // Transform pinning: switching the stage to position:fixed was scored by
+          // Chrome as a full-viewport layout shift (CLS ≈ 1 at pin start and end).
+          // Lenis drives scroll + ScrollTrigger.update in the same GSAP tick, so a
+          // transform pin stays perfectly in sync on desktop.
+          pinType: "transform",
           onUpdate: (self) => {
             if (fill) fill.style.transform = `scaleX(${self.progress})`;
             go(Math.min(total - 1, Math.floor(self.progress * total)));

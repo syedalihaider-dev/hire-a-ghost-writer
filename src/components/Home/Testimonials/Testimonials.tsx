@@ -85,7 +85,7 @@ export default function Testimonials() {
 
   const restartProgress = () => {
     progress.current?.kill();
-    const fill = root.current?.querySelector<HTMLElement>("[data-fill]");
+    const fill = root.current?.querySelector<HTMLElement>("[data-progress]");
     if (!fill) return;
     gsap.set(fill, { scaleX: 0 });
     const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
@@ -198,7 +198,7 @@ export default function Testimonials() {
               {pad(index + 1)} <i>/ {pad(items.length)}</i>
             </span>
             <span className={styles.track} aria-hidden="true">
-              <span className={styles.fill} data-fill />
+              <span className={styles.fill} data-progress />
             </span>
             <button type="button" className={styles.btn} onClick={() => show(current.current - 1)} aria-label="Previous testimonial" data-magnetic>
               ←

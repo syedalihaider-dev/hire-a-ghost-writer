@@ -47,12 +47,13 @@ type Props = {
   as?: ElementType;
   id?: string;
   className?: string;
-  reveal?: boolean;
+  /** chars = main headings (default) · words = secondary headings · lines = long statements · false = static */
+  reveal?: false | "chars" | "words" | "lines";
 };
 
-export default function RichTitle({ text, as: Tag = "h2", id, className, reveal = true }: Props) {
+export default function RichTitle({ text, as: Tag = "h2", id, className, reveal = "chars" }: Props) {
   return (
-    <Tag id={id} className={["display", className].filter(Boolean).join(" ")} data-reveal={reveal ? "split" : undefined}>
+    <Tag id={id} className={["display", className].filter(Boolean).join(" ")} data-reveal={reveal || undefined}>
       {renderRich(text)}
     </Tag>
   );

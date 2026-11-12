@@ -1,4 +1,5 @@
 .band {
+  isolation: isolate;
   position: relative;
   overflow: hidden;
   display: grid;

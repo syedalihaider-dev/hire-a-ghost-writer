@@ -53,11 +53,12 @@ export const portfolio = {
   title: "Portfolio",
   lead: "Our sample work shows how thoughtful formatting improves the way a book reads, looks, and feels.",
   text: "A formatted book should not look crowded, uneven, or assembled at the last minute. It should have a clear chapter flow, balanced spacing, clean page structure, and a layout that suits the genre. Our samples reflect the kind of professional finish authors need before sending a book into the world.",
+  // `render` = the same cover photographed as a finished hardcover (transparent PNG, intrinsic size).
   items: [
-    { src: "/images/portfolio/cover-1.jpg", title: "The Past Is Rising", author: "Kathryn Bywaters" },
-    { src: "/images/portfolio/cover-2.jpg", title: "Daughter of Man", author: "The Chronicles of Otherwhere, Book 1" },
-    { src: "/images/portfolio/cover-3.jpg", title: "Fortress of Blood", author: "L. D. Goffigan" },
-    { src: "/images/portfolio/cover-4.jpg", title: "A Rose in the Snow", author: "Damon Frostheart" },
+    { src: "/images/portfolio/cover-1.jpg", render: { src: "/images/portfolio/book-1.png", width: 993, height: 1495 }, title: "The Past Is Rising", author: "Kathryn Bywaters" },
+    { src: "/images/portfolio/cover-2.jpg", render: { src: "/images/portfolio/book-2.png", width: 1003, height: 1486 }, title: "Daughter of Man", author: "The Chronicles of Otherwhere, Book 1" },
+    { src: "/images/portfolio/cover-3.jpg", render: { src: "/images/portfolio/book-3.png", width: 1012, height: 1475 }, title: "Fortress of Blood", author: "L. D. Goffigan" },
+    { src: "/images/portfolio/cover-4.jpg", render: { src: "/images/portfolio/book-4.png", width: 989, height: 1497 }, title: "A Rose in the Snow", author: "Damon Frostheart" },
   ],
 };
 

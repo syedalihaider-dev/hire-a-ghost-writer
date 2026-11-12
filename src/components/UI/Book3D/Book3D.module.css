@@ -1,0 +1,257 @@
+/*
+ * CSS 3D hardcover. Every dimension derives from --bw (cover width):
+ *   height = 1.5 × width (6×9 trim), thickness --bd = 0.14 × width.
+ */
+.stage {
+  --bh: calc(var(--bw) * 1.5);
+  --bd: calc(var(--bw) * 0.14);
+  --t: calc(var(--bd) - 4px);
+  --cloth: #2a2f42;
+  --cloth-dark: #1c2131;
+  --foil: #e2c486;
+  position: relative;
+  width: var(--bw);
+  height: var(--bh);
+  perspective: 1800px;
+  perspective-origin: 50% 40%;
+  pointer-events: none;
+}
+
+.shadow {
+  position: absolute;
+  left: 50%;
+  bottom: -9%;
+  width: 135%;
+  height: 16%;
+  translate: -50% 0;
+  border-radius: 50%;
+  background: radial-gradient(closest-side, rgba(0, 0, 0, 0.55), rgba(0, 0, 0, 0.18) 60%, transparent);
+  will-change: transform, opacity;
+}
+
+.body {
+  position: absolute;
+  inset: 0;
+  transform-style: preserve-3d;
+  transform: rotateX(6deg) rotateY(-28deg);
+  will-change: transform;
+}
+
+.face {
+  position: absolute;
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+}
+
+.back {
+  inset: 0;
+  border-radius: 2px 6px 6px 2px;
+  background: var(--cloth-dark);
+  transform: translateZ(calc(var(--bd) * -0.5)) rotateY(180deg);
+}
+
+.spine {
+  top: 0;
+  left: calc(var(--bd) * -0.5);
+  width: var(--bd);
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  padding: 14% 0;
+  background: linear-gradient(90deg, #171b28, #2f3549 45%, #22273a 70%, #171b28);
+  transform: rotateY(-90deg);
+}
+
+.spineBand {
+  width: 100%;
+  height: 2px;
+  background: var(--foil);
+  opacity: 0.7;
+  box-shadow: 0 5px 0 rgba(226, 196, 134, 0.4);
+}
+
+.spineTitle {
+  writing-mode: vertical-rl;
+  font-family: var(--font-serif);
+  font-size: calc(var(--bw) * 0.05);
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  white-space: nowrap;
+  color: var(--foil);
+}
+
+/* Page block: fore-edge, head and tail */
+.fore {
+  top: 2%;
+  left: calc(var(--bw) - var(--t) * 0.5 - 5px);
+  width: var(--t);
+  height: 96%;
+  background: repeating-linear-gradient(90deg, #f1ebde 0 1px, #d8cfbb 1px 2px);
+  transform: rotateY(90deg);
+}
+
+.top,
+.bottom {
+  left: 0;
+  width: calc(var(--bw) - 5px);
+  height: var(--t);
+  background: repeating-linear-gradient(0deg, #f1ebde 0 1px, #d8cfbb 1px 2px);
+}
+
+.top {
+  top: calc(var(--bh) * 0.02 - var(--t) * 0.5);
+  transform: rotateX(90deg);
+}
+
+.bottom {
+  top: calc(var(--bh) * 0.98 - var(--t) * 0.5);
+  transform: rotateX(-90deg);
+}
+
+/* First page — seen when the cover swings open */
+.page {
+  left: 0;
+  top: 2%;
+  width: calc(100% - 5px);
+  height: 96%;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: calc(var(--bw) * 0.03);
+  padding: 20% 13% 0 15%;
+  background:
+    linear-gradient(90deg, rgba(60, 45, 20, 0.18), transparent 12%),
+    #f5efe2;
+  color: #2a2f42;
+  transform: translateZ(calc(var(--bd) * 0.5 - 3px));
+}
+
+.pageNo {
+  font-family: var(--font-serif);
+  font-size: calc(var(--bw) * 0.05);
+  letter-spacing: 0.2em;
+  color: #9a7a3c;
+}
+
+.pageTitle {
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-size: calc(var(--bw) * 0.1);
+  line-height: 1;
+}
+
+.rule {
+  width: 24%;
+  height: 1px;
+  margin: calc(var(--bw) * 0.02) 0 calc(var(--bw) * 0.03);
+  background: #9a7a3c;
+}
+
+.textLine {
+  display: block;
+  height: max(1px, calc(var(--bw) * 0.008));
+  background: rgba(42, 47, 66, 0.28);
+}
+
+/* Cover on its hinge */
+.hinge {
+  position: absolute;
+  inset: 0;
+  transform-style: preserve-3d;
+  transform: translateZ(calc(var(--bd) * 0.5));
+}
+
+.cover {
+  position: absolute;
+  inset: 0;
+  transform-origin: left center;
+  transform-style: preserve-3d;
+  will-change: transform;
+}
+
+.front {
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-top: 24%;
+  overflow: hidden;
+  border-radius: 2px 6px 6px 2px;
+  background:
+    linear-gradient(90deg, rgba(0, 0, 0, 0.4) 0, rgba(255, 255, 255, 0.07) 2.5%, rgba(0, 0, 0, 0.22) 5%, transparent 8%),
+    radial-gradient(120% 80% at 30% 15%, rgba(255, 255, 255, 0.07), transparent 60%),
+    var(--cloth);
+  color: var(--foil);
+}
+
+.frame {
+  position: absolute;
+  inset: 6% 6% 6% 9%;
+  border: 1px solid rgba(226, 196, 134, 0.75);
+  box-shadow:
+    inset 0 0 0 3px var(--cloth),
+    inset 0 0 0 4px rgba(226, 196, 134, 0.5);
+}
+
+.mark {
+  width: calc(var(--bw) * 0.22);
+  height: auto;
+  color: var(--foil);
+}
+
+.title {
+  margin-top: calc(var(--bw) * 0.1);
+  font-family: var(--font-serif);
+  font-weight: 500;
+  font-size: calc(var(--bw) * 0.085);
+  line-height: 1.08;
+  letter-spacing: 0.04em;
+  text-align: center;
+  text-transform: uppercase;
+}
+
+.titleRule {
+  width: 18%;
+  height: 1px;
+  margin-top: calc(var(--bw) * 0.06);
+  background: currentColor;
+}
+
+.url {
+  position: absolute;
+  bottom: 11%;
+  font-family: var(--font-serif);
+  font-size: calc(var(--bw) * 0.038);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  opacity: 0.85;
+}
+
+.sheenWrap {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+.sheen {
+  position: absolute;
+  top: -10%;
+  bottom: -10%;
+  left: 0;
+  width: 70%;
+  background: linear-gradient(100deg, transparent 20%, rgba(255, 244, 220, 0.16) 50%, transparent 80%);
+  transform: translateX(-110%);
+  will-change: transform;
+}
+
+.endpaper {
+  inset: 0;
+  border-radius: 6px 2px 2px 6px;
+  background:
+    radial-gradient(circle at 1px 1px, rgba(197, 160, 89, 0.4) 1px, transparent 1.6px) 0 0 / 9px 9px,
+    #1b2335;
+  transform: rotateY(180deg);
+}

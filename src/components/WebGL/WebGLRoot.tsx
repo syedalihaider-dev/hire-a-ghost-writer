@@ -15,6 +15,12 @@ export default function WebGLRoot() {
   const status = useGLStatus();
 
   useEffect(() => {
+    const targets = document.querySelectorAll("[data-gl]");
+    // No 3D section on this page: don't even probe (probing creates a GL context).
+    if (!targets.length) {
+      setGLStatus("off");
+      return;
+    }
     if (!canRunWebGL()) {
       setGLStatus("off");
       return;
@@ -28,7 +34,7 @@ export default function WebGLRoot() {
       },
       { rootMargin: "150% 0px" },
     );
-    document.querySelectorAll("[data-gl]").forEach((el) => io.observe(el));
+    targets.forEach((el) => io.observe(el));
     return () => io.disconnect();
   }, []);
 

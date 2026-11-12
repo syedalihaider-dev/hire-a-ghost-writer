@@ -33,9 +33,17 @@ export default function SectionHead({ chapter, label, title, id, lead, align = "
       </div>
       <RichTitle text={title} id={id} className={styles.title} />
       {(lead || children) && (
-        <div className={styles.side} data-reveal="up" data-reveal-delay="0.15">
-          {lead && <p className="lead">{lead}</p>}
-          {children}
+        <div className={styles.side}>
+          {lead && (
+            <p className="lead" data-reveal="lines" data-reveal-delay="0.2">
+              {lead}
+            </p>
+          )}
+          {children && (
+            <div data-reveal="up" data-reveal-delay="0.3">
+              {children}
+            </div>
+          )}
         </div>
       )}
     </header>

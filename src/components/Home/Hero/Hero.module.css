@@ -1,12 +1,55 @@
 .hero {
+  --book-w: clamp(150px, 13.5vw, 232px);
   position: relative;
   overflow: hidden;
-  background:
-    radial-gradient(60% 70% at 85% 30%, rgba(197, 160, 89, 0.1), transparent 60%),
-    radial-gradient(50% 60% at 0% 100%, rgba(46, 54, 70, 0.6), transparent 70%),
-    var(--ink-950);
+  isolation: isolate;
+  background: var(--ink-950);
 }
 
+/* ---------- Atmosphere (behind everything) ---------- */
+.atmos {
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+}
+
+.glow {
+  position: absolute;
+  top: -10%;
+  right: -12%;
+  width: 70%;
+  height: 110%;
+  background: radial-gradient(closest-side, rgba(197, 160, 89, 0.15), rgba(197, 160, 89, 0.05) 55%, transparent);
+  will-change: transform, opacity;
+}
+
+.rule {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 1px;
+  background: linear-gradient(180deg, transparent, rgba(246, 244, 239, 0.08) 20%, rgba(246, 244, 239, 0.08) 80%, transparent);
+  transform-origin: top;
+}
+
+.ruleB {
+  left: calc(var(--margin) + 2px);
+}
+
+.watermark {
+  position: absolute;
+  right: -1.5vw;
+  bottom: calc(var(--ribbon-overlap) - 1vw);
+  font-style: italic;
+  font-size: clamp(5.5rem, 15vw, 15rem);
+  line-height: 0.8;
+  white-space: nowrap;
+  color: rgba(246, 244, 239, 0.035);
+  will-change: transform;
+}
+
+/* ---------- Layout ---------- */
 .grid {
   display: grid;
   grid-template-columns: repeat(12, minmax(0, 1fr));
@@ -14,7 +57,7 @@
   align-items: center;
   min-height: 100vh;
   min-height: 100svh;
-  max-height: 1100px;
+  max-height: 1080px;
   padding-top: calc(var(--header-h) + var(--s-5));
   padding-bottom: calc(var(--ribbon-overlap) + var(--s-5));
 }
@@ -24,119 +67,182 @@
   display: grid;
   justify-items: start;
   gap: var(--s-5);
-  padding-right: var(--s-6);
+  padding-right: var(--s-5);
 }
 
 .title {
-  font-size: clamp(2.6rem, 4.9vw, 5.4rem);
-  line-height: 1;
-  max-width: 13ch;
+  font-size: clamp(2.5rem, 3.75vw, 4.15rem);
+  line-height: 1.02;
+  max-width: 14ch;
+  letter-spacing: -0.02em;
 }
 
 .title em {
-  display: inline-block;
   color: var(--gold-500);
 }
 
 .intro {
   font-size: var(--fs-md);
-  line-height: 1.6;
+  line-height: 1.65;
   color: var(--slate-300);
-  max-width: 34rem;
+  max-width: 33rem;
+  text-wrap: pretty;
 }
 
 .ctas {
   display: flex;
   flex-wrap: wrap;
   gap: var(--s-3);
-  margin-top: var(--s-2);
+  margin-top: var(--s-1);
 }
 
 .points {
   display: grid;
   gap: var(--s-2);
-  margin-top: var(--s-3);
-  padding-top: var(--s-5);
+  width: 100%;
+  max-width: 34rem;
+  margin-top: var(--s-2);
+  padding-top: var(--s-4);
   border-top: 1px solid var(--line);
   font-size: var(--fs-sm);
-  color: rgba(246, 244, 239, 0.8);
-  width: 100%;
+  color: rgba(246, 244, 239, 0.78);
 }
 
 .points li {
-  display: flex;
-  gap: var(--s-3);
+  display: grid;
+  grid-template-columns: 2rem 1fr;
   align-items: baseline;
 }
 
-/* Visual */
+.pointNo {
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-size: 1.05rem;
+  color: var(--gold-500);
+}
+
+/* ---------- Visual composition ---------- */
 .visual {
   position: relative;
   grid-column: 7 / -1;
-  align-self: stretch;
-  display: grid;
-  margin: 0;
-  padding: var(--s-5) 0 var(--s-5) var(--s-5);
+  height: min(72svh, 680px);
+  min-height: 460px;
 }
 
-.frame {
-  position: relative;
+.arch {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  right: 5%;
   z-index: 1;
-  min-height: 420px;
+  width: min(64%, calc(min(72svh, 680px) * 0.72));
+  aspect-ratio: 0.72;
+  margin: auto 0;
   overflow: hidden;
-  border-radius: var(--r-1);
+  border-radius: 999px 999px var(--r-1) var(--r-1);
   background: var(--navy-700);
+  box-shadow: 0 50px 80px -40px rgba(0, 0, 0, 0.9);
 }
 
 .image {
   object-fit: cover;
-  /* keep the pen nib and handwriting in frame */
+  /* keep the nib and the handwriting in frame */
   object-position: 34% 45%;
   will-change: transform;
 }
 
-.frame::after {
+.arch::after {
   content: "";
   position: absolute;
   inset: 0;
-  background: linear-gradient(180deg, transparent 55%, rgba(11, 15, 25, 0.75));
+  background:
+    linear-gradient(180deg, rgba(11, 15, 25, 0.1) 0%, transparent 35%, rgba(11, 15, 25, 0.8) 100%),
+    linear-gradient(90deg, rgba(11, 15, 25, 0.35), transparent 40%);
   pointer-events: none;
 }
 
 .caption {
   position: absolute;
   z-index: 1;
-  /* clear the rotating seal that overlaps the frame's lower-left corner */
-  left: 104px;
-  right: var(--s-5);
-  bottom: var(--s-5);
+  left: 30%;
+  right: var(--s-4);
+  bottom: var(--s-4);
   display: flex;
   flex-wrap: wrap;
-  gap: var(--s-2) var(--s-4);
+  justify-content: flex-end;
+  gap: var(--s-1) var(--s-3);
 }
 
 .caption :global(.label) {
-  color: rgba(246, 244, 239, 0.85);
+  color: rgba(246, 244, 239, 0.82);
 }
 
-.frameLine {
+.archLine {
   position: absolute;
   top: 0;
-  right: calc(var(--s-5) * -1);
-  bottom: var(--s-8);
-  left: var(--s-8);
+  bottom: 0;
+  right: calc(5% - 18px);
+  width: min(64%, calc(min(72svh, 680px) * 0.72));
+  aspect-ratio: 0.72;
+  margin: auto 0;
   border: 1px solid rgba(197, 160, 89, 0.45);
-  border-radius: var(--r-1);
+  border-radius: 999px 999px var(--r-1) var(--r-1);
+  translate: 0 -18px;
   pointer-events: none;
 }
 
+/* Loose manuscript leaf behind the arch */
+.sheet {
+  position: absolute;
+  top: 9%;
+  left: 12%;
+  z-index: 0;
+  width: 30%;
+  aspect-ratio: 0.75;
+  display: flex;
+  flex-direction: column;
+  gap: 7%;
+  padding: 12% 10%;
+  background: linear-gradient(160deg, #f4eee2, #e4dccb);
+  box-shadow: 0 30px 50px -25px rgba(0, 0, 0, 0.8);
+  transform: rotate(-8deg);
+  will-change: transform;
+}
+
+.sheetHead {
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-size: clamp(0.7rem, 0.9vw, 0.95rem);
+  color: var(--navy-700);
+}
+
+.sheetLine {
+  display: block;
+  height: 1px;
+  background: rgba(20, 26, 42, 0.28);
+}
+
+.sheetLine:nth-child(4n) {
+  width: 70%;
+}
+
+/* Floating hardcover */
+.bookWrap {
+  position: absolute;
+  z-index: 3;
+  left: 2%;
+  bottom: 4%;
+  will-change: transform;
+}
+
+/* Seal */
 .seal {
   position: absolute;
-  z-index: 2;
-  left: 0;
-  bottom: var(--s-8);
-  width: 132px;
-  height: 132px;
+  z-index: 4;
+  top: 4%;
+  right: 0;
+  width: 116px;
+  height: 116px;
   display: grid;
   place-items: center;
   border-radius: 50%;
@@ -159,8 +265,8 @@
 }
 
 .sealMark {
-  width: 52px;
-  height: 52px;
+  width: 46px;
+  height: 46px;
 }
 
 @keyframes spin {
@@ -169,49 +275,139 @@
   }
 }
 
+.vertical {
+  position: absolute;
+  left: -2%;
+  top: 2%;
+  display: flex;
+  align-items: center;
+  gap: var(--s-3);
+  writing-mode: vertical-rl;
+  rotate: 180deg;
+  font-family: var(--font-mono);
+  font-size: 0.6875rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: rgba(246, 244, 239, 0.45);
+}
+
+.vertical i {
+  width: 1px;
+  height: 28px;
+  background: var(--gold-600);
+}
+
+/* ---------- Tablet ---------- */
 @media (max-width: 1023px) {
-  .caption {
-    left: var(--s-5);
+  .hero {
+    --book-w: clamp(140px, 21vw, 190px);
   }
   .grid {
     max-height: none;
     min-height: 0;
     row-gap: var(--s-7);
-    padding-bottom: calc(var(--ribbon-overlap) + var(--s-7));
+    padding-top: calc(var(--header-h) + var(--s-7));
+    padding-bottom: calc(var(--ribbon-overlap) + var(--s-6));
   }
   .copy,
   .visual {
     grid-column: 1 / -1;
     padding-right: 0;
   }
-  .frame {
-    min-height: 0;
-    aspect-ratio: 4 / 3;
+  .title {
+    font-size: clamp(2.4rem, 6vw, 3.4rem);
+    max-width: 15ch;
   }
   .visual {
-    padding: var(--s-4) var(--s-4) 0 0;
+    height: clamp(420px, 66vw, 560px);
+    min-height: 0;
   }
-  .frameLine {
-    top: 0;
-    right: 0;
-    bottom: calc(var(--s-4) * -1);
-    left: var(--s-6);
+  .arch,
+  .archLine {
+    width: 48%;
+    right: 10%;
   }
-  .seal {
-    width: 104px;
-    height: 104px;
-    left: auto;
-    right: var(--s-3);
-    bottom: auto;
-    top: calc(var(--s-6) * -1);
+  .archLine {
+    right: calc(10% - 16px);
+  }
+  .sheet {
+    left: 16%;
+    width: 26%;
+  }
+  .bookWrap {
+    left: 12%;
   }
 }
 
+/* ---------- Phones ---------- */
 @media (max-width: 767px) {
+  .hero {
+    --book-w: clamp(112px, 33vw, 150px);
+  }
+  .grid {
+    padding-top: calc(var(--header-h) + var(--s-6));
+    row-gap: var(--s-6);
+  }
+  .copy {
+    gap: var(--s-4);
+  }
   .title {
-    font-size: clamp(2.5rem, 10.5vw, 3.4rem);
+    font-size: clamp(2.15rem, 9.4vw, 2.75rem);
+    line-height: 1.04;
+  }
+  .intro {
+    font-size: 1rem;
+  }
+  .ctas {
+    width: 100%;
   }
   .ctas > * {
     flex: 1 1 auto;
+  }
+  .visual {
+    height: clamp(340px, 108vw, 460px);
+  }
+  .arch,
+  .archLine {
+    width: 60%;
+    right: 2%;
+  }
+  .archLine {
+    right: calc(2% - 10px);
+    translate: 0 -10px;
+  }
+  .caption {
+    left: var(--s-3);
+    right: var(--s-3);
+    bottom: var(--s-3);
+    gap: 2px var(--s-2);
+  }
+  .caption :global(.label) {
+    font-size: 0.6875rem;
+  }
+  .sheet {
+    left: 4%;
+    top: 6%;
+    width: 34%;
+  }
+  .bookWrap {
+    left: 1%;
+    bottom: 3%;
+  }
+  .seal {
+    top: -2%;
+    right: -2%;
+    width: 84px;
+    height: 84px;
+  }
+  .sealMark {
+    width: 34px;
+    height: 34px;
+  }
+  .vertical {
+    display: none;
+  }
+  .watermark {
+    bottom: calc(var(--ribbon-overlap) + 2vw);
   }
 }

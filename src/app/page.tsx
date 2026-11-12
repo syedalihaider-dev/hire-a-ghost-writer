@@ -78,7 +78,6 @@ export default function Home() {
       <Insights />
       <FAQ />
       <Contact />
-      {/* Last, so it runs only after every section above has hydrated. */}
       <ScrollEffects />
     </>
   );
